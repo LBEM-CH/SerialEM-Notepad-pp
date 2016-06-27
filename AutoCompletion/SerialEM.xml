@@ -15,6 +15,11 @@
               </Overload>
           </KeyWord>
 
+          <KeyWord name="AND" func="yes">
+              <Overload retVal="" descr="Logical operator" >
+              </Overload>
+          </KeyWord>
+
           <KeyWord name="ATAN" func="yes">
               <Overload retVal="" descr="Arc-tangent of following <number>, between -90 and 90 degrees" >
                    <Param name="int number" />
@@ -763,6 +768,11 @@
           <KeyWord name="OppositeTrial" func="yes">
               <Overload retVal="" descr="In low dose mode, acquire Trial image from area on opposite side of Record from the
 			defined Trial area." >
+              </Overload>
+          </KeyWord>
+
+          <KeyWord name="OR" func="yes">
+              <Overload retVal="" descr="Logical operator" >
               </Overload>
           </KeyWord>
 
