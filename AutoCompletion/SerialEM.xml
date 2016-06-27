@@ -91,8 +91,8 @@
           </KeyWord>
 
           <KeyWord name="Autofocus" func="yes">
-              <Overload retVal="" descr="Autofocus; set optional first # to -1 to just measure defocus without changing or 1 for normal
-			autofocus that changes focus to target; set optional second # to 1 to focus with View area in Low Dose mode." >
+              <Overload retVal="" descr="Autofocus; set optional first number to -1 to just measure defocus without changing or 1 for normal
+			autofocus that changes focus to target; set optional second number to 1 to focus with View area in Low Dose mode." >
                    <Param name="[int change]" />
                    <Param name="{int view]" />
               </Overload>
@@ -122,7 +122,7 @@
           </KeyWord>
 
           <KeyWord name="CalibrateImageShift" func="yes">
-              <Overload retVal="" descr="[#] Calibrate image shift at the current mag. Do the calibration from scratch if the
+              <Overload retVal="" descr="Calibrate image shift at the current mag. Do the calibration from scratch if the
 			optional <value> is nonzero." >
                    <Param name="[int value]" />
               </Overload>
@@ -653,8 +653,8 @@
           </KeyWord>
 
           <KeyWord name="MovePiezoZ" func="yes">
-              <Overload retVal="" descr="Sets the <Z> position, or position of a single-axis piezo, to #Z for the currently selected
-			piezo, or if the optional second argument <arg> is non-zero, moves the piezo by #Z" >
+              <Overload retVal="" descr="Sets the <Z> position, or position of a single-axis piezo, to <Z> for the currently selected
+			piezo, or if the optional second argument <arg> is non-zero, moves the piezo by <Z>" >
                    <Param name="int Z" />
                    <Param name="[bool arg]" />
               </Overload>
@@ -1338,7 +1338,7 @@
           </KeyWord>
 
           <KeyWord name="SetAlpha" func="yes">
-              <Overload retVal="" descr="# Sets alpha <value> on JEOL." >
+              <Overload retVal="" descr="Sets alpha <value> on JEOL." >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
@@ -1499,7 +1499,7 @@
           </KeyWord>
 
           <KeyWord name="SetLowDoseMode" func="yes">
-              <Overload retVal="" descr="# Turns low dose <mode> on for nonzero or off for 0; the previous state of low dose is saved
+              <Overload retVal="" descr="Turns low dose <mode> on for nonzero or off for 0; the previous state of low dose is saved
 			in ReportedValue1 as a 0 or 1." >
                    <Param name="bool mode" />
               </Overload>
@@ -1658,7 +1658,7 @@
           </KeyWord>
 
           <KeyWord name="SkipPiecesOutsideItem" func="yes">
-              <Overload retVal="" descr="# Sets the current montage to skip pieces outside the Navigator item whose <position> in the
+              <Overload retVal="" descr="Sets the current montage to skip pieces outside the Navigator item whose <position> in the
 			table (numbered from 1). If <position> is 0, uses the current item. If <position> is < 0, disables the skipping of pieces." >
                    <Param name="int position" />
               </Overload>
@@ -1682,7 +1682,7 @@
 
           <KeyWord name="SpecialExposeFilm" func="yes">
               <Overload retVal="" descr="Expose film with special handling: the first specifies a <delay> in seconds after
-			loading the plate; the second # specifies a <pre>-exposure of the specimen before exposing the plate, in seconds. The third
+			loading the plate; the second number specifies a <pre>-exposure of the specimen before exposing the plate, in seconds. The third
 			suppresses <dimming> of the screen if it is nonzero. This command command does not raise the screen if it is down. It requires
 			the adaexp server to be installed." >
                    <Param name="int delay" />
@@ -1692,7 +1692,7 @@
           </KeyWord>
 
           <KeyWord name="StepFocusNextShot" func="yes">
-              <Overload retVal="" descr="# # [# #] Do one or two focus changes during the next exposure. Follow with 2 or 4 numbers:
+              <Overload retVal="" descr="Do one or two focus changes during the next exposure. Follow with 2 or 4 numbers:
 			the <time> in seconds from start of the exposure to the first focus change, the first <focus> change in microns, the <time> from
 			start of the exposure to the second focus change if any, and the second <focus> change relative to the starting focus, not
 			relative to the focus after the first change. The command will have no effect if the exposure time is less than the time to
@@ -1787,7 +1787,7 @@
 
           <KeyWord name="UpdateHWDarkRef" func="yes">
               <Overload retVal="" descr="Updates the K2 hardware dark reference if the known interval since the last update is longer
-			than # in hours. If value is 0, the update is done unconditionally; if value is negative (-1), it simply records the current time as
+			than <value> in hours. If value is 0, the update is done unconditionally; if value is negative (-1), it simply records the current time as
 			the time of the last update." >
                    <Param name="int value" />
               </Overload>
