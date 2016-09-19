@@ -20,6 +20,36 @@
               </Overload>
           </KeyWord>
 
+          <KeyWord name="argVal1" func="yes">
+              <Overload retVal="" descr="First argument passed to a function" >
+              </Overload>
+          </KeyWord>
+	  
+          <KeyWord name="argVal2" func="yes">
+              <Overload retVal="" descr="Second argument passed to a function" >
+              </Overload>
+          </KeyWord>
+	  
+          <KeyWord name="argVal3" func="yes">
+              <Overload retVal="" descr="Third argument passed to a function" >
+              </Overload>
+          </KeyWord>
+	  
+          <KeyWord name="argVal4" func="yes">
+              <Overload retVal="" descr="Fourth argument passed to a function" >
+              </Overload>
+          </KeyWord>
+	  
+          <KeyWord name="argVal5" func="yes">
+              <Overload retVal="" descr="Fifth argument passed to a function" >
+              </Overload>
+          </KeyWord>
+	  
+          <KeyWord name="argVal6" func="yes">
+              <Overload retVal="" descr="Sixth argument passed to a function" >
+              </Overload>
+          </KeyWord>
+
           <KeyWord name="ATAN" func="yes">
               <Overload retVal="" descr="Arc-tangent of following <number>, between -90 and 90 degrees" >
                    <Param name="int number" />
@@ -316,13 +346,13 @@
 
           <KeyWord name="Else" func="yes">
               <Overload retVal="" descr="Inside of an If/Endif block, starts a block that is executed if the expression after the
-			'If' and any preceding 'Elseif' commands is false" >
+			'If' and any preceding 'ElseIf' commands is false" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="Elseif" func="yes">
+          <KeyWord name="ElseIf" func="yes">
               <Overload retVal="" descr="expression Inside of an If/Endif block, starts a block that is executed conditionally on the
-			value of 'expression' if the expressions in the starting If statement and any preceding Elseif statements were not true." >
+			value of 'expression' if the expressions in the starting If statement and any preceding ElseIf statements were not true." >
               </Overload>
           </KeyWord>
 
@@ -898,32 +928,32 @@
               </Overload>
           </KeyWord>
 
-          <KeyWord name="RepVal1" func="yes">
+          <KeyWord name="repVal1" func="yes">
               <Overload retVal="" descr="Alias of ReportedValue1" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="RepVal2" func="yes">
+          <KeyWord name="repVal2" func="yes">
               <Overload retVal="" descr="Alias of ReportedValue2" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="RepVal3" func="yes">
+          <KeyWord name="repVal3" func="yes">
               <Overload retVal="" descr="Alias of ReportedValue3" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="RepVal4" func="yes">
+          <KeyWord name="repVal4" func="yes">
               <Overload retVal="" descr="Alias of ReportedValue4" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="RepVal5" func="yes">
+          <KeyWord name="repVal5" func="yes">
               <Overload retVal="" descr="Alias of ReportedValue5" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="RepVal6" func="yes">
+          <KeyWord name="repVal6" func="yes">
               <Overload retVal="" descr="Alias of ReportedValue6" >
               </Overload>
           </KeyWord>
