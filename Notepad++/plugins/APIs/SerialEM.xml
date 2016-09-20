@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
-<!-- Created for C-CINA & BioEM-Lab by Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, from SerialEM 3.5.5 chm informations -->
-<!-- Version @VERSION@ -->
+<!--
+  Copyright (c) 2016 Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, C-CINA <https://c-cina.unibas.ch>, BioEM Lab <https://c-cina.unibas.ch/bioem>
+
+  This program is free software; you can redistribute it and/or
+  modify it under the terms of the GNU General Public License
+  as published by the Free Software Foundation; either version 2
+  of the License, or (at your option) any later version.
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+  
+  - API extraction made from SerialEM v3.5.5 documentation.
+  - File version: @VERSION@
+-->
 <NotepadPlus>
      <AutoComplete language="SEM">
           <Environment ignoreCase="yes" startFunc="?" stopFunc="" paramSeparator=" " />
