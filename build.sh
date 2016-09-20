@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.99.3
+VERSION=0.99.4
 ZIPFILE=SerialEM_for_Notepad++_v$VERSION.zip
 
 rm -rf build
@@ -44,8 +44,7 @@ Usage:
 ----
 
 To automatically select SerialEM language, just give ".sem" file extension of your macro files.
-The autocompletion is case sensitive: all macro commands start with an upper case character, except "repval*" and "argVal*". 
-Also, "ReportedValue*" are kept with first upper case character to match SerialEM's documentation.
+The autocompletion is case sensitive: all macro commands start with an upper case character, except "reportedValue*", "repval*" and "argVal*". 
 
 To get macro's syntax popup, just press the question mark after the macro name, e.g.:
 

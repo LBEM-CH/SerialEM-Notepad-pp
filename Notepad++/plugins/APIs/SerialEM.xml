@@ -390,7 +390,7 @@
           <KeyWord name="EnterDefaultedNumber" func="yes">
               <Overload retVal="" descr="Opens a dialog box for the user to enter one floating point or integer <value>. Follow with
 			the <default> value to show in the box, the number of decimal places to show for a float entry or -1 for an integer
-			entry, and the prompt <text> on the rest of the line. Sets ReportedValue1 to the entered value." >
+			entry, and the prompt <text> on the rest of the line. Sets reportedValue1 to the entered value." >
                    <Param name="float/int value" />
                    <Param name="float/int default" />
                    <Param name="string text" />
@@ -406,7 +406,7 @@
 
           <KeyWord name="EnterOneNumber" func="yes">
               <Overload retVal="" descr="Opens a dialog box for the user to enter one floating point number, with the given <text> as
-			the prompt. Sets ReportedValue1 to the entered value." >
+			the prompt. Sets reportedValue1 to the entered value." >
                    <Param name="string text" />
               </Overload>
           </KeyWord>
@@ -945,32 +945,32 @@
           </KeyWord>
 
           <KeyWord name="repVal1" func="yes">
-              <Overload retVal="" descr="Alias of ReportedValue1" >
+              <Overload retVal="" descr="Alias of reportedValue1" >
               </Overload>
           </KeyWord>
 
           <KeyWord name="repVal2" func="yes">
-              <Overload retVal="" descr="Alias of ReportedValue2" >
+              <Overload retVal="" descr="Alias of reportedValue2" >
               </Overload>
           </KeyWord>
 
           <KeyWord name="repVal3" func="yes">
-              <Overload retVal="" descr="Alias of ReportedValue3" >
+              <Overload retVal="" descr="Alias of reportedValue3" >
               </Overload>
           </KeyWord>
 
           <KeyWord name="repVal4" func="yes">
-              <Overload retVal="" descr="Alias of ReportedValue4" >
+              <Overload retVal="" descr="Alias of reportedValue4" >
               </Overload>
           </KeyWord>
 
           <KeyWord name="repVal5" func="yes">
-              <Overload retVal="" descr="Alias of ReportedValue5" >
+              <Overload retVal="" descr="Alias of reportedValue5" >
               </Overload>
           </KeyWord>
 
           <KeyWord name="repVal6" func="yes">
-              <Overload retVal="" descr="Alias of ReportedValue6" >
+              <Overload retVal="" descr="Alias of reportedValue6" >
               </Overload>
           </KeyWord>
 
@@ -1043,7 +1043,7 @@
 
           <KeyWord name="ReportEnergyFilter" func="yes">
               <Overload retVal="" descr="Report the slit width, energy loss, and whether the slit is in or
-			out (the latter is placed in ReportedValue3 as a 1 or 0)" >
+			out (the latter is placed in reportedValue3 as a 1 or 0)" >
               </Overload>
           </KeyWord>
 
@@ -1064,7 +1064,7 @@
           </KeyWord>
 
           <KeyWord name="ReportFrameMdocOpen" func="yes">
-              <Overload retVal="" descr="Reports whether a frame .mdoc file is open; sets ReportedValue1 to 1
+              <Overload retVal="" descr="Reports whether a frame .mdoc file is open; sets reportedValue1 to 1
 			if so." >
               </Overload>
           </KeyWord>
@@ -1098,18 +1098,18 @@
 
           <KeyWord name="ReportLowDose" func="yes">
               <Overload retVal="" descr="Report whether low dose is on or not and the current area, if it is
-			defined. The number of the area (0 for V, etc.) is placed in ReportedValue2." >
+			defined. The number of the area (0 for V, etc.) is placed in reportedValue2." >
               </Overload>
           </KeyWord>
 
           <KeyWord name="ReportMag" func="yes">
-              <Overload retVal="" descr="Report the current mag; also set ReportedValue2 to 1 if low mag
+              <Overload retVal="" descr="Report the current mag; also set reportedValue2 to 1 if low mag
 			mode, 0 if not" >
               </Overload>
           </KeyWord>
 
           <KeyWord name="ReportMagIndex" func="yes">
-              <Overload retVal="" descr="Report the current mag index; also set ReportedValue2 to 1 if low mag
+              <Overload retVal="" descr="Report the current mag index; also set reportedValue2 to 1 if low mag
 			mode, 0 if not" >
               </Overload>
           </KeyWord>
@@ -1207,39 +1207,39 @@
               </Overload>
           </KeyWord>
 
-          <KeyWord name="ReportedValue1" func="yes">
+          <KeyWord name="reportedValue1" func="yes">
               <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally
-			assigned to variables named 'ReportedValue1', 'ReportedValue2', and so on up to 6" >
+			assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="ReportedValue2" func="yes">
+          <KeyWord name="reportedValue2" func="yes">
               <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally
-			assigned to variables named 'ReportedValue1', 'ReportedValue2', and so on up to 6" >
+			assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="ReportedValue3" func="yes">
+          <KeyWord name="reportedValue3" func="yes">
               <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally
-			assigned to variables named 'ReportedValue1', 'ReportedValue2', and so on up to 6" >
+			assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="ReportedValue4" func="yes">
+          <KeyWord name="reportedValue4" func="yes">
               <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally
-			assigned to variables named 'ReportedValue1', 'ReportedValue2', and so on up to 6" >
+			assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="ReportedValue5" func="yes">
+          <KeyWord name="reportedValue5" func="yes">
               <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally
-			assigned to variables named 'ReportedValue1', 'ReportedValue2', and so on up to 6" >
+			assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6" >
               </Overload>
           </KeyWord>
 
-          <KeyWord name="ReportedValue6" func="yes">
+          <KeyWord name="reportedValue6" func="yes">
               <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally
-			assigned to variables named 'ReportedValue1', 'ReportedValue2', and so on up to 6" >
+			assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6" >
               </Overload>
           </KeyWord>
 
@@ -1546,7 +1546,7 @@
 
           <KeyWord name="SetLowDoseMode" func="yes">
               <Overload retVal="" descr="Turns low dose <mode> on for nonzero or off for 0; the previous state of low dose is saved
-			in ReportedValue1 as a 0 or 1." >
+			in reportedValue1 as a 0 or 1." >
                    <Param name="bool mode" />
               </Overload>
           </KeyWord>
@@ -1855,7 +1855,7 @@
           <KeyWord name="UserSetDirectory" func="yes">
               <Overload retVal="" descr="Open a directory chooser dialog to allow user to select or make a directory, and
 			change the working directory to it. If the optional <prompt> string is not supplied, the dialog title
-			is 'Choose a new current working directory'. The chosen directory is stored in ReportedValue1." >
+			is 'Choose a new current working directory'. The chosen directory is stored in reportedValue1." >
                    <Param name="[string prompt]" />
               </Overload>
           </KeyWord>
@@ -1911,7 +1911,7 @@
 
           <KeyWord name="YesNoBox" func="yes">
               <Overload retVal="" descr="Opens a Yes-No message box with the given <text>, which should be a question that can be answered
-			with yes or no. Sets ReportedValue1 to 1 or 0 for a yes or no answer." >
+			with yes or no. Sets reportedValue1 to 1 or 0 for a yes or no answer." >
                    <Param name="string text" />
               </Overload>
           </KeyWord>
