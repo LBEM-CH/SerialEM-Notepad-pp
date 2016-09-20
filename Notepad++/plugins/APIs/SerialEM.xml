@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Windows-1252" ?>
 <!-- Created for C-CINA & BioEM-Lab by Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, from SerialEM 3.5.5 chm informations -->
-<!-- Version 0.0.1 -->
+<!-- Version @VERSION@ -->
 <NotepadPlus>
      <AutoComplete language="SEM">
           <Environment ignoreCase="yes" startFunc="?" stopFunc="" paramSeparator=" " />
