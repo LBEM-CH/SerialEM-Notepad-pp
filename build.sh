@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=0.99.2
+VERSION=0.99.3
 ZIPFILE=SerialEM_for_Notepad++_v$VERSION.zip
 
 rm -rf build
