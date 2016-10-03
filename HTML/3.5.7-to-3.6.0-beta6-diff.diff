@@ -1,0 +1,1006 @@
+--- stable-3.5.7-commands.html	2016-08-04 13:05:05.000000000 +0200
++++ beta-3.6.0-beta6-commands.html	2016-10-02 17:49:07.000000000 +0200
+@@ -1,7 +1,7 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+ <HTML>
+   <HEAD>
+-    <TITLE>Macro Commands</TITLE>
++    <TITLE>Script Commands</TITLE>
+     <META content="text/html; charset=Windows-1252" http-equiv="Content-Type">
+     <style type="text/css"> <!-- BODY { font-family:"Arial" }
+   TD { font-size:16 }
+@@ -15,7 +15,7 @@
+       }
+       .style6
+       {
+-        width: 205px;
++        width: 212px;
+       }
+       .style7
+       {
+@@ -29,15 +29,15 @@
+   </HEAD>
+   <BODY bgColor="#ffffff" text="#000000">
+     <basefont size="2">
+-      <P><A name="macro_commands"></A><B><FONT size="3">Macro commands</FONT></B></P>
+-      <P>The macro processor is case-insensitive; you can enter commands as ALLCAPS or 
++      <P><A name="macro_commands"></A><B><FONT size="3">Script commands</FONT></B></P>
++      <P>The script processor is case-insensitive; you can enter commands as ALLCAPS or 
+         alllowercase, but for readability it is helpful to use MixedCase as in the 
+         table. Completing a command by typing tab or ` will convert it to MixedCase.</P>
+       <BR>
+-      <A href="#macro_control_commands">Macro Control Commands</A>
++      <A href="#macro_control_commands">Script Control Commands</A>
+       <BR>
+       &nbsp;&nbsp;&nbsp;&nbsp; <A href="#flow_control">Flow Control Commands</A><br>
+-      &nbsp;&nbsp;&nbsp;&nbsp; <A href="#other_control">Other Macro Operation Control Commands</A><br>
++      &nbsp;&nbsp;&nbsp;&nbsp; <A href="#other_control">Other Script Operation Control Commands</A><br>
+       <A href="#camera_commands">Camera Commands</A>
+       <BR>
+       &nbsp;&nbsp;&nbsp;&nbsp; <A href="#acquisition_param">Acquisition and Parameter Commands</A><br>
+@@ -60,22 +60,22 @@
+       &nbsp;&nbsp;&nbsp;&nbsp; <A href="#piezo_commands">Piezo Drive Commands</A><br>
+       <A href="#high_level_operations">Higher Level Operations and Tasks</A>
+       <BR>
+-      &nbsp;&nbsp;&nbsp;&nbsp; <A href="#autoalign">Autoalign-Related COmmands</A><br>
+-      &nbsp;&nbsp;&nbsp;&nbsp; <A href="#autofocus">Autofocus-Related Commands</A><br>
++      &nbsp;&nbsp;&nbsp;&nbsp; <A href="#autoalign">Autoalign-Related Commands</A><br>
++      &nbsp;&nbsp;&nbsp;&nbsp; <A href="#autofocus">Autofocus/Autotuning-Related Commands</A><br>
+       &nbsp;&nbsp;&nbsp;&nbsp; <A href="#low_dose">Low Dose Commands</A><br>
+       &nbsp;&nbsp;&nbsp;&nbsp; <A href="#task_commands">Task-Related Commands</A><br>
+       &nbsp;&nbsp;&nbsp;&nbsp; <A href="#navigator">Navigator-Related Commands</A><br>
+       <A href="#miscellaneous">Miscellaneous Commands</A>
+       
+     <P></P>
+-      <P><A name="macro_control_commands"></A><B>Macro Control Commands</B></P>
++      <P><A name="macro_control_commands"></A><B>Script Control Commands</B></P>
+       <TABLE border="1" cols="2">
+        <TR  vAlign="top">
+          <TD colspan="2"><A name="flow_control"></A><B>Flow Control Commands</B></TD>
+        </TR>
+         <TR vAlign="top">
+           <TD class="style4">Repeat</TD>
+-          <TD>Place at end of macro to repeat it</TD>
++          <TD>Place at end of script to repeat it</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">Loop # [variable]</TD>
+@@ -86,16 +86,18 @@
+           <TD>Marks the end of the loop</TD>
+         </TR>
+         <TR vAlign="top">
+-          <TD class="style4">DoMacro #</TD>
+-          <TD>Switches to given macro #</TD>
++          <TD class="style4">DoScript #<br />
++            DoMacro #</TD>
++          <TD>Switches to given script #</TD>
+         </TR>
+         <TR vAlign="top">
+-          <TD class="style4">CallMacro #</TD>
+-          <TD>Calls other macro by # and returns</TD>
++          <TD class="style4">CallScript #<br />
++            CallMacro #</TD>
++          <TD>Calls other script by # and returns</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">Call text</TD>
+-          <TD>Calls other macro by name. Names are case-sensitive and must match exactly,
++          <TD>Calls other script by name. Names are case-sensitive and must match exactly,
+             including spaces</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -103,7 +105,7 @@
+           <TD>Defines a function with the given name (without embedded spaces).&nbsp; The
+             optional #n indicates the number of numeric arguments and s is non-zero to
+             indicate that a string argument occurs after the numeric ones.&nbsp; Functions
+-            must be placed at the ends of macros.</TD>
++            must be placed at the ends of scripts.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">EndFunction</TD>
+@@ -112,9 +114,9 @@
+         <TR vAlign="top">
+           <TD class="style4">CallFunction name [args]</TD>
+           <TD>Calls the function with the given name and supplies arguments for the function
+-            to receive.&nbsp; If the name could occur in more than one macro, it must be
+-            qualified with a macro number or name, i.e. &#39;5::GoodFunc&#39; or &#39;Func
+-            Macro::GoodFunc&#39;.</TD>
++            to receive.&nbsp; If the name could occur in more than one script, it must be
++            qualified with a script number or name, i.e. &#39;5::GoodFunc&#39; or &#39;Func
++            Script::GoodFunc&#39;.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">If expression</TD>
+@@ -142,7 +144,7 @@
+         <TR vAlign="top">
+           <TD class="style4">KeyBreak [key]</TD>
+           <TD>If the user presses &#39;B&#39;, or the key given by the optional &#39;key&#39; entry, the
+-            macro breaks out of the innermost Loop containing this statement.&nbsp; &#39;key&#39;
++            script breaks out of the innermost Loop containing this statement.&nbsp; &#39;key&#39;
+             should be a letter or number; the test for the key is case-insensitive.</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -157,26 +159,37 @@
+             not included in the label in the SkipTo statement.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style4">OnStopCallFunc name</TD>
++          <TD>Calls the function with the given name when the script is stopped by the user 
++            pressing STOP or by an error in a script operation or in an external routine.&nbsp; 
++            The function must not take any arguments, and it should not call other functions 
++            or scripts (such calls will be skipped).&nbsp; The function will be called only 
++            once, even if there is an error or STOP while it is running.&nbsp; The script 
++            will be aborted (not left in a resumable state) when the end of the function is 
++            reached.&nbsp; </TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style4">Return</TD>
+-          <TD>Without executing to the end of the current macro, returns to calling macro or
+-            ends execution if this is the top-level macro</TD>
++          <TD>Without executing to the end of the current script, returns to calling script or
++            ends execution if this is the top-level script</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">Exit</TD>
+           <TD>Ends execution unconditionally</TD>
+         </TR>
+         <TR vAlign="top">
+-          <TD colspan="2"><A name="other_control"></A><B>Other Macro Operation
++          <TD colspan="2"><A name="other_control"></A><B>Other Script Operation
+           Control Commands</B></TD>
+         </TR>
+         <TR vAlign="top">
+-          <TD class="style4">MacroName text</TD>
+-          <TD>Name the macro to the given text, which can include spaces</TD>
++          <TD class="style4">ScriptName text<br />
++            MacroName text</TD>
++          <TD>Name the script to the given text, which can include spaces</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">LongName text</TD>
+-          <TD>A longer name to appear in the Run submenu of the Macro menu; if this name is
+-            not defined, the regular MacroName appears there.</TD>
++          <TD>A longer name to appear in the Run submenu of the Script menu; if this name is
++            not defined, the regular name defined by ScriptName or MacroName appears there.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">Delay # [units]</TD>
+@@ -191,7 +204,7 @@
+         <TR vAlign="top">
+           <TD class="style4">Pause [text]</TD>
+           <TD>Opens message box with optional text plus question of whether to proceed with
+-            macro</TD>
++            script</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">YesNoBox text</TD>
+@@ -221,7 +234,7 @@
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">Verbose #</TD>
+-          <TD>Turns echoing of each macro line on or off for # 1 or 0</TD>
++          <TD>Turns echoing of each script line on or off for # 1 or 0</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD width="210">SuppressReports</TD>
+@@ -229,7 +242,7 @@
+         </TR>
+         <TR vAlign="top">
+           <TD class="style4">ErrorsToLog [#]</TD>
+-          <TD>Makes most macro error messages be duplicated in the log
++          <TD>Makes most script error messages be duplicated in the log
+             window.&nbsp; Follow with a 0 to turn off the feature again.</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -240,7 +253,37 @@
+           <TD class="style4">IsVariableDefined Var</TD>
+           <TD>Reports whether a variable is defined, placing a 1 in
+             reportedValue1 if it is and a 0 if it is not.&nbsp; Follow with the variable
+-            name without a $.</TD>
++            name without a $.&nbsp; Value can be assigned to a variable at end of commmand.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style4">Require feature [feature] ...</TD>
++          <TD>This command tests whether the given script features are available in this 
++            version of SerialEM.&nbsp; Earlier versions will not generate an error when some 
++            newer features are used, so including this command is the only way to test 
++            whether the script will run correctly.&nbsp; The available features are: 1) &#39;variable1&#39;, which includes two capabilities: assigning reported values 
++            directly to variables listed after a command, and assigning function arguments 
++            directly to variables listed on the &#39;Function&#39; line.&nbsp; 2) &#39;arrays&#39;, 
++            which is the ability to define a variable with an indexable array of values.&nbsp; 
++            3) &#39;keepcase&#39;, which means that case will be preserved when assigning text to a 
++            variable.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style4">Test expression</TD>
++          <TD>Evaluates a conditional expression (just as would be used for an IF statement) 
++            or a single number or variable value and stores whether the test passed (i.e., 
++            if the expression is true or if the number is non-zero) internally, as well as 
++            storing a 1 for success or 0 for failure in ReportedValue1 and a veariable 
++            TestResult</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style4">PauseIfFailed [text]</TD>
++          <TD>If the last &#39;Test&#39; command failed, this command opens a message box with the 
++            optional text plus the question of whether to proceed with the script.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style4">AbortIfFailed [text]</TD>
++          <TD>If the last &#39;Test&#39; command failed, this command opens a message box with the 
++            optional text and aborts the script.</TD>
+         </TR>
+       </TABLE>
+       <BR>
+@@ -286,8 +329,8 @@
+             sets.&nbsp; The set &#39;S&#39; can be specified as either V, F, T, R, P or 0, 1, 2, 3,
+             4 for view, focus, trial,
+             record, preview, respectively.&nbsp; Parameters will be restored whenever the
+-            macro ends or stops or when a different camera is selected.&nbsp; However, if
+-            the macro is suspended, any changed parameters will be set again when the macro
++            script ends or stops or when a different camera is selected.&nbsp; However, if
++            the script is suspended, any changed parameters will be set again when the script
+             resumes.</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -325,6 +368,29 @@
+             from 0, or -1 to select no detector for that channel.&nbsp; At least one actual
+             detector must be specified.</TD>
+         </TR>
++        <TR>
++          <TD class="style8">&nbsp;&nbsp; &nbsp;SetProcessing S #P</TD>
++          <TD>Set processing for exposure set S to the given value, which should be 0 for 
++            unporcessed, 1 for dark-subtracted, or 2 for gain-normalized.</TD>
++        </TR>
++        <TR>
++          <TD class="style8">&nbsp;&nbsp;&nbsp; SetK2ReadMode S #M&nbsp;</TD>
++          <TD>Set the K2 &#39;read mode&#39; for exposure set S to the given value, which should be 
++            0 for linear, 1 for counting, or 2 for super-resolution mode.</TD>
++        </TR>
++        <TR>
++          <TD class="style8">&nbsp;&nbsp;&nbsp; SetFrameTime &nbsp;S #F</TD>
++          <TD>Set the frame time for a K2 camera to the given number.</TD>
++        </TR>
++        <TR>
++          <TD class="style8">&nbsp;&nbsp;&nbsp; SetDoseFracParams S #D<br />
++&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; [#S] [#A] [#M] [#C]&nbsp;</TD>
++          <TD>Set dose fractionation parametes for exposure set S; follow with up to 5 
++            numbers: D non-zero for dose-fractionation mode on K2; S non-zero to save frames 
++            (not just for K2); A non-zero to align frames; M 0 to align in DM, 1 to align in 
++            plugin, or 2 to save a command file for alignframes; C non-zero to combine 
++            frames into sums.</TD>
++        </TR>
+         <TR vAlign="top">
+           <TD class="style8">RestoreCameraSet [S]</TD>
+           <TD>Restore one or all camera parameter set(s) modified with the &#39;Set&#39; commands
+@@ -344,25 +410,33 @@
+         </TR>
+         <TR vAlign="top">
+           <TD class="style8">UseContinuousFrames #</TD>
+-          <TD>If # is non-zero, the macro will keep executing commands (such as stage
++          <TD>If # is non-zero, the script will keep executing commands (such as stage
+             movement and alignment) even when the camera is acquiring in continuous mode.&nbsp;
+-            Use 0 to return to normal operation, in which the macro will wait for continuous
++            Use 0 to return to normal operation, in which the script will wait for continuous
+             acquisition to be ended by the user.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style8">WaitForNextFrame</TD>
+           <TD>After starting a continuous acquisition, use this command to wait until the
+-            next image becomes available.&nbsp; The program will wait until the exposure
++            next image becomes available in buffer A.&nbsp; The program will wait until the exposure
+             time has elapsed so that the image is likely to be taken after completion of
+             previous operations. The &#39;UseContinuousFrames 1&#39; command must be used before the
+             acquisition is started.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style8">StartFrameWaitTimer</TD>
++          <TD>Sets the time from which the next &#39;WaitForNextFrame&#39; will require an exposure 
++            time to elapse.&nbsp; Without this command, the program will wait the full 
++            exposure time after the &#39;WaitNextFrameCommand&#39;. If this command is given just 
++            after getting a frame, and operations are done before waiting for the next 
++            frame, the next frame will be obtained sooner.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style8">SetLiveSettleFraction #</TD>
+           <TD>Set the fraction of the usual settling time to apply in continuous mode after
+             image shift or stage movement.&nbsp; By default, no settling is applied in
+             continuous mode (i.e., the fraction is 0), but some settling may be needed when
+-            a macro or other operation is using continuous frames.&nbsp; The fraction is
++            a script or other operation is using continuous frames.&nbsp; The fraction is
+             reset to zero when continuous mode ends.</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -370,7 +444,9 @@
+         </TR>
+         <TR vAlign="top">
+           <TD class="style8">CameraProperties</TD>
+-          <TD>Report unbinned size in X and Y of current camera</TD>
++          <TD>Reports unbinned size in X and Y of current camera, and RotationAndFlip 
++            property.
++          &nbsp; Values can be assigned to variables at end of command.</TD>
+         </TR>
+         <TR>
+           <TD class="style8">SelectCamera #</TD>
+@@ -410,19 +486,43 @@
+             and StepFocusNextShot are enabled for Gatan, Falcon, and Tietz cameras.</TD>
+         </TR>
+         <TR>
+-          <TD class="style8">EarlyReturnNextShot #</TD>
++          <TD class="style8">EarlyReturnNextShot # [#]</TD>
+           <TD>Return as early as possible from the next acquisition, which must involve
+-            saving dose-fractionation frames from a K2 camera.&nbsp; Follow with the number
++            either aligning or saving dose-fractionation frames from a K2 camera.&nbsp; Follow with the number
+             of frames to be summed in the returned image, 0 to return without any summed
+             image, or -1 to return with the full sum (the latter is available only on GMS
+-            2.31 or higher).&nbsp; Single-shot and dose-fractionation images can be
+-            requested without delay in the macro.&nbsp; The single-shot images will be taken
++            2.31 or higher).&nbsp; The second optional number should be 1 to make a deferred 
++            full sum when not aligning; this sum is always made when aligning.&nbsp; Single-shot and dose-fractionation images can be
++            requested without delay in the script.&nbsp; The single-shot images will be taken
+             as soon as possible (after the end of the exposure before GMS 2.31, after the
+             frame stack has been accessed in GMS 2.31 and higher).&nbsp; Another
+             dose-fractionation shot will be delayed until saving is finished for the current
+             shot.</TD>
+         </TR>
+         <TR>
++          <TD class="style8">GetDeferredSum</TD>
++          <TD>Acquire the deferred full sum that was saved as a result of 
++            &#39;EarlyReturnNextShot&#39;.</TD>
++        </TR>
++        <TR>
++          <TD class="style8">RecordAndTiltUp</TD>
++          <TD>Starts a Record acquisition and tilts the stage up by the current increment 
++            after the exposure is expected to be done.</TD>
++        </TR>
++        <TR>
++          <TD class="style8">RecordAndTiltDown</TD>
++          <TD>Starts a Record acquisition and tilts the stage down by the current increment 
++            after the exposure is expected to be done.</TD>
++        </TR>
++        <TR>
++          <TD class="style8">TiltDuringRecord #A #D [#S]</TD>
++          <TD>Starts a Record acquisition and starts the stage tilting to angle #A after the 
++            delay #D in milliseconds.&nbsp; On FEI scopes with recent enough versions of FEI 
++            scripting, #S can be added with a speed multiplier (&lt; 1 for slower, &gt; 1 for 
++            faster).&nbsp; On FEI scopes this command will freeze the user 
++            interface and prevent scope updates while the stage is tilting.</TD>
++        </TR>
++        <TR>
+           <TD class="style8">DeferStackingNextShot</TD>
+           <TD>Do not stack Falcon intermediate frames after the next exposure.&nbsp; To
+             stack frames from multiple exposures into one stack, use this command before
+@@ -431,7 +531,7 @@
+         <TR>
+           <TD class="style8">OpenDECameraCover</TD>
+           <TD>Opens the protection cover of the Direct Electron camera for the remainder of
+-            the macro, if it is the current camera.&nbsp; Without this command, the cover
++            the script, if it is the current camera.&nbsp; Without this command, the cover
+             will be opened and closed for each exposure except during tasks.</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -441,6 +541,74 @@
+             unconditionally; if # is negative (-1), it simply records the current time as
+             the time of the last update. </TD>
+         </TR>
++        <TR vAlign="top">
++          <TD class="style8">ReportK2FileParams</TD>
++          <TD>Reports values selected in the Frame File Options dialog: 0 for MRC, 1 for 
++            TIFF LZW, or 2 for TIFF ZIP; sum of 1 to pack unnormalized data at all, plus 2 
++            to pack counting mode to bytes; 1 to save MRC files in 4-bit mode 101; 1 to save 
++            normalized data times 100; 1 to skip rotation and flip of frames; 1 for one file 
++            per frame. </TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">SetK2FileParams #T [#P]<br />
++&nbsp;&nbsp;&nbsp; [#M] [#N] [#R] [#O]</TD>
++          <TD>Set values to control K2 frame file saving.&nbsp; Follow with up to 6 values: 
++            T 0 for MRC, 1 for TIFF LZW, or 2 for TIFF ZIP; P as the sum of 1 to pack 
++            unnormalized data at all, plus 2 to pack counting mode to bytes; M non-zero to 
++            save MRC files in 4-bit mode 101; N non-zero to save normalized data times 100; 
++            R non-zero to skip rotation and flip of frames; O non-zero for one file per 
++            frame.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">ReportCountScaling</TD>
++          <TD>Reports two values of current camera: either the scaling being applied to 
++            counting/super-resolution mode images returned from a K2 camera, or the 
++            'CountsPerElectron' property; and whether division by 2 is.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">SetDivideBy2 #</TD>
++          <TD>Turns division by 2 for the current camera on or off if # is 1 or 0, 
++            respectively.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">ReportNumFramesSaved</TD>
++          <TD>Reports the number of frames saved, or beng saved, in the last acquisition 
++            that saved frames.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">ReportFrameAliParams</TD>
++          <TD>Reports six values for the frame alignment parameter set selected to be used 
++            for Record images: the binning for alignment, whether to keep precision for 
++            gain-normalized images when doing early returns, the strategy (0 to 3, 
++            corresponding to the radio buttons in the Frame Alignment dialog), the number of 
++            frames to align all pairs among, the number of iterations to refine (negative if 
++            refinement off), and the group size (negative if using groups is off).</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">SetFrameAliParams #B [#K]<br />
++&nbsp;&nbsp;&nbsp; [#S] [#A] [#R] [#G]</TD>
++          <TD>In the frame alignment parameter set selected to be used for Record images, 
++            sets the binning to B, and optionally sets whether to keep precision during 
++            early returns if K is 1, the strategy from S, the number of frames for all pairs 
++            from A, the number of refinement iterations from |R| and to do refinement if R 
++            is positive, and the group size from |G| and the whether to use groups if G is 
++            positive.&nbsp; </TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">ReportFrameAli2</TD>
++          <TD>Reports more values for frame alignment: whether GPU use is selected, and for 
++            the Record parameter set: truncation limit (negative if truncation is off), 
++            whether to use hybrid shifts, and the three flter radii.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style8">SetFrameAli2 #G [#T] [#H]<br />
++&nbsp;&nbsp;&nbsp; [#R1] [#R2] [#R3]</TD>
++          <TD>Sets whether to use GPU for frame alignment and, in the frame alignment 
++            parameters for Record, optionally sets truncation limit from |T| and to truncate 
++            if T is positive, whether to use hybrid shifts if H is 1, primary filter radius 
++            from R1, and second and third filter radii from R2 and R3 or 0 for either if R1 
++            is present and R2 or R3 is not.</TD>
++        </TR>
+       </TABLE>
+       <BR>
+       <P><A name="buffer_file_commands"></A><B>Buffer and File Commands</B></P>
+@@ -463,9 +631,16 @@
+             at the top.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style7">FFT buf [#B]</TD>
++          <TD>Takes the FFT of the image in the given buffer, optionally applying the 
++            binning given in #B.&nbsp; The FFT will appear in buffer A, or in the 
++            side-by-side FFT window if that option is on.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style7">ImageProperties [buf]</TD>
+           <TD>Report size in X and Y, binning, exposure, pixel size, and parameter set
+-            used&nbsp;for the image in buffer A or in the buffer indicated by 'buf'</TD>
++            used&nbsp;for the image in buffer A or in the buffer indicated by 'buf'.
++            &nbsp; Values can be assigned to variables after a buffer letter.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style7">ImageLowDoseSet [buf]</TD>
+@@ -475,24 +650,27 @@
+             a montage image, it will report Record.&nbsp; For a tracking image, it will
+             report View if the mag matches that of View in Low Dose; if the mag matches
+             Record in Low Dose, it will report Record or Preview depending on which has an
+-            closest exposure time closest to that of the image.</TD>
++            closest exposure time closest to that of the image.
++            &nbsp; Values can be assigned to variables after a buffer letter.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style7">ReportMeanCounts [buf] [#]</TD>
+           <TD>Report the mean counts of the A buffer, or of the buffer indicated by 'buf';
+-            add a 1 to get unbinned counts per second</TD>
++            add a 1 to get unbinned counts per second.
++            &nbsp; No optional assignment to variable.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style7">ElectronStats [buf]</TD>
+           <TD>Report the min, max, mean, and SD of the A buffer, or of the buffer indicated
+             by &#39;buf&#39;, scaled to electrons, and also report the electrons per unbinned pixel
+-            per second.&nbsp; The camera must have a defined counts per electron.</TD>
++            per second.&nbsp; The camera must have a defined counts per electron.
++            &nbsp; Values can be assigned to variables after a buffer letter.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style7">SubareaMean x0 x1 y0 y1</TD>
+           <TD>Report the mean counts in a subarea of the A buffer from x0 to x1 in X and from
+             y0 to y1 in Y. Coordinates are numbered from 0 to size - 1 in each dimension
+-            and 0 in Y is at the top.</TD>
++            and 0 in Y is at the top.&nbsp; Value can be assigned to variable at end of command.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style7">QuadrantMeans [n] [f1] [f2]</TD>
+@@ -515,6 +693,11 @@
+           <TD>Change the working directory to 'dir', which can contain spaces.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style7">ReportDirectory</TD>
++          <TD>Reports the current working directory, which is where a file will be created 
++            if it is opened from a script command without a full path.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style7">UserSetDirectory [prompt]</TD>
+           <TD>Open a directory chooser dialog to allow user to select or make a directory,
+             and change the working directory to it.&nbsp; If the optional prompt string is
+@@ -596,18 +779,41 @@
+             the standard Read buffer, or into the buffer indicated by the optional &#39;buf&#39;</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style7">ReadOtherFile # buf file</TD>
++          <TD>Reads the given section # (numbered from 0) from a file into the given buffer 
++            buf and leaves the file closed; buf can be a buffer letter or -1 to use the 
++            standard Read buffer; end with filename.&nbsp; This command can read from a TIFF 
++            file, which cannot be opened otherwise.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style7">RetryReadOtherFile #</TD>
++          <TD>Sets the number of times to retry if there is an error in ReadOtherFile, 
++            with a 2-second wait between trials.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style7">CloseFile [e]</TD>
+-          <TD>Close the current file. Enter optional 'e' to stop macro if no file is open.</TD>
++          <TD>Close the current file. Enter optional 'e' to stop script if no file is open.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style7">SwitchToFile #</TD>
+           <TD>Make the given file number be the current open file.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style7">RemoveFile file</TD>
++          <TD>Removes the given file unconditionally, prints a warning if it cannot be 
++            removed.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style7">ReportFileZsize</TD>
+           <TD>Report the number of frames in currently open file</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style7">ReadTextFile var file</TD>
++          <TD>Reads the contents of the given text file, breaks it up by spaces or tabs, and 
++            stores the words or numbers as an array in the variable &#39;var&#39;.&nbsp; All lines 
++            will be read and combined into the one variable.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style7">SetMontageParams # [# # # # #]</TD>
+           <TD>Sets up to 6 montage parameters; enter a value or -1 to leave the parameter
+             unchanged. The entries are: 1 to use stage movement or 0 not to; overlap in X;
+@@ -645,12 +851,28 @@
+           <TD>Reports whether a frame .mdoc file is open; sets ReportedValue1 to 1 if so.</TD>
+         </TR>
+         <TR vAlign="top">
+-          <TD class="style7">SaveLogOpenNew</TD>
++          <TD class="style7">SaveLogOpenNew [newFile]</TD>
+           <TD>Closes the log window and opens a new one.&nbsp; If a log file has been saved, 
+             the log is automatically saved to it before closing.&nbsp; If there is no log 
+             file and the log has new contents since program startup, the program will ask 
+-            the user whether to save to log first; if the user cancels, the macro is 
+-            aborted.</TD>
++            the user whether to save to log first; if the user cancels, the script is 
++            aborted.&nbsp; If a filename (newFile) is added, the new log will be saved with 
++            that name.&nbsp; An extension in this name will be stripped off before adding 
++            '.log', so if you want to preserve extensions or other text after a period, add 
++            '.log' to the end of the name.&nbsp; If the file already exists, a number will 
++            be added to get a unique new name.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style7">ReportCurrentFilename [#]</TD>
++          <TD>Reports the full path and filename of the current open file and sets it into 
++            ReportedValue1; or if the optional # is entered with a 1, sets the root of the 
++            filename in ReportedValue1 and the extension (including the dot) in 
++            ReportedValue2.&nbsp; No optional assignment to variable.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style7">ReportLastFrameFile</TD>
++          <TD>Reports the full path and filename of the last frame file saved from a K2 or 
++            Falcon camera and sets it into ReporrtedValue1.</TD>
+         </TR>
+       </TABLE>
+       <BR>
+@@ -676,6 +898,12 @@
+           <TD>Change tilt by the given amount</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style6">BackgroundTilt #A [#S]</TD>
++          <TD>Start tilting stage in the background; images can be taken and scripts can run 
++            during the tilt.&nbsp; Follow with #A, the angle to tilt to, and optionally with 
++            #S, a speed factor for FEI scopes (&lt; 1 for slower than normal tilting).</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style6">ReportTiltAngle</TD>
+           <TD>Report current tilt angle</TD>
+         </TR>
+@@ -693,6 +921,10 @@
+           <TD>Report current stage position</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style6">ReportStageBusy</TD>
++          <TD>Reports if the stage is busy and sets ReportedValue1 to 1 if so, 0 if not.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD colspan="2"><A name="focus_commands"></A><B>Focus-Related Commands</B></TD>
+         </TR>
+         <TR vAlign="top">
+@@ -749,13 +981,13 @@
+         <TR vAlign="top">
+           <TD class="style6">SaveFocus</TD>
+           <TD>Saves the current focus; the focus will be restored to this value either by
+-            RestoreFocus or when the macro stops or exits.&nbsp; The macro will not be
++            RestoreFocus or when the script stops or exits.&nbsp; The script will not be
+             resumable if it stops.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style6">RestoreFocus</TD>
+           <TD>Restores the focus value when SaveFocus was run.&nbsp; After this is run, the
+-            focus will not be restored again when the macro ends.</TD>
++            focus will not be restored again when the script ends.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style6">ResetDefocus</TD>
+@@ -795,7 +1027,7 @@
+             remaining factor of intensity change needed if it was not possible to change
+             the intensity by the full amount needed. The C2 value should be used to restore
+             intensity when the mag is restored. The remaining intensity change could be
+-            applied to the exposure time if necessary. The macro will stop if there is an
++            applied to the exposure time if necessary. The script will stop if there is an
+             error in the intensity change.</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -843,10 +1075,18 @@
+         <TR vAlign="top">
+           <TD class="style6">SetIntensityForMean #</TD>
+           <TD>Adjust beam intensity to yield the given number of counts, based on counts in
+-            the tilt-foreshortened area of the image in A. In low dose mode, this operates
++            the tilt-foreshortened area of the image in A. In Low Dose mode, this operates
+             only on Record images and will change the intensity only of the Record area.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style6">SetExposureForMean #M [#K]</TD>
++          <TD>Adjust Record exposure time to yield the gven number of counts #M, based on 
++            counts in the tilt-foreshortened area of the image in A, which must be a Record 
++            image in Low Dose mode.&nbsp; For a K2 camera taking dose-fractionated images, a 
++            non-zero value can be given for the optional #K to modify frame time so as to 
++            keep the same number of frames.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style6">SetIntensityByLastTilt</TD>
+           <TD>Adjust beam intensity by the change in cosine of the tilt angle from the last
+             tilt change. In low dose mode, this changes the intensity only of the Record
+@@ -915,9 +1155,10 @@
+         <TR vAlign="top">
+           <TD class="style6">ReportImageShift</TD>
+           <TD>Report the image shift in IS units, adjusted for tilt axis offset, image shift
+-            offset, and low dose area shift; also report the equivalent shift in unbinned 
+-            pixels on the current camera at the current magnification, if image shift is 
+-            calibrated.&nbsp; Positive values of the latter will result from an image shift 
++            offset, and low dose area shift; if image shift is calibrated, also report the equivalent shift in unbinned 
++            pixels on the current camera at the current magnification, and the amount the 
++            stage would need to be moved to compensate for resetting this image shift.&nbsp; Positive values of the 
++            camera shift will result from an image shift 
+             imposed by dragging an image to the upper right.</TD>
+         </TR>
+         <TR  vAlign="top">
+@@ -949,9 +1190,15 @@
+             lenses) in a separate call.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style6">ReportColumnOrGunValve</TD>
++          <TD>Reports 0 or 1 if column/gun valve is closed or open on FEG scopes, or if 
++            filament on JEOL is clearly off or on.&nbsp; Reports -1 if the filament current 
++            is inconsistent with the beam switch state.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style6">SetColumnOrGunValve #</TD>
+-          <TD>Close column/gun valve or turn off filament if # is 0; open valve or turn on
+-            filament if # is 1</TD>
++          <TD>Close column/gun valve on FEG scope or turn off filament on JEOL if # is 0; open valve if # is 1 
++            (turning on filament does not work).</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style6">ScreenUp</TD>
+@@ -962,6 +1209,10 @@
+           <TD>Lower the main screen</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style6">ReportScreen</TD>
++          <TD>Report if screen is up or down; reportedValue1 is set to 0 or 1, respectively.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style6">ManualFilmExposure #</TD>
+           <TD>Film exposure time in seconds for manual exposures, or 0 for automatic exposure
+             (the default)</TD>
+@@ -1024,21 +1275,23 @@
+         <TR vAlign="top">
+           <TD class="style6">AreDewarsFilling</TD>
+           <TD>Report whether any of the dewars in a temperature control system are busy
+-            filling (reported value 1 is set to 0 or 1)</TD>
++            filling (reported value 1 is set to 0 or 1).
++            &nbsp; Value can be assigned to a variable at end of commmand.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style6">DewarsRemainingTime</TD>
+           <TD>Report the time remaining for until next automatic dewar filling, or -1 if
+-            none is scheduled</TD>
++            none is scheduled.&nbsp; Value can be assigned to a variable at end of commmand.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style6">RefrigerantLevel #</TD>
+           <TD>Report the refrigerant level of the given dewar: 1 for autoloader, 2 for
+-            column, 3 for liquid helium</TD>
++            column, 3 for liquid helium. &nbsp; Value can be assigned to a variable at end of commmand.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style6">IsPVPRunning</TD>
+-          <TD>Report whether the PVP is running on an FEI scope.</TD>
++          <TD>Report whether the PVP is running on an FEI scope.&nbsp; Value can be assigned 
++          to a variable at end of commmand.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style6">LongOperation Op # [Op #...]</TD>
+@@ -1053,7 +1306,7 @@
+             and be started in &nbsp;the order that they are listed. The dark reference update
+             will be done simultaneously with scope operations.&nbsp; If an error occurs in a
+             scope operation, other operations will be finished and the error reported at the
+-            end.&nbsp; Errors other than in refilling refrigerant will cause the macro to
++            end.&nbsp; Errors other than in refilling refrigerant will cause the script to
+             stop.&nbsp; The user
+             interface should not hang during long operations, and users will be asked to confirm that they want to
+             kill the operation threads if they press STOP or try to exit the program.&nbsp;
+@@ -1143,7 +1396,7 @@
+           <TD>Reset the sum of shifts given by ReportAlignShift to 0 or ReportShiftDiffFrom</TD>
+         </TR>
+         <TR  vAlign="top">
+-          <TD colspan="2"><A name="autofocus"></A><B>Autofocus-Related Commands</B></TD>
++          <TD colspan="2"><A name="autofocus"></A><B>Autofocus/Autotuning-Related Commands</B></TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style5">G or Autofocus [#] [#]</TD>
+@@ -1172,7 +1425,7 @@
+         <TR>
+           <TD class="style5">FocusChangeLimits # #</TD>
+           <TD>Set limits on the focus change during autofocus runs for the remainder of the
+-            macro; follow with a negative and a positive number for the limits in microns.&nbsp;
++            script; follow with a negative and a positive number for the limits in microns.&nbsp;
+             When an autofocus run exceeds a limit, it will abort and return to the starting
+             defocus.&nbsp; Enter with 0 0 to cancel these limits.</TD>
+         </TR>
+@@ -1194,6 +1447,16 @@
+           <TD class="style5">ReportTargetDefocus</TD>
+           <TD>Report the defocus target</TD>
+         </TR>
++        <TR>
++          <TD class="style5">CorrectAstigmatism [#]</TD>
++          <TD>Measure astigmatism, report the stigmator values, and correct for those values 
++            (or do not correct, if the optional # is -1)</TD>
++        </TR>
++        <TR>
++          <TD class="style5">CorrectComa [#]</TD>
++          <TD>Measure beam-tilt misalignment, report the estimated beam tilt, and correct to 
++            bring beam tilt to zero (or do not correct, if the optional # is -1)</TD>
++        </TR>
+         <TR  vAlign="top">
+           <TD colspan="2"><A name="low_dose"></A><B>Low Dose Commands</B></TD>
+         </TR>
+@@ -1206,7 +1469,8 @@
+         <TR vAlign="top">
+           <TD class="style5">SetLowDoseMode #</TD>
+           <TD>Turns low dose mode on for # nonzero or off for # 0; the previous state of low
+-            dose is saved in ReportedValue1 as a 0 or 1.</TD>
++            dose is saved in ReportedValue1 as a 0 or 1.&nbsp; This value can be assigned 
++            to a variable at the end of the command.</TD>
+         </TR>
+         <TR>
+           <TD class="style5">ReportLowDose</TD>
+@@ -1214,6 +1478,11 @@
+             The number of the area (0 for V, etc.) is placed in ReportedValue2.</TD>
+         </TR>
+         <TR>
++          <TD class="style5">SetLDContinuousUpdate #</TD>
++          <TD>Turns &quot;Continuous update of Mag &amp; Beam&quot; in the Low Dose panel on if # is 
++            non-zero or off if # is 0.</TD>
++        </TR>
++        <TR>
+           <TD class="style5">SetAxisPosition F/T #D [#A]</TD>
+           <TD>Modifies the axis position, and optionally the rotation of the inter-area 
+             axis, for the Focus and/or Trial area.&nbsp; Follow with F or T to specify the 
+@@ -1245,7 +1514,7 @@
+         <TR vAlign="top">
+           <TD class="style5">ReportLastAxisOffset</TD>
+           <TD>Reports the lateral offset of the tilt axis estimated from the last Refine 
+-            Eucentricity run; aborts the macro if no offset is available.</TD>
++            Eucentricity run; aborts the script if no offset is available.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style5">WalkUpTo #</TD>
+@@ -1323,12 +1592,12 @@
+         <TR vAlign="top">
+           <TD class="style5">MoveToNavItem [#]</TD>
+           <TD>Move the stage to a Navigator item; if no # is entered, move to the current
+-            Navigator item or to the item that this macro is being run on, otherwise move
++            Navigator item or to the item that this script is being run on, otherwise move
+             to the item whose index in the table is # (numbered from 1)</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style5">RealignToNavItem #r [#c]</TD>
+-          <TD>Realign to the current Navigator item, or to the item that this macro is being
++          <TD>Realign to the current Navigator item, or to the item that this script is being
+             run on. For #r, enter 1 to restore the microscope state to the current state
+             after the procedure, or 0 not to.&nbsp; For optional #c, enter 1 to use
+             continuous acquisition mode and end it at end of procedure, or 2 to leave it
+@@ -1354,14 +1623,21 @@
+             the current and previous run.</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style5">ShiftItemsByCurrentDiff #</TD>
++          <TD>Shift items at the current registration by the difference between the current 
++            stage position and the recorded position of the current Navigator item or the 
++            item that this script is being run on.&nbsp; The shift is done only if the 
++            difference is less than the # in microns.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style5">UpdateItemZ</TD>
+           <TD>Assign current stage Z value to the current Navigator item, or item that this
+-            macro is being run on.</TD>
++            script is being run on.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD class="style5">UpdateGroupZ</TD>
+           <TD>Assign current stage Z value to the whole group that the current Navigator
+-            item, or item that this macro is being run on, belongs to. The item must have a
++            item, or item that this script is being run on, belongs to. The item must have a
+             non-zero group ID. If the group would show up on more than one line with
+             'Collapse groups' on, items on all lines will be updated, unlike with the
+             'Update Z' button.</TD>
+@@ -1369,7 +1645,7 @@
+         <TR vAlign="top">
+           <TD class="style5">ReportNavItem</TD>
+           <TD>Report the index, stage X, Y, Z, label, and note string for the current
+-            Navigator item, or the item this macro is being run on. The index and stage
++            Navigator item, or the item this script is being run on. The index and stage
+             coordinates are placed in 'reportedValue' variables as usual, and the item type
+             is placed in 'reportedValue5' (0 for point, 1 for polygon, 2 for map). In
+             addition, variables 'navLabel', and 'navNote' are set with the label and note
+@@ -1387,7 +1663,7 @@
+         </TR>
+         <TR vAlign="top">
+           <TD class="style5">ReportGroupStatus</TD>
+-          <TD>For the current Navigator item or the item this macro is being run on, reports a code for whether the
++          <TD>For the current Navigator item or the item this script is being run on, reports a code for whether the
+             item is first to be acquired in a group: -1 if Navigator not acquiring, 0 if
+             not in a group, 1 if first to be acquired in a group, 2 if later in the group.
+             If the group would show up on more than one line with 'Collapse groups' on, a
+@@ -1396,6 +1672,22 @@
+             group).</TD>
+         </TR>
+         <TR vAlign="top">
++          <TD class="style5">ReportNumNavAcquire</TD>
++          <TD>Report the number of Navigator marked for Acquire and marked for Tilt Series 
++            as two values; return each as -1 if Navigator is not open.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style5">ItemIndexWithLabel str</TD>
++          <TD>Report the index in the Navigator table of the item whose label is the given 
++            string, or 0 if there is none.&nbsp; Sets reportedValue1 with the index.&nbsp; 
++            The string can contain spaces and the comparison is not case-sensitive.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD class="style5">ItemIndexWithNote str</TD>
++          <TD>Report the Navigator index of the item whose note is the given string, 
++            otherwise just like ItemIndexWithLabel.</TD>
++        </TR>
++        <TR vAlign="top">
+           <TD class="style5">ItemForSuperCoord #</TD>
+           <TD>Set the item number that Navigator supplies supermontage coordinates from when
+             a montage image is acquired. Set the number to 0 to restore Navigator to using
+@@ -1407,6 +1699,15 @@
+             position in the table is # (numbered from 1). If # is 0, uses the current item.
+             If # is &lt; 0, disables the skipping of pieces.</TD>
+         </TR>
++        <TR vAlign="top">
++          <TD class="style5">SuffixForExtraFile</TD>
++          <TD>Sets a suffix so that the Acquire at Points routine will open an extra file 
++            whenever it opens a regular file for output.&nbsp; The name of the extra file 
++            will be the root of the regular filename, plus the suffix, followed by the 
++            extension of the regular filename.&nbsp; The extra file will be opened before 
++            the regular file.&nbsp; It will be closed when the regular file is closed (at 
++            the end of acquisition or before opening a new file).</TD>
++        </TR>
+       </TABLE>
+       <BR>
+       <P><A name="miscellaneous"></A><B>Miscellaneous Commands</B></P>
+@@ -1415,7 +1716,7 @@
+           <TD width="210">CircleFromPoints x y x y x y</TD>
+           <TD>Report the X and Y center coordinate and the radius in microns for the circle
+             through three points whose coordinates are given on the line as x1 y1 x2 y2 x3
+-            y3.</TD>
++            y3..&nbsp; Values can be assigned to variables at end of command.</TD>
+         </TR>
+         <TR vAlign="top">
+           <TD width="210">ReportClock</TD>
+@@ -1426,8 +1727,34 @@
+           <TD>Reset the time reported by ReportClock to 0</TD>
+         </TR>
+         <TR vAlign="top">
+-          <TD width="210">ProgramTimeStamps</TD>
+-          <TD>Prints the program version and build date, and the current date and time.</TD>
++          <TD width="210">ReportMinuteTime</TD>
++          <TD>Report an absolute time in minutes, a large integer. The difference between
++           two such values will give an elapsed time in minutes.  If a variable name is
++           included after the command, the value will automatically be assigned to a 
++           persistent variable so that it is available across multiple runs of the macro.
++          </TD>
++        </TR>
++         <TR vAlign="top">
++          <TD width="210">ReportTickTime</TD>
++          <TD>Report the time in seconds since the program started, like the times that 
++            prefix program debug output. The difference between two such values will give an 
++            elapsed time in seconds with nominal millisecond precision, as long as the 
++            program has been running for fewer than 57 days. If a variable name is included 
++            after the command, the value will automatically be assigned to a persistent 
++            variable so that it is available across multiple runs of the macro.
++          </TD>
++        </TR>
++         <TR vAlign="top">
++          <TD width="210">ElapsedTickTime start</TD>
++          <TD>Report the time in seconds since the tick time given in &#39;start&#39;, which should 
++            be a variable assigned with the result from &#39;ReportTickTime&#39;.&nbsp; This command 
++            should be used to measure intervals between tick times if there is any chance 
++            that the program will run for more than 57 days.&nbsp; The value can be assigned 
++            to a variable at the end of the command.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD width="210">ProgramTimeStampss</TD>
++          <TD>Print the program version and build date, and the current date and time.</TD>
+         </TR>
+         <TR>
+           <TD width="207">Plugin name func [args]</TD>
+@@ -1439,7 +1766,7 @@
+         </TR>
+         <TR>
+           <TD width="210">ListPluginCalls</TD>
+-          <TD>List the names of macro-callable functions in all loaded plugins along with the
++          <TD>List the names of script-callable functions in all loaded plugins along with the
+             arguments that they expect, in parentheses.&nbsp; For each argument, there
+             should be one item provided on the command line calling the function, with all
+             items separated by spaces as usual.&nbsp; Two exceptions to this are: a string
+@@ -1448,7 +1775,7 @@
+         </TR>
+         <TR vAlign="top">
+           <TD width="210">MailSubject text</TD>
+-          <TD>Subject line for an email message (default is 'Message from SerialEM macro').
++          <TD>Subject line for an email message (default is 'Message from SerialEM script').
+             The text can include variables to be substituted.</TD>
+         </TR>
+         <TR vAlign="top">
+@@ -1458,6 +1785,38 @@
+             properties file, and recipient(s) must be defined using 'Set Email Address' in
+             the Tilt Series Menu.</TD>
+         </TR>
++        <TR vAlign="top">
++          <TD width="210">ErrorBoxSendEmail text</TD>
++          <TD>Send an email containing the given text if the script stops with a message box; 
++            the text can have variables to be substituted.&nbsp; Requirements are the same 
++            as for &#39;SendEmail&#39;.&nbsp; If the message box occurs during Navigator Acquire at 
++            Points and the user has selected to send emails there, two emails will be sent, 
++            thus allowing more specific information from the one specified here.</TD>
++        </TR>
++        <TR vAlign="top">
++          <TD width="210">RunInShell command</TD>
++          <TDRun the given command with the system command processor.&nbsp; It appears that 
++            any command that will run in a Command Prompt window can be run.&nbsp; Thus 
++            commands can include: &#39;|&#39; to pipe from one program to another; &#39;&amp;&#39; to run 
++            successive programs unconditionally; &#39;&amp;&amp;&#39; or &#39;||&#39; to run successive programs 
++            conditionally; &#39;&gt; outfile&#39; to redirect standard output to a file, &#39;2&gt; errfile&#39; 
++            to redirect standard error output to a file, or &#39;&gt; outfile 2&gt;&amp;1&#39; to redirect 
++            both to one file.&nbsp; Single arguments like filenames that contain spaces 
++            should be enclosed in double quotes.&nbsp; The exit status of the command will 
++            be placed in ReportedValue1; if it is -1, this indicates an error in before 
++            running the command, and ReportedValue2 will be set with the following values: 1 
++            if argument list too big, 2 or 3 if command interpreter cannot be found or is 
++            not executable, 4 for insufficient memory or other meory problem, 5 for 
++            unidentified error.&nbsp; In any case, a non-zero exit status will not be 
++            considered a macro error, and you need to test for failure explicitly. These 
++            error codes are not very helpful - it seems that the exit status is 1 if the 
++            command cannot be found or cannot be started, so if you want to pass information 
++            back with the exit status, you cannot use a 1, and might want to use a value 
++            beside 1 for failure of the operation to distinguish it from failure to run the 
++            command.&nbsp;&nbsp; If STOP is used while the command is running, the script 
++            will stop and th ethread that is running the command will be killed, but the 
++            command will keep running.</TD>
++        </TR>
+       </TABLE>
+     </basefont>
+   </BODY>
