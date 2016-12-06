@@ -26,7 +26,7 @@
           </KeyWord>
 
           <KeyWord name="ABS" func="yes">
-              <Overload retVal="" descr="Absolute value of following <number>" >
+              <Overload retVal="" descr="Absolute value of following &lt;number&gt;" >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
@@ -67,28 +67,28 @@
           </KeyWord>
 
           <KeyWord name="ATAN" func="yes">
-              <Overload retVal="" descr="Arc-tangent of following <number>, between -90 and 90 degrees" >
+              <Overload retVal="" descr="Arc-tangent of following &lt;number&gt;, between -90 and 90 degrees" >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ATAN2" func="yes">
-              <Overload retVal="" descr="Arc-tangent of first <number> divided by second <number>, between -180 and 180 degrees" >
+              <Overload retVal="" descr="Arc-tangent of first &lt;number&gt; divided by second &lt;number>, between -180 and 180 degrees" >
                    <Param name="int number1" />
                    <Param name="int number2" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="AbsoluteFocusLimits" func="yes">
-              <Overload retVal="" descr="Set limits on the absolute focus reached during autofocus runs. Follow with a <lower> and
-			a <upper> limit as given by ReportAbsoluteFocus, or 0 0 to cancel these limits. Autofocus will abort when a limit is exceeded." >
+              <Overload retVal="" descr="Set limits on the absolute focus reached during autofocus runs. Follow with a &lt;lower&gt; and
+			a &lt;upper&gt; limit as given by ReportAbsoluteFocus, or 0 0 to cancel these limits. Autofocus will abort when a limit is exceeded." >
                    <Param name="int lower" />
                    <Param name="int upper" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="AddToAutodoc" func="yes">
-              <Overload retVal="" descr="Adds a <key> - <value> pair to the last section of the autodoc associated with the current
+              <Overload retVal="" descr="Adds a &lt;key&gt; - &lt;value&gt; pair to the last section of the autodoc associated with the current
 			open file, if any. The next word after the command is the key, and the remainder of the text on the line is taken as
 			the value. Variables are substituted before using the text. After one or more additions to a section of the autodoc,
 			a WriteAutodoc command must be used to save the values before closing the file or saving another image to it." >
@@ -98,7 +98,7 @@
           </KeyWord>
 
           <KeyWord name="AddToFrameMdoc" func="yes">
-              <Overload retVal="" descr="Adds a <key> - <value> pair to the last section of the autodoc opened with the Open .mdoc for
+              <Overload retVal="" descr="Adds a &lt;key&gt; - &lt;value&gt; pair to the last section of the autodoc opened with the Open .mdoc for
 			Frames command. This works just like AddToAutodoc, but the WriteFrameMdoc command must be used instead after adding values." >
                    <Param name="int key" />
                    <Param name="int value" />
@@ -114,8 +114,8 @@
           </KeyWord>
 
           <KeyWord name="AllowFileOverwrite" func="yes">
-              <Overload retVal="" descr="Allow 'OpenNewFile' and 'OpenNewMontage' to overwrite an existing file if <allow> is 1, or
-			disallow it again if <allow> is 0." >
+              <Overload retVal="" descr="Allow 'OpenNewFile' and 'OpenNewMontage' to overwrite an existing file if &lt;allow&gt; is 1, or
+			disallow it again if &lt;allow&gt; is 0." >
                    <Param name="bool allow" />
               </Overload>
           </KeyWord>
@@ -145,7 +145,7 @@
           </KeyWord>
 
           <KeyWord name="BeamTiltDirection" func="yes">
-              <Overload retVal="" descr="Set beam tilt direction for autofocusing to <value> (from 0 to 3)" >
+              <Overload retVal="" descr="Set beam tilt direction for autofocusing to &lt;value&gt; (from 0 to 3)" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
@@ -156,7 +156,7 @@
           </KeyWord>
 
           <KeyWord name="COS" func="yes">
-              <Overload retVal="" descr="Cosine of following <angle> in degrees" >
+              <Overload retVal="" descr="Cosine of following &lt;angle> in degrees" >
                    <Param name="int angle" />
               </Overload>
           </KeyWord>
@@ -169,19 +169,19 @@
 
           <KeyWord name="CalibrateImageShift" func="yes">
               <Overload retVal="" descr="Calibrate image shift at the current mag. Do the calibration from scratch if the
-			optional <value> is nonzero." >
+			optional &lt;value&gt; is nonzero." >
                    <Param name="[int value]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="Call" func="yes">
-              <Overload retVal="" descr="Calls other macro by <name>. Names are case-sensitive and must match exactly, including spaces" >
+              <Overload retVal="" descr="Calls other macro by &lt;name&gt;. Names are case-sensitive and must match exactly, including spaces" >
                    <Param name="string name" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="CallFunction" func="yes">
-              <Overload retVal="" descr="Calls the function with the given <name> and supplies <arguments> for the function to receive.
+              <Overload retVal="" descr="Calls the function with the given &lt;name&gt; and supplies &lt;arguments&gt; for the function to receive.
 			If the name could occur in more than one macro, it must be qualified with a macro number or name, i.e. '5::GoodFunc' or
 			'Func Macro::GoodFunc'." >
                    <Param name="string name" />
@@ -190,7 +190,7 @@
           </KeyWord>
 
           <KeyWord name="CallMacro" func="yes">
-              <Overload retVal="" descr="Calls other macro by <name> and returns" >
+              <Overload retVal="" descr="Calls other macro by &lt;name&gt; and returns" >
                    <Param name="string name" />
               </Overload>
           </KeyWord>
@@ -202,39 +202,39 @@
 
           <KeyWord name="CenterBeamFromImage" func="yes">
               <Overload retVal="" descr="Center beam using the existing image in the active buffer by detecting the edges of the beam,
-			or from the centroid of the image intensities if <value> is nonzero. In the latter case the beam should be completely within
+			or from the centroid of the image intensities if &lt;value&gt; is nonzero. In the latter case the beam should be completely within
 			the camera field." >
                    <Param name="[int value]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ChangeEnergyLoss" func="yes">
-              <Overload retVal="" descr="Change the energy loss by the <value>" >
+              <Overload retVal="" descr="Change the energy loss by the &lt;value&gt;" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ChangeFocus" func="yes">
-              <Overload retVal="" descr="Change defocus by the given <value> in microns" >
+              <Overload retVal="" descr="Change defocus by the given &lt;value&gt; in microns" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ChangeIntensityBy" func="yes">
-              <Overload retVal="" descr="Change beam intensity by the given <factor> using calibrations. In low dose mode this changes
+              <Overload retVal="" descr="Change beam intensity by the given &lt;factor&gt; using calibrations. In low dose mode this changes
 			the intensity of the current area." >
                    <Param name="int factor" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ChangeMag" func="yes">
-              <Overload retVal="" descr="Change mag by given <number> of mag steps" >
+              <Overload retVal="" descr="Change mag by given &lt;number&gt; of mag steps" >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ChangeMagAndIntensity" func="yes">
-              <Overload retVal="" descr="Change mag by the given <number> of mag steps and change the beam to maintain the same brightness.
+              <Overload retVal="" descr="Change mag by the given &lt;number&gt; of mag steps and change the beam to maintain the same brightness.
 			Behaves same as SetMagAndIntensity." >
 			       <Param name="int number" />
               </Overload>
@@ -242,7 +242,7 @@
 
           <KeyWord name="CircleFromPoints" func="yes">
               <Overload retVal="" descr="Report the X and Y center coordinate and the radius in microns for the circle through three
-			points whose coordinates are given on the line as <X>1 <Y1> <X2> <Y2> <X3> <Y3>." >
+			points whose coordinates are given on the line as &lt;X1&gt; &lt;Y1&gt; &lt;X2&gt; &lt;Y2&gt; &lt;X3&gt; &lt;Y3&gt;." >
                    <Param name="int X1" />
                    <Param name="int Y1" />
                    <Param name="int X2" />
@@ -263,14 +263,14 @@
           </KeyWord>
 
           <KeyWord name="CloseFile" func="yes">
-              <Overload retVal="" descr="Close the current file. Enter optional <e> to stop macro if no file is open." >
+              <Overload retVal="" descr="Close the current file. Enter optional &lt;e&gt; to stop macro if no file is open." >
                    <Param name="[char e]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ConicalAlignTo" func="yes">
-              <Overload retVal="" descr="Align buffer A to the given <buffer> assuming a specimen rotation given by <number>.
-			Optionally, enter 1 for <show> to show the cross-correlation." >
+              <Overload retVal="" descr="Align buffer A to the given &lt;buffer&gt; assuming a specimen rotation given by &lt;number&gt;.
+			Optionally, enter 1 for &lt;show&gt; to show the cross-correlation." >
                    <Param name="char buffer" />
                    <Param name="int number" />
                    <Param name="[bool show]" />
@@ -295,7 +295,7 @@
           </KeyWord>
 
           <KeyWord name="CropImage" func="yes">
-              <Overload retVal="" descr="Crop out a subarea of the given <buffer> from <X0> to <X1> in X and from <Y0> to <Y1> in Y.
+              <Overload retVal="" descr="Crop out a subarea of the given &lt;buffer&gt; from &lt;X0&gt; to &lt;X1&gt; in X and from &lt;Y0&gt; to &lt;Y1&gt; in Y.
 			Coordinates are numbered from 0 to size - 1 in each dimension and 0 in Y is at the top." >
                    <Param name="char buffer" />
                    <Param name="int X0" />
@@ -317,8 +317,8 @@
           </KeyWord>
 
           <KeyWord name="Delay" func="yes">
-              <Overload retVal="" descr="Wait for given amount of <time>. The optional <units> can be 'msec', 'sec', or 'min'.
-			If no units are given, a <time> <= 60 is taken to be seconds, and a <time> > 60 is taken to be milliseconds" >
+              <Overload retVal="" descr="Wait for given amount of &lt;time&gt;. The optional &lt;units&gt; can be 'msec', 'sec', or 'min'.
+			If no units are given, a &lt;time&gt; &lt;= 60 is taken to be seconds, and a &lt;time&gt; &gt; 60 is taken to be milliseconds" >
                    <Param name="int time" />
                    <Param name="[string units]" />
               </Overload>
@@ -330,14 +330,14 @@
           </KeyWord>
 
           <KeyWord name="DoMacro" func="yes">
-              <Overload retVal="" descr="Switches to given <macro>" >
+              <Overload retVal="" descr="Switches to given &lt;macro&gt;" >
                    <Param name="string macro" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="EarlyReturnNextShot" func="yes">
               <Overload retVal="" descr="Return as early as possible from the next acquisition, which must involve saving
-			dose-fractionation frames from a K2 camera. Follow with the <number> of frames to be summed in the returned image,
+			dose-fractionation frames from a K2 camera. Follow with the &lt;number&gt; of frames to be summed in the returned image,
 			0 to return without any summed image, or -1 to return with the full sum (the latter is available only
 			on GMS 2.31 or higher). Single-shot and dose-fractionation images can be requested without delay in the macro.
 			The single-shot images will be taken as soon as possible (after the end of the exposure before GMS 2.31, after the
@@ -348,13 +348,13 @@
           </KeyWord>
 
           <KeyWord name="Echo" func="yes">
-              <Overload retVal="" descr="Prints the <text> to the log window" >
+              <Overload retVal="" descr="Prints the &lt;text&gt; to the log window" >
                    <Param name="string text" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ElectronStats" func="yes">
-              <Overload retVal="" descr="Report the min, max, mean, and SD of the A buffer, or of the indicated <buffer> scaled
+              <Overload retVal="" descr="Report the min, max, mean, and SD of the A buffer, or of the indicated &lt;buffer&gt; scaled
 			to electrons, and also report the electrons per unbinned pixel per second. The camera must have a defined counts per electron." >
                    <Param name="[char buffer]" />
               </Overload>
@@ -388,9 +388,9 @@
           </KeyWord>
 
           <KeyWord name="EnterDefaultedNumber" func="yes">
-              <Overload retVal="" descr="Opens a dialog box for the user to enter one floating point or integer <value>. Follow with
-			the <default> value to show in the box, the number of decimal places to show for a float entry or -1 for an integer
-			entry, and the prompt <text> on the rest of the line. Sets reportedValue1 to the entered value." >
+              <Overload retVal="" descr="Opens a dialog box for the user to enter one floating point or integer &lt;value&gt;. Follow with
+			the &lt;default&gt; value to show in the box, the number of decimal places to show for a float entry or -1 for an integer
+			entry, and the prompt &lt;text&gt; on the rest of the line. Sets reportedValue1 to the entered value." >
                    <Param name="float/int value" />
                    <Param name="float/int default" />
                    <Param name="string text" />
@@ -399,13 +399,13 @@
 
           <KeyWord name="EnterNameOpenFile" func="yes">
               <Overload retVal="" descr="Get a filename through a dialog with a simple text box and open it as a new file. If the
-			optional <prompt> string is not supplied, the prompt is 'Enter name for new file:'." >
+			optional &lt;prompt&gt; string is not supplied, the prompt is 'Enter name for new file:'." >
                    <Param name="[string prompt]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="EnterOneNumber" func="yes">
-              <Overload retVal="" descr="Opens a dialog box for the user to enter one floating point number, with the given <text> as
+              <Overload retVal="" descr="Opens a dialog box for the user to enter one floating point number, with the given &lt;text&gt; as
 			the prompt. Sets reportedValue1 to the entered value." >
                    <Param name="string text" />
               </Overload>
@@ -413,13 +413,13 @@
 
           <KeyWord name="ErrorsToLog" func="yes">
               <Overload retVal="" descr="Makes most macro error messages be duplicated in the log window. Follow with an
-			optional <value> of 0 to turn off the feature again." >
+			optional &lt;value&gt; of 0 to turn off the feature again." >
                    <Param name="[bool value]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="Eucentricity" func="yes">
-              <Overload retVal="" descr="Refine eucentricity, or if optional <value> is entered, do rough eucentricity only (1),
+              <Overload retVal="" descr="Refine eucentricity, or if optional &lt;value&gt; is entered, do rough eucentricity only (1),
 			refine only (2), both steps (3), or refine and realign (6)" >
                    <Param name="[int value]" />
               </Overload>
@@ -447,7 +447,7 @@
 
           <KeyWord name="FlashDisplay" func="yes">
               <Overload retVal="" descr="Flashes between a yellow screen and normal image display several times. The first
-			optional entry <times>, sets the number of times to flash (default 4) and the second optional entry, sets the <duration>
+			optional entry &lt;times&gt;, sets the number of times to flash (default 4) and the second optional entry, sets the &lt;duration&gt;
 			of each state in seconds (default 0.3). Total duration may not exceed 6 seconds." >
                    <Param name="[int times]" />
                    <Param name="[int duration]" />
@@ -461,7 +461,7 @@
 
           <KeyWord name="FocusChangeLimits" func="yes">
               <Overload retVal="" descr="Set limits on the focus change during autofocus runs for the remainder of the macro;
-			follow with a <negative> and a <positive> number for the limits in microns. When an autofocus run exceeds a limit, it
+			follow with a &lt;negative&gt; and a &lt;positive&gt; number for the limits in microns. When an autofocus run exceeds a limit, it
 			will abort and return to the starting defocus. Enter with 0 0 to cancel these limits." >
                    <Param name="int negative" />
                    <Param name="int positive" />
@@ -475,8 +475,8 @@
           </KeyWord>
 
           <KeyWord name="Function" func="yes">
-              <Overload retVal="" descr="Defines a function with the given <name> (without embedded spaces). The optional <number>
-			indicates the number of numeric arguments and <s> is non-zero to indicate that a string argument occurs after the numeric
+              <Overload retVal="" descr="Defines a function with the given &lt;name&gt; (without embedded spaces). The optional &lt;number&gt;
+			indicates the number of numeric arguments and &lt;s&gt; is non-zero to indicate that a string argument occurs after the numeric
 			ones. Functions must be placed at the ends of macros." >
                    <Param name="string name" />
                    <Param name="int number" />
@@ -485,29 +485,29 @@
           </KeyWord>
 
           <KeyWord name="G" func="yes">
-              <Overload retVal="" descr="Autofocus; set optional first <value> to -1 to just measure defocus without changing or 1 for
-			normal autofocus that changes focus to target; set optional second <view> to 1 to focus with View area in Low Dose mode." >
+              <Overload retVal="" descr="Autofocus; set optional first &lt;value&gt; to -1 to just measure defocus without changing or 1 for
+			normal autofocus that changes focus to target; set optional second &lt;view&gt; to 1 to focus with View area in Low Dose mode." >
                    <Param name="[int value]" />
                    <Param name="[int view]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="GoToLowDoseArea" func="yes">
-              <Overload retVal="" descr="Switches to the low dose area given by <area>, which must be one of V, F, T, R, or S. This will
+              <Overload retVal="" descr="Switches to the low dose area given by &lt;area&gt;, which must be one of V, F, T, R, or S. This will
 			not work if the screen is down." >
                    <Param name="char area" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="If" func="yes">
-              <Overload retVal="" descr="Starts a block that is executed conditionally on the value of <expression>" >
+              <Overload retVal="" descr="Starts a block that is executed conditionally on the value of &lt;expression&gt;" >
                    <Param name="int expression" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ImageLowDoseSet" func="yes">
               <Overload retVal="" descr="Report the parameter set that an image was taken with and whether it was taken in Low Dose mode,
-			for the image in buffer A or in the buffer indicated by <buffer>. For one of the 5 standard parameter sets, it will report
+			for the image in buffer A or in the buffer indicated by &lt;buffer&gt;. For one of the 5 standard parameter sets, it will report
 			the set name. For a montage image, it will report Record. For a tracking image, it will report View if the mag matches that
 			of View in Low Dose; if the mag matches Record in Low Dose, it will report Record or Preview depending on which has an
 			closest exposure time closest to that of the image." >
@@ -517,27 +517,27 @@
 
           <KeyWord name="ImageProperties" func="yes">
               <Overload retVal="" descr="Report size in X and Y, binning, exposure, pixel size, and parameter set used for the image in
-			buffer A or in the buffer indicated by <buffer>" >
+			buffer A or in the buffer indicated by &lt;buffer&gt;" >
                    <Param name="[char buffer]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ImageShiftByMicrons" func="yes">
-              <Overload retVal="" descr="Change image shift by given distance on specimen (<X> is tilt axis)" >
+              <Overload retVal="" descr="Change image shift by given distance on specimen (&lt;X&gt; is tilt axis)" >
                    <Param name="int X" />
                    <Param name="int Y" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ImageShiftByPixels" func="yes">
-              <Overload retVal="" descr="Change image shift by given values of pixels in camera <X> and <Y>" >
+              <Overload retVal="" descr="Change image shift by given values of pixels in camera &lt;X&gt; and &lt;Y&gt;" >
                    <Param name="int X" />
                    <Param name="int Y" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ImageShiftByUnits" func="yes">
-              <Overload retVal="" descr="Change image shift by given values of IS units in <X> & <Y>" >
+              <Overload retVal="" descr="Change image shift by given values of IS units in &lt;X&gt; &amp; &lt;Y&gt;" >
                    <Param name="int X" />
                    <Param name="int Y" />
               </Overload>
@@ -545,20 +545,20 @@
 
           <KeyWord name="IncMagIfFoundPixel" func="yes">
               <Overload retVal="" descr="Increase or decrease mag by one step if the pixel size has been found at the current mag
-			with the Find Pixel Size routine, depending on whether <value> is positive or negative. Sets reportedValue1 to 1 if the
+			with the Find Pixel Size routine, depending on whether &lt;value&gt; is positive or negative. Sets reportedValue1 to 1 if the
 			mag is changed, 0 otherwise." >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="IncPercentC2" func="yes">
-              <Overload retVal="" descr="Change the C2/C3 lens strength percentage or illuminated area in microns by the given <amount>" >
+              <Overload retVal="" descr="Change the C2/C3 lens strength percentage or illuminated area in microns by the given &lt;amount&gt;" >
                    <Param name="int amount" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="IncTargetDefocus" func="yes">
-              <Overload retVal="" descr="Change the defocus target by <value>" >
+              <Overload retVal="" descr="Change the defocus target by &lt;value&gt;" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
@@ -569,21 +569,21 @@
           </KeyWord>
 
           <KeyWord name="IsVariableDefined" func="yes">
-              <Overload retVal="" descr="Reports whether a <variable> is defined, placing a 1 in reportedValue1 if it is and a 0 if it
+              <Overload retVal="" descr="Reports whether a &lt;variable&gt; is defined, placing a 1 in reportedValue1 if it is and a 0 if it
 			is not. Follow with the variable name without a $." >
                    <Param name="string variable" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ItemForSuperCoord" func="yes">
-              <Overload retVal="" descr="Set the item <number> that Navigator supplies supermontage coordinates from when a montage image
+              <Overload retVal="" descr="Set the item &lt;number&gt; that Navigator supplies supermontage coordinates from when a montage image
 			is acquired. Set the number to 0 to restore Navigator to using coordinates from the item currently being acquired." >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="KeyBreak" func="yes">
-              <Overload retVal="" descr="If the user presses 'B', or the key given by the optional <key> entry, the macro breaks out of
+              <Overload retVal="" descr="If the user presses 'B', or the key given by the optional &lt;key&gt; entry, the macro breaks out of
 			the innermost Loop containing this statement. 'key' should be a letter or number; the test for the key is case-insensitive." >
                    <Param name="char key" />
               </Overload>
@@ -603,24 +603,24 @@
           </KeyWord>
 
           <KeyWord name="LoadCartridge" func="yes">
-              <Overload retVal="" descr="Loads the cartridge from the given <slot> (numbered from 1) if there is an autoloader." >
+              <Overload retVal="" descr="Loads the cartridge from the given &lt;slot&gt; (numbered from 1) if there is an autoloader." >
                    <Param name="int slot" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="LongName" func="yes">
-              <Overload retVal="" descr="A longer <name> to appear in the Run submenu of the Macro menu; if this name is not defined,
+              <Overload retVal="" descr="A longer &lt;name&gt; to appear in the Run submenu of the Macro menu; if this name is not defined,
 			the regular MacroName appears there." >
                    <Param name="string name" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="LongOperation" func="yes">
-              <Overload retVal="" descr="Starts one or more time-consuming <operation>s: Buffer cycle (Bu), Refill refrigerant (Re),
+              <Overload retVal="" descr="Starts one or more time-consuming &lt;operation&gt;s: Buffer cycle (Bu), Refill refrigerant (Re),
 			Inventory cassettes (In), Loader buffer cycle (Lo), Dark reference update for K2 (Da). Operations are identified by the
 			first two letters of whatever full word you use (case insensitive). Each operation except Inventory must be followed by an
-			<interval> in hours. If <interval> is > 0, the operation is done only if the time since the last such operation is greater
-			than <interval>; if <interval> is 0, the operation is done unconditionally; if <interval> is < 0, it simply records the
+			&lt;interval&gt; in hours. If &lt;interval&gt; is &gt; 0, the operation is done only if the time since the last such operation is greater
+			than &lt;interval&gt;; if &lt;interval&gt; is 0, the operation is done unconditionally; if &lt;interval&gt; is &lt; 0, it simply records the
 			current time as the time of the last operation. The scope operations will occur sequentially and be started in the order
 			that they are listed. The dark reference update will be done simultaneously with scope operations. If an error occurs in
 			a scope operation, other operations will be finished and the error reported at the end. Errors other than in refilling
@@ -634,7 +634,7 @@
           </KeyWord>
 
           <KeyWord name="Loop" func="yes">
-              <Overload retVal="" descr="Loop the given <value> of times until EndLoop; optionally set <variable> with index" >
+              <Overload retVal="" descr="Loop the given &lt;value&gt; of times until EndLoop; optionally set &lt;variable&gt; with index" >
                    <Param name="int value" />
                    <Param name="[string variable]" />
               </Overload>
@@ -646,20 +646,20 @@
           </KeyWord>
 
           <KeyWord name="MODULO" func="yes">
-              <Overload retVal="" descr="Remainder upon dividing nearest integer to <first> number by nearest integer to <second> one" >
+              <Overload retVal="" descr="Remainder upon dividing nearest integer to &lt;first&gt; number by nearest integer to &lt;second&gt; one" >
                    <Param name="int first" />
                    <Param name="int second" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="MacroName" func="yes">
-              <Overload retVal="" descr="Name the macro to the given <text>, which can include spaces" >
+              <Overload retVal="" descr="Name the macro to the given &lt;text&gt;, which can include spaces" >
                    <Param name="string text" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="MailSubject" func="yes">
-              <Overload retVal="" descr="Subject line for an email message (default is 'Message from SerialEM macro'). The <text> can
+              <Overload retVal="" descr="Subject line for an email message (default is 'Message from SerialEM macro'). The &lt;text&gt; can
 			include variables to be substituted." >
                    <Param name="string text" />
               </Overload>
@@ -672,14 +672,14 @@
           </KeyWord>
 
           <KeyWord name="MakeDirectory" func="yes">
-              <Overload retVal="" descr="dir Create the <directory> if it does not already exist. It can contain spaces. The parent
+              <Overload retVal="" descr="dir Create the &lt;directory&gt; if it does not already exist. It can contain spaces. The parent
 			directory must already exist." >
                    <Param name="string directory" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ManualFilmExposure" func="yes">
-              <Overload retVal="" descr="Film exposure <time> in seconds for manual exposures, or 0 for automatic exposure (the default)" >
+              <Overload retVal="" descr="Film exposure &lt;time&gt; in seconds for manual exposures, or 0 for automatic exposure (the default)" >
                    <Param name="int time" />
               </Overload>
           </KeyWord>
@@ -690,8 +690,8 @@
           </KeyWord>
 
           <KeyWord name="MovePiezoXY" func="yes">
-              <Overload retVal="" descr="=Sets the X and Y position of the currently selected piezo to <X>, <Y>, or if the optional
-			third argument <arg> is non-zero, moves the piezo by X, Y" >
+              <Overload retVal="" descr="=Sets the X and Y position of the currently selected piezo to &lt;X&gt;, &lt;Y&gt;, or if the optional
+			third argument &lt;arg&gt; is non-zero, moves the piezo by X, Y" >
                    <Param name="int X" />
                    <Param name="int Y" />
                    <Param name="[bool arg]" />
@@ -699,15 +699,15 @@
           </KeyWord>
 
           <KeyWord name="MovePiezoZ" func="yes">
-              <Overload retVal="" descr="Sets the <Z> position, or position of a single-axis piezo, to <Z> for the currently selected
-			piezo, or if the optional second argument <arg> is non-zero, moves the piezo by <Z>" >
+              <Overload retVal="" descr="Sets the &lt;Z&gt; position, or position of a single-axis piezo, to &lt;Z&gt; for the currently selected
+			piezo, or if the optional second argument &lt;arg&gt; is non-zero, moves the piezo by &lt;Z&gt;" >
                    <Param name="int Z" />
                    <Param name="[bool arg]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="MoveStage" func="yes">
-              <Overload retVal="" descr="Move stage by micron increments in <X>, <Y>, <Z> (Z optional)" >
+              <Overload retVal="" descr="Move stage by micron increments in &lt;X&gt;, &lt;Y&gt;, &lt;Z&gt; (Z optional)" >
                    <Param name="int X" />
                    <Param name="int Y" />
                    <Param name="[int Z]" />
@@ -715,7 +715,7 @@
           </KeyWord>
 
           <KeyWord name="MoveStageTo" func="yes">
-              <Overload retVal="" descr="Move stage to given position in microns. <Z> is optional and <Z> will not be changed if
+              <Overload retVal="" descr="Move stage to given position in microns. &lt;Z&gt; is optional and &lt;Z&gt; will not be changed if
 			it is omitted." >
                    <Param name="int X" />
                    <Param name="int Y" />
@@ -724,15 +724,15 @@
           </KeyWord>
 
           <KeyWord name="MoveToNavItem" func="yes">
-              <Overload retVal="" descr="Move the stage to a Navigator <item>; if no <item> is entered, move to the current Navigator
+              <Overload retVal="" descr="Move the stage to a Navigator &lt;item&gt;; if no &lt;item&gt; is entered, move to the current Navigator
 			item or to the item that this macro is being run on, otherwise move to the item whose index in the
-			table is <item> (numbered from 1)" >
+			table is &lt;item&gt; (numbered from 1)" >
                    <Param name="[int item]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="NEARINT" func="yes">
-              <Overload retVal="" descr="Nearest integer to following <number>" >
+              <Overload retVal="" descr="Nearest integer to following &lt;number&gt;" >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
@@ -743,8 +743,8 @@
           </KeyWord>
 
           <KeyWord name="NormalizeAllLenses" func="yes">
-              <Overload retVal="" descr="Normalize all lenses, or in a lens group, on an FEI scope. With <value> equal to 0 or
-			not present, it normalizes all lenses in one call. Otherwise, <value> can be the sum of 1 to normalize the illumination
+              <Overload retVal="" descr="Normalize all lenses, or in a lens group, on an FEI scope. With &lt;value&gt; equal to 0 or
+			not present, it normalizes all lenses in one call. Otherwise, &lt;value&gt; can be the sum of 1 to normalize the illumination
 			group (which includes condenser, minicondenser, and objective lenses) and 2 to normalize the projection group (which
 			includes objective and projector lenses) in a separate call." >
                    <Param name="[int value]" />
@@ -752,7 +752,7 @@
           </KeyWord>
 
           <KeyWord name="NormalizeLenses" func="yes">
-              <Overload retVal="" descr="Normalize selected lenses on an FEI or Hitachi scope; <value> is the sum of 1 for 
+              <Overload retVal="" descr="Normalize selected lenses on an FEI or Hitachi scope; &lt;value&gt; is the sum of 1 for 
 			projector, 2 for objective, 4 for condenser lenses" >
                    <Param name="int value" />
               </Overload>
@@ -767,13 +767,13 @@
 
           <KeyWord name="OpenFrameSumFile" func="yes">
               <Overload retVal="" descr="Open a file whose name starts with the last name used for saving frames from a K2 or
-			Falcon camera, and ends with the string <suffix> given in the command. The string can contain spaces and variables." >
+			Falcon camera, and ends with the string &lt;suffix&gt; given in the command. The string can contain spaces and variables." >
                    <Param name="string suffix" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="OpenNewFile" func="yes">
-              <Overload retVal="" descr="Open a file with the given <name>, which can contain spaces. The file properties dialog
+              <Overload retVal="" descr="Open a file with the given &lt;name&gt;, which can contain spaces. The file properties dialog
 			will be bypassed. Since the current working directory can be unpredictable, depending on whether the user has opened
 			a file with the file chooser, it is advisable either to specify an absolute path for the filename, or use
 			a 'SetDirectory' with an absolute path." >
@@ -782,8 +782,8 @@
           </KeyWord>
 
           <KeyWord name="OpenNewMontage" func="yes">
-              <Overload retVal="" descr="Open a file with the given <name> for montaging, with the number of frames in X
-			and Y given by <X> and <Y>. If either <X> or <Y> is 0, the number of frames will be taken from the last montage
+              <Overload retVal="" descr="Open a file with the given &lt;name&gt; for montaging, with the number of frames in X
+			and Y given by &lt;X&gt; and &lt;Y&gt;. If either &lt;X&gt; or &lt;Y&gt; is 0, the number of frames will be taken from the last montage
 			that was open. The file properties and montage setup dialogs will be bypassed, and some properties like overlap
 			and whether to do a stage montage will be taken from the last montage that was open." >
                    <Param name="int X" />
@@ -793,14 +793,14 @@
           </KeyWord>
 
           <KeyWord name="OpenOldFile" func="yes">
-              <Overload retVal="" descr="Open an existing MRC or ADOC file with the given <name>, which can contain spaces." >
+              <Overload retVal="" descr="Open an existing MRC or ADOC file with the given &lt;name&gt;, which can contain spaces." >
                    <Param name="string name" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="OppositeAutofocus" func="yes">
               <Overload retVal="" descr="In low dose mode, autofocus in area on opposite side of Record from the defined Focus
-			area; if optional <value> is -1, just measure defocus without changing. Not available if Balance Shifts is on." >
+			area; if optional &lt;value&gt; is -1, just measure defocus without changing. Not available if Balance Shifts is on." >
                    <Param name="[int value]" />
               </Overload>
           </KeyWord>
@@ -823,21 +823,21 @@
           </KeyWord>
 
           <KeyWord name="POWER" func="yes">
-              <Overload retVal="" descr="<First> following number raised to the power of the <second> number" >
+              <Overload retVal="" descr="&lt;First&gt; following number raised to the power of the &lt;second&gt; number" >
                    <Param name="int first" />
                    <Param name="int second" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="Pause" func="yes">
-              <Overload retVal="" descr="Opens message box with optional <text> plus question of whether to proceed with macro" >
+              <Overload retVal="" descr="Opens message box with optional &lt;text&gt; plus question of whether to proceed with macro" >
                    <Param name="[string text]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="Plugin" func="yes">
-              <Overload retVal="" descr="Call the function <func> in the plugin named <name> with appropriate list
-			of <arguments> for that function. Arguments are entered as items separated by spaces, except that a string
+              <Overload retVal="" descr="Call the function &lt;func&gt; in the plugin named &lt;name&gt; with appropriate list
+			of &lt;arguments&gt; for that function. Arguments are entered as items separated by spaces, except that a string
 			argument at the end may consist of multiple words. The return value of the function is reported and placed
 			into reportedValue1." >
                    <Param name="string name" />
@@ -849,7 +849,7 @@
           <KeyWord name="PreCookMontage" func="yes">
               <Overload retVal="" descr="If montaging is enabled with stage movement, this command lowers the screen to
 			expose the specimen, then moves the stage to each piece position and waits there for the number of seconds
-			indicated by <secs>." >
+			indicated by &lt;secs&gt;." >
                    <Param name="int secs" />
               </Overload>
           </KeyWord>
@@ -866,8 +866,8 @@
 
           <KeyWord name="QuadrantMeans" func="yes">
               <Overload retVal="" descr="[n] [f1] [f2] Report means of strips along quadrant boundaries. Optional
-			entries are <n> for the number of pixels between strip and boundary (default 2), <f1> for the strip width
-			as a fraction of quadrant extent (default 0.1), and <f2> for the fraction of quadrant extent to trim off
+			entries are &lt;n&gt; for the number of pixels between strip and boundary (default 2), &lt;f1&gt; for the strip width
+			as a fraction of quadrant extent (default 0.1), and &lt;f2&gt; for the fraction of quadrant extent to trim off
 			the length of the strip (default 0.1). Output is labeled by quadrant number (1 to 4) and 'h' for horizontal
 			strips or 'v' for vertical strips." >
                    <Param name="[int n]" />
@@ -878,7 +878,7 @@
 
           <KeyWord name="QuickFlyback" func="yes">
               <Overload retVal="" descr="Run the camera timing calibration routine in quick flyback mode for an FEI STEM
-			camera, where <set> specifies the camera parameter set and must be V, F, T, R, or P, and <exp> is the exposure
+			camera, where &lt;set&gt; specifies the camera parameter set and must be V, F, T, R, or P, and &lt;exp&gt; is the exposure
 			time to use. The routine will not ask for confirmation before saving the resulting flyback time and startup
 			delay in the master list of flyback times." >
                    <Param name="char set" />
@@ -892,15 +892,15 @@
           </KeyWord>
 
           <KeyWord name="ROUND" func="yes">
-              <Overload retVal="" descr="Round <first> following number to the number of decimal places given by second <number>" >
+              <Overload retVal="" descr="Round &lt;first&gt; following number to the number of decimal places given by second &lt;number&gt;" >
                    <Param name="float first" />
                    <Param name="int second" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ReadFile" func="yes">
-              <Overload retVal="" descr="Reads the given <section> (numbered from 0) from the current open file into the
-			standard Read buffer, or into the buffer indicated by the optional <buffer>" >
+              <Overload retVal="" descr="Reads the given &lt;section&gt; (numbered from 0) from the current open file into the
+			standard Read buffer, or into the buffer indicated by the optional &lt;buffer&gt;" >
                    <Param name="int section" />
                    <Param name="[char buffer]" />
               </Overload>
@@ -908,8 +908,8 @@
 
           <KeyWord name="RealignToNavItem" func="yes">
               <Overload retVal="" descr="Realign to the current Navigator item, or to the item that this macro is being
-			run on. For <restore>, enter 1 to restore the microscope state to the current state after the procedure,
-			or 0 not to. For optional <continous>, enter 1 to use continuous acquisition mode and end it at end of
+			run on. For &lt;restore&gt;, enter 1 to restore the microscope state to the current state after the procedure,
+			or 0 not to. For optional &lt;continous&gt;, enter 1 to use continuous acquisition mode and end it at end of
 			procedure, or 2 to leave it running if possible." >
                    <Param name="bool restore" />
                    <Param name="[int continous]" />
@@ -917,9 +917,9 @@
           </KeyWord>
 
           <KeyWord name="RealignToOtherItem" func="yes">
-              <Overload retVal="" descr="Realign to the Navigator item whose <index> in the table, numbered from 1.
-			For <restore>, enter 1 to restore the microscope state to the current state after the procedure, or 0
-			not to. For optional <continous>, enter 1 to use continuous acquisition mode and end it at end of
+              <Overload retVal="" descr="Realign to the Navigator item whose &lt;index&gt; in the table, numbered from 1.
+			For &lt;restore&gt;, enter 1 to restore the microscope state to the current state after the procedure, or 0
+			not to. For optional &lt;continous&gt;, enter 1 to use continuous acquisition mode and end it at end of
 			procedure, or 2 to leave it running if possible." >
                    <Param name="int index" />
                    <Param name="bool restore" />
@@ -938,7 +938,7 @@
           </KeyWord>
 
           <KeyWord name="RefrigerantLevel" func="yes">
-              <Overload retVal="" descr="Report the refrigerant level of the given <dewar>: 1 for autoloader, 2 for
+              <Overload retVal="" descr="Report the refrigerant level of the given &lt;dewar&gt;: 1 for autoloader, 2 for
 			column, 3 for liquid helium" >
                    <Param name="int dewar" />
               </Overload>
@@ -1115,8 +1115,8 @@
           </KeyWord>
 
           <KeyWord name="ReportMeanCounts" func="yes">
-              <Overload retVal="" descr="Report the mean counts of the A buffer, or of the indicated <buffer>;
-			set <unbinned> to 1 to get unbinned counts per second" >
+              <Overload retVal="" descr="Report the mean counts of the A buffer, or of the indicated &lt;buffer&gt;;
+			set &lt;unbinned&gt; to 1 to get unbinned counts per second" >
                    <Param name="[char buffer]" />
                    <Param name="[bool unbinned]" />
               </Overload>
@@ -1141,7 +1141,7 @@
           </KeyWord>
 
           <KeyWord name="ReportOtherItem" func="yes">
-              <Overload retVal="" descr="Report similarly on the Navigator item whose <index> in the table,
+              <Overload retVal="" descr="Report similarly on the Navigator item whose &lt;index&gt; in the table,
 			numbered from 1." >
                    <Param name="int index" />
               </Overload>
@@ -1173,7 +1173,7 @@
 
           <KeyWord name="ReportShiftDiffFrom" func="yes">
               <Overload retVal="" descr="Report the difference between the alignment shift of the current
-			image and the given <value> in microns, as percentage of the value; the cumulative sum of
+			image and the given &lt;value&gt; in microns, as percentage of the value; the cumulative sum of
 			differences in microns, and the total sum of shifts in microns. For monitoring variability in
 			successive stage movements." >
                    <Param name="int value" />
@@ -1181,7 +1181,7 @@
           </KeyWord>
 
           <KeyWord name="ReportSlotStatus" func="yes">
-              <Overload retVal="" descr="Report the status of the cartridge <slot> (numbered from 1) if there
+              <Overload retVal="" descr="Report the status of the cartridge &lt;slot&gt; (numbered from 1) if there
 			is an autoloader. Status is -1 for an error, 0 for empty, and 1 for occupied." >
                    <Param name="int slot" />
               </Overload>
@@ -1264,15 +1264,15 @@
           </KeyWord>
 
           <KeyWord name="ResetShiftIfAbove" func="yes">
-              <Overload retVal="" descr="Reset image shift and realign image if image shift is greater than the given <value> in microns" >
+              <Overload retVal="" descr="Reset image shift and realign image if image shift is greater than the given &lt;value&gt; in microns" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="RestoreCameraSet" func="yes">
-              <Overload retVal="" descr="Restore one or all camera parameter set(s) modified with the 'Set' commands above. If <set> is omitted,
+              <Overload retVal="" descr="Restore one or all camera parameter set(s) modified with the 'Set' commands above. If &lt;set&gt; is omitted,
 			all modified sets will be restored.
-			The set <set> can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
+			The set &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
 			Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is
 			suspended, any changed parameters will be set again when the macro resumes." >
                    <Param name="[char set]" />
@@ -1298,32 +1298,32 @@
 
           <KeyWord name="ReverseTilt" func="yes">
               <Overload retVal="" descr="Work out backlash and realign image after reversing tilt direction; enter
-			optional <dir> 1 or -1 to specify a specific direction for further tilts" >
+			optional &lt;dir&gt; 1 or -1 to specify a specific direction for further tilts" >
                    <Param name="[int dir]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="S" func="yes">
-              <Overload retVal="" descr="Save image in A or in <buffer> to current open file, or to the given file <number>" >
+              <Overload retVal="" descr="Save image in A or in &lt;buffer&gt; to current open file, or to the given file &lt;number&gt;" >
                    <Param name="[char buffer]" />
                    <Param name="[int number]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SIN" func="yes">
-              <Overload retVal="" descr="Sine of following <angle> in degrees" >
+              <Overload retVal="" descr="Sine of following &lt;angle&gt; in degrees" >
                    <Param name="int angle" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SQRT" func="yes">
-              <Overload retVal="" descr="Square root of following <number>; generates error if it is negative" >
+              <Overload retVal="" descr="Square root of following &lt;number&gt;; generates error if it is negative" >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="Save" func="yes">
-              <Overload retVal="" descr="Save image in A or in <buffer> to current open file, or to the given file <number>" >
+              <Overload retVal="" descr="Save image in A or in &lt;buffer&gt; to current open file, or to the given file &lt;number&gt;" >
                    <Param name="[char buffer]" />
                    <Param name="[int number]" />
               </Overload>
@@ -1354,22 +1354,22 @@
           </KeyWord>
 
           <KeyWord name="SelectCamera" func="yes">
-              <Overload retVal="" descr="Make the given <camera> (numbered from 1) be the active camera. Will switch
+              <Overload retVal="" descr="Make the given &lt;camera&gt; (numbered from 1) be the active camera. Will switch
 			in and out of EFTEM mode or STEM mode if appropriate." >
                    <Param name="int camera" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SelectPiezo" func="yes">
-              <Overload retVal="" descr="Select a piezo drive for reports or movements, follow with the <plugin>
-			number (numbered from 0, enter 0 if there is only one plugin controlling piezos) and the <piezo> number (numbered from 0)." >
+              <Overload retVal="" descr="Select a piezo drive for reports or movements, follow with the &lt;plugin&gt;
+			number (numbered from 0, enter 0 if there is only one plugin controlling piezos) and the &lt;piezo&gt; number (numbered from 0)." >
                    <Param name="int plugin" />
                    <Param name="int piezo" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SendEmail" func="yes">
-              <Overload retVal="" descr="Send an email containing the given <text>, which can include variables to
+              <Overload retVal="" descr="Send an email containing the given &lt;text&gt;, which can include variables to
 			be substituted. An SMTP server and address to send from must be defined in the properties file, and
 			recipient(s) must be defined using 'Set Email Address' in the Tilt Series Menu." >
                    <Param name="string text" />
@@ -1377,22 +1377,22 @@
           </KeyWord>
 
           <KeyWord name="SetAbsoluteFocus" func="yes">
-              <Overload retVal="" descr="Set focus to a an absolute (standardized) <value> as reported earlier
+              <Overload retVal="" descr="Set focus to a an absolute (standardized) &lt;value&gt; as reported earlier
 			by ReportAbsoluteFocus or ReportFocus" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetAlpha" func="yes">
-              <Overload retVal="" descr="Sets alpha <value> on JEOL." >
+              <Overload retVal="" descr="Sets alpha &lt;value&gt; on JEOL." >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetAxisPosition" func="yes">
               <Overload retVal="" descr="Modifies the axis position, and optionally the rotation of the inter-area axis,
-			for the Focus and/or Trial <area>. Follow with F or T to specify the area (both will be changed if Focus and Trial settings
-			are being kept identical); with <dist>, the distance in microns; and optionally with <angle>, a rotation angle. If an angle is set,
+			for the Focus and/or Trial &lt;area&gt;. Follow with F or T to specify the area (both will be changed if Focus and Trial settings
+			are being kept identical); with &lt;dist&gt;, the distance in microns; and optionally with &lt;angle&gt;, a rotation angle. If an angle is set,
 			the option to apply the angle will be turned on in the Low Dose control panel. Low dose mode must be on to use this command." >
                    <Param name="char area" />
                    <Param name="int dist" />
@@ -1414,8 +1414,8 @@
           </KeyWord>
 
           <KeyWord name="SetBinning" func="yes">
-              <Overload retVal="" descr="Set <binning> for exposure <set>.
-			The <set> can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
+              <Overload retVal="" descr="Set &lt;binning&gt; for exposure &lt;set&gt;.
+			The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
 			Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro
 			is suspended, any changed parameters will be set again when the macro resumes." >
                    <Param name="char set" />
@@ -1424,17 +1424,17 @@
           </KeyWord>
 
           <KeyWord name="SetCamLenIndex" func="yes">
-              <Overload retVal="" descr="Set the camera length index to the given <number>; on the Tecnai, values higher than 30 set
+              <Overload retVal="" descr="Set the camera length index to the given &lt;number&gt;; on the Tecnai, values higher than 30 set
 			the index to (# - 30) in LAD mode" >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetCameraArea" func="yes">
-              <Overload retVal="" descr="Set the acquisition area for exposure <set>. Follow the set specifier S with either
-			4 numbers for the unbinned <left>, <right>, <top>, and <bottom> coordinates (the same kind of numbers as in the camera setup dialog)
+              <Overload retVal="" descr="Set the acquisition area for exposure &lt;set&gt;. Follow the set specifier S with either
+			4 numbers for the unbinned &lt;left&gt;, &lt;right&gt;, &lt;top&gt;, and &lt;bottom&gt; coordinates (the same kind of numbers as in the camera setup dialog)
 			or with F, H, Q, WH or WQ for full, half, quarter, wide half, or wide quarter. Values will be adjusted for a legal area.
-			The <set> can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
+			The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
 			Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is
 			suspended, any changed parameters will be set again when the macro resumes." >
                    <Param name="char set" />
@@ -1446,9 +1446,9 @@
           </KeyWord>
 
           <KeyWord name="SetCenteredSize" func="yes">
-              <Overload retVal="" descr="Set exposure <set> for acquisition from a centered area. Follow the <set> specifier with 3 numbers:
+              <Overload retVal="" descr="Set exposure &lt;set&gt; for acquisition from a centered area. Follow the &lt;set&gt; specifier with 3 numbers:
 			the binning B, the binned size in X, and the binned size in Y.
-			The <set> can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
+			The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
 			Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is 
 			suspended, any changed parameters will be set again when the macro resumes." >
                    <Param name="char set" />
@@ -1459,16 +1459,16 @@
           </KeyWord>
 
           <KeyWord name="SetColumnOrGunValve" func="yes">
-              <Overload retVal="" descr="Close column/gun valve or turn off filament if <value> is 0; open valve or turn on
-			filament if <value> is 1" >
+              <Overload retVal="" descr="Close column/gun valve or turn off filament if &lt;value&gt; is 0; open valve or turn on
+			filament if &lt;value&gt; is 1" >
                    <Param name="bool value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetContinuous" func="yes">
-              <Overload retVal="" descr="Set the acquisition mode for exposure <set> for continuous if <cont> is non-zero, or single-frame
-			if <cont> is 0.
-			The <set> can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
+              <Overload retVal="" descr="Set the acquisition mode for exposure &lt;set&gt; for continuous if &lt;cont&gt; is non-zero, or single-frame
+			if &lt;cont&gt; is 0.
+			The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
 			Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is
 			suspended, any changed parameters will be set again when the macro resumes." >
                    <Param name="char set" />
@@ -1477,19 +1477,19 @@
           </KeyWord>
 
           <KeyWord name="SetDefocus" func="yes">
-              <Overload retVal="" descr="Set the defocus to the given <value> in microns" >
+              <Overload retVal="" descr="Set the defocus to the given &lt;value&gt; in microns" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetDirectory" func="yes">
-              <Overload retVal="" descr="Change the working directory to <dir>, which can contain spaces." >
+              <Overload retVal="" descr="Change the working directory to &lt;dir&gt;, which can contain spaces." >
                    <Param name="string dir" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetEnergyLoss" func="yes">
-              <Overload retVal="" descr="Set the energy loss to the <value>" >
+              <Overload retVal="" descr="Set the energy loss to the &lt;value&gt;" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
@@ -1503,9 +1503,9 @@
           </KeyWord>
 
           <KeyWord name="SetExposure" func="yes">
-              <Overload retVal="" descr="Set exposure and, optionally, drift settling for exposure <set> to the given values <exp> and <drift>.
+              <Overload retVal="" descr="Set exposure and, optionally, drift settling for exposure &lt;set&gt; to the given values &lt;exp&gt; and &lt;drift&gt;.
 			If D is omitted, the existing drift settling will be unchanged.
-			The <set> can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
+			The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
 			Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is
 			suspended, any changed parameters will be set again when the macro resumes." >
                    <Param name="char set" />
@@ -1529,7 +1529,7 @@
           </KeyWord>
 
           <KeyWord name="SetIntensityForMean" func="yes">
-              <Overload retVal="" descr="Adjust beam intensity to yield the given <number> of counts, based on counts in the
+              <Overload retVal="" descr="Adjust beam intensity to yield the given &lt;number&gt; of counts, based on counts in the
 			tilt-foreshortened area of the image in A. In low dose mode, this operates only on Record images and will change the
 			intensity only of the Record area." >
                    <Param name="int number" />
@@ -1537,7 +1537,7 @@
           </KeyWord>
 
           <KeyWord name="SetLiveSettleFraction" func="yes">
-              <Overload retVal="" descr="Set the <fraction> of the usual settling time to apply in continuous mode after image shift
+              <Overload retVal="" descr="Set the &lt;fraction&gt; of the usual settling time to apply in continuous mode after image shift
 			or stage movement. By default, no settling is applied in continuous mode (i.e., the fraction is 0), but some settling may be
 			needed when a macro or other operation is using continuous frames. The fraction is reset to zero when continuous mode ends." >
                    <Param name="int fraction" />
@@ -1545,20 +1545,20 @@
           </KeyWord>
 
           <KeyWord name="SetLowDoseMode" func="yes">
-              <Overload retVal="" descr="Turns low dose <mode> on for nonzero or off for 0; the previous state of low dose is saved
+              <Overload retVal="" descr="Turns low dose &lt;mode&gt; on for nonzero or off for 0; the previous state of low dose is saved
 			in reportedValue1 as a 0 or 1." >
                    <Param name="bool mode" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetMag" func="yes">
-              <Overload retVal="" descr="Set the <mag> to an actual film mag value" >
+              <Overload retVal="" descr="Set the &lt;mag&gt; to an actual film mag value" >
                    <Param name="int mag" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetMagAndIntensity" func="yes">
-              <Overload retVal="" descr="Set the <mag> to the actual film mag value and change the beam to maintain the same brightness.
+              <Overload retVal="" descr="Set the &lt;mag&gt; to the actual film mag value and change the beam to maintain the same brightness.
 			Two values are reported: the initial percent C2 value and the remaining factor of intensity change needed if it was not
 			possible to change the intensity by the full amount needed. The C2 value should be used to restore intensity when the mag
 			is restored. The remaining intensity change could be applied to the exposure time if necessary. The macro will stop if there
@@ -1569,8 +1569,8 @@
 
           <KeyWord name="SetMontageParams" func="yes">
               <Overload retVal="" descr="Sets up to 6 montage parameters; enter a value or -1 to leave the parameter
-			unchanged. The entries are: 1 to use <stage> movement or 0 not to; overlap in X; overlap in Y; frame size in X; frame size
-			in Y, 1 to <skip> correlations or 0 not to." >
+			unchanged. The entries are: 1 to use &lt;stage&gt; movement or 0 not to; overlap in X; overlap in Y; frame size in X; frame size
+			in Y, 1 to &lt;skip&gt; correlations or 0 not to." >
                    <Param name="bool stage" />
                    <Param name="[int Xoverlap]" />
                    <Param name="[int Yoverlap]" />
@@ -1581,8 +1581,8 @@
           </KeyWord>
 
           <KeyWord name="SetNewFileType" func="yes">
-              <Overload retVal="" descr="Set to 0 to open files as MRC, or 1 to open files as a TIFF <series> described in an
-			image autodoc file. The optional second <value> sets whether to open montaged files as MRC or as a TIFF series, but only
+              <Overload retVal="" descr="Set to 0 to open files as MRC, or 1 to open files as a TIFF &lt;series&gt; described in an
+			image autodoc file. The optional second &lt;value&gt; sets whether to open montaged files as MRC or as a TIFF series, but only
 			if the property MontageAutodocOptions is set." >
                    <Param name="bool series" />
                    <Param name="[bool value]" />
@@ -1590,7 +1590,7 @@
           </KeyWord>
 
           <KeyWord name="SetObjFocus" func="yes">
-              <Overload retVal="" descr="Calls SetObjFocus on JEOL with the given <value>, an integer increment, and reports change in focus" >
+              <Overload retVal="" descr="Calls SetObjFocus on JEOL with the given &lt;value&gt;, an integer increment, and reports change in focus" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
@@ -1603,24 +1603,24 @@
           </KeyWord>
 
           <KeyWord name="SetPercentC2" func="yes">
-              <Overload retVal="" descr="Set the C2/C3 lens <strength> to the given percentage, or illuminated area on Titan
+              <Overload retVal="" descr="Set the C2/C3 lens &lt;strength&gt; to the given percentage, or illuminated area on Titan
 			to given value in microns." >
                    <Param name="int strength" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetProbeMode" func="yes">
-              <Overload retVal="" descr="Sets the <mode> to microprobe or nanoprobe on an FEI scope. Follow with 0 or 'nano' for
+              <Overload retVal="" descr="Sets the &lt;mode&gt; to microprobe or nanoprobe on an FEI scope. Follow with 0 or 'nano' for
 			nanoprobe, or 1 or 'micro' for microprobe." >
                    <Param name="variant mode" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetSTEMDetectors" func="yes">
-              <Overload retVal="" descr="Set the STEM <detector>s for each available channel of exposure <set>. Follow the set
+              <Overload retVal="" descr="Set the STEM &lt;detector&gt;s for each available channel of exposure &lt;set&gt;. Follow the set
 			specifier with a detector number for each channel, numbered from 0, or -1 to select no detector for that channel. At least
 			one actual detector must be specified.
-			The <set> can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
+			The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.
 			Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is
 			suspended, any changed parameters will be set again when the macro resumes." >
                    <Param name="char set" />
@@ -1630,26 +1630,26 @@
           </KeyWord>
 
           <KeyWord name="SetSlitIn" func="yes">
-              <Overload retVal="" descr="Insert the slit; or if <value> is entered, insert if 1 or retract if 0" >
+              <Overload retVal="" descr="Insert the slit; or if &lt;value&gt; is entered, insert if 1 or retract if 0" >
                    <Param name="[bool value]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetSlitWidth" func="yes">
-              <Overload retVal="" descr="Set energy filter slit <width> in eV" >
+              <Overload retVal="" descr="Set energy filter slit &lt;width&gt; in eV" >
                    <Param name="int width" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetSpotSize" func="yes">
-              <Overload retVal="" descr="Set the <spot> size to the given number" >
+              <Overload retVal="" descr="Set the &lt;spot&gt; size to the given number" >
                    <Param name="int spot" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SetStandardFocus" func="yes">
               <Overload retVal="" descr="Same as 'SetAbsoluteFocus', which is preferred to avoid confusion with the calibrated
-			standard or eucentric focus <value>" >
+			standard or eucentric focus &lt;value&gt;" >
                    <Param name="int value" />
               </Overload>
           </KeyWord>
@@ -1662,8 +1662,8 @@
 
           <KeyWord name="SetupWaffleMontage" func="yes">
               <Overload retVal="" descr="Open a montage file or adjust the current file's properties so that it will hold
-			an image of the cross-line (waffle) replica grating with at least <blocks> in X and Y at the current magnification.
-			Follow with the <minimum> of blocks and the <name> of the file to be opened if necessary. If montaging is not needed,
+			an image of the cross-line (waffle) replica grating with at least &lt;blocks&gt; in X and Y at the current magnification.
+			Follow with the &lt;minimum&gt; of blocks and the &lt;name&gt; of the file to be opened if necessary. If montaging is not needed,
 			no changes are made. If there is an existing montage that is adequate, its properties will be adjusted to work at the
 			current mag. If a new montage is needed, it will close the current file if it is a montage and open a new one with the
 			given name. Variables will be substituted, so the name can contain the mag index, for example. It sets reportedValue1
@@ -1677,14 +1677,14 @@
           <KeyWord name="ShiftCalSkipLensNorm" func="yes">
               <Overload retVal="" descr="Keeps projector lens normalization from being done before the next image or stage shift
 			calibration provided that normalization was last done at the current magnification. Follow with an optional 0 to NOT
-			<skip> normalization." >
+			&lt;skip&gt; normalization." >
                    <Param name="[bool skip]" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="ShiftImageForDrift" func="yes">
-              <Overload retVal="" descr="Apply image shift during the next exposure to compensate for a drift in <X> and <Y> given
-			by the first and second numbers; the third number should be 0 if the <drift> is in unbinned pixels/sec and 1 if it is in nm/sec" >
+              <Overload retVal="" descr="Apply image shift during the next exposure to compensate for a drift in &lt;X&gt; and &lt;Y&gt; given
+			by the first and second numbers; the third number should be 0 if the &lt;drift&gt; is in unbinned pixels/sec and 1 if it is in nm/sec" >
                    <Param name="int X" />
                    <Param name="int Y" />
                    <Param name="bool drift" />
@@ -1698,28 +1698,28 @@
           </KeyWord>
 
           <KeyWord name="Show" func="yes">
-              <Overload retVal="" descr="Display the given <buffer> (e.g., Show C)" >
+              <Overload retVal="" descr="Display the given &lt;buffer&gt; (e.g., Show C)" >
                    <Param name="char buffer" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SkipPiecesOutsideItem" func="yes">
-              <Overload retVal="" descr="Sets the current montage to skip pieces outside the Navigator item whose <position> in the
-			table (numbered from 1). If <position> is 0, uses the current item. If <position> is < 0, disables the skipping of pieces." >
+              <Overload retVal="" descr="Sets the current montage to skip pieces outside the Navigator item whose &lt;position&gt; in the
+			table (numbered from 1). If &lt;position&gt; is 0, uses the current item. If &lt;position&gt; is &lt; 0, disables the skipping of pieces." >
                    <Param name="int position" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SkipTo" func="yes">
-              <Overload retVal="" descr="Skips forward to the line starting with the given <label>, where the label has a colon (:) at
+              <Overload retVal="" descr="Skips forward to the line starting with the given &lt;label&gt;, where the label has a colon (:) at
 			the end of it and is the only item on the line. The colon is not included in the label in the SkipTo statement." >
                    <Param name="string label" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="SmoothFocusNextShot" func="yes">
-              <Overload retVal="" descr="Change focus linearly through next exposure. Follow with 2 numbers, the <starting> and
-			<ending> defocus relative to the current focus. This command and StepFocusNextShot are enabled for Gatan, Falcon, and
+              <Overload retVal="" descr="Change focus linearly through next exposure. Follow with 2 numbers, the &lt;starting&gt; and
+			&lt;ending&gt; defocus relative to the current focus. This command and StepFocusNextShot are enabled for Gatan, Falcon, and
 			Tietz cameras." >
                    <Param name="int starting" />
                    <Param name="int ending" />
@@ -1727,9 +1727,9 @@
           </KeyWord>
 
           <KeyWord name="SpecialExposeFilm" func="yes">
-              <Overload retVal="" descr="Expose film with special handling: the first specifies a <delay> in seconds after
-			loading the plate; the second number specifies a <pre>-exposure of the specimen before exposing the plate, in seconds. The third
-			suppresses <dimming> of the screen if it is nonzero. This command command does not raise the screen if it is down. It requires
+              <Overload retVal="" descr="Expose film with special handling: the first specifies a &lt;delay&gt; in seconds after
+			loading the plate; the second number specifies a &lt;pre&gt;-exposure of the specimen before exposing the plate, in seconds. The third
+			suppresses &lt;dimming&gt; of the screen if it is nonzero. This command command does not raise the screen if it is down. It requires
 			the adaexp server to be installed." >
                    <Param name="int delay" />
                    <Param name="[int pre]" />
@@ -1739,8 +1739,8 @@
 
           <KeyWord name="StepFocusNextShot" func="yes">
               <Overload retVal="" descr="Do one or two focus changes during the next exposure. Follow with 2 or 4 numbers:
-			the <time> in seconds from start of the exposure to the first focus change, the first <focus> change in microns, the <time> from
-			start of the exposure to the second focus change if any, and the second <focus> change relative to the starting focus, not
+			the &lt;time&gt; in seconds from start of the exposure to the first focus change, the first &lt;focus&gt; change in microns, the &lt;time&gt; from
+			start of the exposure to the second focus change if any, and the second &lt;focus&gt; change relative to the starting focus, not
 			relative to the focus after the first change. The command will have no effect if the exposure time is less than the time to
 			the first change, and the second change will not be done if the time for it is greater than the exposure time." >
                    <Param name="int time" />
@@ -1756,7 +1756,7 @@
           </KeyWord>
 
           <KeyWord name="SubareaMean" func="yes">
-              <Overload retVal="" descr="Report the mean counts in a subarea of the A buffer from <X0> to <X1> in X and from <Y0> to <Y1> in Y.
+              <Overload retVal="" descr="Report the mean counts in a subarea of the A buffer from &lt;X0&gt; to &lt;X1&gt; in X and from &lt;Y0&gt; to &lt;Y1&gt; in Y.
 			Coordinates are numbered from 0 to size - 1 in each dimension and 0 in Y is at the top." >
                    <Param name="int X0" />
                    <Param name="int X1" />
@@ -1771,7 +1771,7 @@
           </KeyWord>
 
           <KeyWord name="SwitchToFile" func="yes">
-              <Overload retVal="" descr="Make the given file <number> be the current open file." >
+              <Overload retVal="" descr="Make the given file &lt;number&gt; be the current open file." >
                    <Param name="int number" />
               </Overload>
           </KeyWord>
@@ -1782,13 +1782,13 @@
           </KeyWord>
 
           <KeyWord name="TAN" func="yes">
-              <Overload retVal="" descr="Tangent of following <angle> in degrees" >
+              <Overload retVal="" descr="Tangent of following &lt;angle&gt; in degrees" >
                    <Param name="int angle" />
               </Overload>
           </KeyWord>
 
           <KeyWord name="TiltBy" func="yes">
-              <Overload retVal="" descr="Change tilt by the given <amount>" >
+              <Overload retVal="" descr="Change tilt by the given &lt;amount&gt;" >
                    <Param name="int amount" />
               </Overload>
           </KeyWord>
@@ -1799,7 +1799,7 @@
           </KeyWord>
 
           <KeyWord name="TiltTo" func="yes">
-              <Overload retVal="" descr="Tilt to given <angle>" >
+              <Overload retVal="" descr="Tilt to given &lt;angle&gt;" >
                    <Param name="int angle" />
               </Overload>
           </KeyWord>
@@ -1833,7 +1833,7 @@
 
           <KeyWord name="UpdateHWDarkRef" func="yes">
               <Overload retVal="" descr="Updates the K2 hardware dark reference if the known interval since the last update is longer
-			than <value> in hours. If value is 0, the update is done unconditionally; if value is negative (-1), it simply records the current time as
+			than &lt;value&gt; in hours. If value is 0, the update is done unconditionally; if value is negative (-1), it simply records the current time as
 			the time of the last update." >
                    <Param name="int value" />
               </Overload>
@@ -1845,7 +1845,7 @@
           </KeyWord>
 
           <KeyWord name="UseContinuousFrames" func="yes">
-              <Overload retVal="" descr="If <value> is non-zero, the macro will keep executing commands (such as stage movement and alignment)
+              <Overload retVal="" descr="If &lt;value&gt; is non-zero, the macro will keep executing commands (such as stage movement and alignment)
 			even when the camera is acquiring in continuous mode. Use 0 to return to normal operation, in which the macro will wait for
 			continuous acquisition to be ended by the user." >
                    <Param name="bool value" />
@@ -1854,7 +1854,7 @@
 
           <KeyWord name="UserSetDirectory" func="yes">
               <Overload retVal="" descr="Open a directory chooser dialog to allow user to select or make a directory, and
-			change the working directory to it. If the optional <prompt> string is not supplied, the dialog title
+			change the working directory to it. If the optional &lt;prompt&gt; string is not supplied, the dialog title
 			is 'Choose a new current working directory'. The chosen directory is stored in reportedValue1." >
                    <Param name="[string prompt]" />
               </Overload>
@@ -1866,7 +1866,7 @@
           </KeyWord>
 
           <KeyWord name="Verbose" func="yes">
-              <Overload retVal="" descr="Turns echoing of each macro line on or off for <value> 1 or 0" >
+              <Overload retVal="" descr="Turns echoing of each macro line on or off for &lt;value&gt; 1 or 0" >
                    <Param name="bool value" />
               </Overload>
           </KeyWord>
@@ -1877,8 +1877,8 @@
           </KeyWord>
 
           <KeyWord name="WaitForDose" func="yes">
-              <Overload retVal="" descr="Start accumulating <dose> and wait until it reaches the given value in electrons
-			per square Angstrom. Enter the optional value to set how many times it <reports> progress while waiting (default is 10).
+              <Overload retVal="" descr="Start accumulating &lt;dose&gt; and wait until it reaches the given value in electrons
+			per square Angstrom. Enter the optional value to set how many times it &lt;reports&gt; progress while waiting (default is 10).
 			Be sure that the screen is down and, if in low dose, that the beam is unblanked." >
                    <Param name="int dose" />
                    <Param name="[int reports]" />
@@ -1893,7 +1893,7 @@
           </KeyWord>
 
           <KeyWord name="WalkUpTo" func="yes">
-              <Overload retVal="" descr="Tilt up to given <angle> in steps and track image position" >
+              <Overload retVal="" descr="Tilt up to given &lt;angle&gt; in steps and track image position" >
                    <Param name="int angle" />
               </Overload>
           </KeyWord>
@@ -1910,7 +1910,7 @@
           </KeyWord>
 
           <KeyWord name="YesNoBox" func="yes">
-              <Overload retVal="" descr="Opens a Yes-No message box with the given <text>, which should be a question that can be answered
+              <Overload retVal="" descr="Opens a Yes-No message box with the given &lt;text&gt;, which should be a question that can be answered
 			with yes or no. Sets reportedValue1 to 1 or 0 for a yes or no answer." >
                    <Param name="string text" />
               </Overload>
