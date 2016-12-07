@@ -352,6 +352,10 @@ class sTreeItemLangKeywordsData: public sTreeItemData
         void SetText(const wxString &str)
         {
             m_text = str;
+            m_text.Replace(wxT("\n"), wxT(" "), true);
+
+            while (m_text.Find(wxT("  ")) != wxNOT_FOUND)
+                m_text.Replace(wxT("  "), wxT(" "), true);
         }
         wxString GetText() const
         {

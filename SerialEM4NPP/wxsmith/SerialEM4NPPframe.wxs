@@ -875,9 +875,11 @@
 																													<font>
 																														<sysfont>wxSYS_OEM_FIXED_FONT</sysfont>
 																													</font>
+																													<style>wxTE_MULTILINE</style>
 																													<handler function="OnInputTextLang" entry="EVT_TEXT" />
 																												</object>
 																												<flag>wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND</flag>
+																												<option>1</option>
 																											</object>
 																										</object>
 																										<flag>wxALL|wxEXPAND</flag>
@@ -891,6 +893,7 @@
 																						</object>
 																						<flag>wxALL|wxEXPAND</flag>
 																						<border>5</border>
+																						<option>1</option>
 																					</object>
 																				</object>
 																				<flag>wxALL|wxEXPAND</flag>

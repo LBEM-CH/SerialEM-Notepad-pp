@@ -154,10 +154,11 @@ void debugLeave(const wxString &str)
 
 SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progress(NULL), m_apiLoaded(false), m_langLoaded(false)
 {
+#if DEBUG
     wxLogWindow *logger = new wxLogWindow(this, _("Logging Window"));
     wxLog::SetActiveTarget(logger);
     wxLogStatus(wxT("Started"));
-
+#endif
 
     //(*Initialize(SerialEM4NPPFrame)
     wxBoxSizer* BoxSizer4;
@@ -471,7 +472,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     StaticBoxSizer9->Add(m_wtextUserLangExt, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     m_wsizerUserLang->Add(StaticBoxSizer9, 0, wxALL|wxEXPAND, 5);
     BoxSizer27->Add(m_wsizerUserLang, 1, wxALL, 5);
-    BoxSizer27->Add(0,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer27->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     m_wsizerWordsStyleLang = new wxStaticBoxSizer(wxHORIZONTAL, ScrolledWindow1, _("  Words Style  "));
     BoxSizer28 = new wxBoxSizer(wxHORIZONTAL);
     StaticBoxSizer12 = new wxStaticBoxSizer(wxHORIZONTAL, ScrolledWindow1, _("  fgColor  "));
@@ -511,14 +512,14 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     m_wsizerContentLang = new wxStaticBoxSizer(wxHORIZONTAL, ScrolledWindow1, _("  Content  "));
     BoxSizer29 = new wxBoxSizer(wxHORIZONTAL);
     BoxSizer30 = new wxBoxSizer(wxVERTICAL);
-    m_wtextContentLang = new wxTextCtrl(ScrolledWindow1, ID_TEXTCTRL14, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL14"));
+    m_wtextContentLang = new wxTextCtrl(ScrolledWindow1, ID_TEXTCTRL14, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxDefaultValidator, _T("ID_TEXTCTRL14"));
     wxFont m_wtextContentLangFont = wxSystemSettings::GetFont(wxSYS_OEM_FIXED_FONT);
     if ( !m_wtextContentLangFont.Ok() ) m_wtextContentLangFont = wxSystemSettings::GetFont(wxSYS_DEFAULT_GUI_FONT);
     m_wtextContentLang->SetFont(m_wtextContentLangFont);
-    BoxSizer30->Add(m_wtextContentLang, 0, wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 0);
+    BoxSizer30->Add(m_wtextContentLang, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 0);
     BoxSizer29->Add(BoxSizer30, 1, wxALL|wxEXPAND, 5);
     m_wsizerContentLang->Add(BoxSizer29, 1, wxALL|wxEXPAND, 0);
-    BoxSizer25->Add(m_wsizerContentLang, 0, wxALL|wxEXPAND, 5);
+    BoxSizer25->Add(m_wsizerContentLang, 1, wxALL|wxEXPAND, 5);
     BoxSizer24->Add(BoxSizer25, 0, wxALL|wxEXPAND, 0);
     ScrolledWindow1->SetSizer(BoxSizer24);
     BoxSizer24->Fit(ScrolledWindow1);
