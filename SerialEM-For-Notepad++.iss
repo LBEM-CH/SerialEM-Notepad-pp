@@ -45,14 +45,16 @@ Source: "Notepad++\plugins\APIs\SerialEM.xml"; DestDir: "{pf32}\Notepad++\plugin
 Source: "Notepad++\plugins\APIs\SerialEM.xml"; DestDir: "{pf64}\Notepad++\plugins\APIs"; DestName: "SerialEM.xml"; Check: IsNPP64; Flags: solidbreak
 ; Place all common files here, first one should be marked 'solidbreak'
 Source: "LICENSE.txt"; DestDir: "{app}"; Flags: solidbreak
+Source: "README.txt"; DestDir: "{app}"; Flags: solidbreak
 
 [Icons]
 Name: "{group}\Uninstall SerialEM For Notepad++ {#SERIALEM4NPP_VERSION}"; Filename: "{uninstallexe}"
 Name: "{group}\License"; Filename: "{app}\LICENSE.txt"
+Name: "{group}\Read Me First"; Filename: "{app}\README.txt"
 
 [Run]
 ;// User selected... these files are shown for launch after everything is done
-;Filename: {app}\README.TXT; Description: View the README file; Flags: postinstall shellexec skipifsilent
+Filename: {app}\README.txt; Description: View the README file (important for first time users); Flags: postinstall shellexec skipifsilent
 
 [Code]
 // Some constants decl.
