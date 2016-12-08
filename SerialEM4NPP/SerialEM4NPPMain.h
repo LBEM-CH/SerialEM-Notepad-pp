@@ -480,11 +480,12 @@ class SerialEM4NPPFrame: public wxFrame
         void OnInputTextLang(wxCommandEvent& event);
         void OnCheckLangClick(wxCommandEvent& event);
         void OnSaveLangClick(wxCommandEvent& event);
-        void Onm_wreloadBetaHtmlClick(wxCommandEvent& event);
         void Onm_whomeBetaHtmlClick(wxCommandEvent& event);
         void Onm_whomeStableHtmlClick(wxCommandEvent& event);
         void Onm_wtextBetaURLTextEnter(wxCommandEvent& event);
         void OnPanel7RightDown(wxMouseEvent& event);
+        void OnHtmlReloadClick(wxCommandEvent& event);
+        void OnHtmlSaveClick(wxCommandEvent& event);
         //*)
 
         void                            OnHtmlCopy(wxCommandEvent &);
@@ -560,6 +561,7 @@ class SerialEM4NPPFrame: public wxFrame
         static const long ID_BITMAPBUTTON7;
         static const long ID_BITMAPBUTTON8;
         static const long ID_BITMAPBUTTON5;
+        static const long ID_BITMAPBUTTON9;
         static const long ID_HTMLWINDOW1;
         static const long ID_PANEL9;
         static const long ID_AUINOTEBOOK1;
@@ -581,7 +583,6 @@ class SerialEM4NPPFrame: public wxFrame
         wxPanel* Panel5;
         wxTextCtrl* m_wtextTextLang;
         wxButton* m_wbtnSaveLang;
-        wxBitmapButton* m_wreloadBetaHtml;
         wxTextCtrl* m_wtextDecimalSeparator;
         wxButton* m_wbtnLoadLang;
         wxTextCtrl* m_wtextUserLangExt;
@@ -595,10 +596,8 @@ class SerialEM4NPPFrame: public wxFrame
         wxTextCtrl* m_wtextInput;
         wxCheckBox* m_wcheckKeywords8;
         wxColourDialog* m_wcolourDialog;
-        wxBitmapButton* m_whomeStableHtml;
         wxBitmapButton* m_wbtmBtnSave;
         wxCheckBox* m_wcheckKeywords3;
-        wxBitmapButton* m_whomeBetaHtml;
         wxStaticBoxSizer* m_wsizerPrefixLang;
         wxPanel* Panel1;
         wxTextCtrl* m_wtextEnvSep;
@@ -617,15 +616,19 @@ class SerialEM4NPPFrame: public wxFrame
         wxCheckBox* m_wcheckAllowFoldOfComments;
         wxTextCtrl* m_wtextFontSize;
         wxStaticBoxSizer* m_wsizerContentLang;
+        wxBitmapButton* m_wbtnHtmlSave;
         wxTextCtrl* m_wtextFontName;
         wxTextCtrl* m_wtextFunctionArgs;
         wxStatusBar* StatusBar1;
         wxCheckBox* m_wcheckKeywords1;
+        wxBitmapButton* m_wbtnHomeBetaHtml;
         wxPanel* m_wpanelFgColor;
         wxTextCtrl* m_wtextFunctionName;
         wxBitmapButton* BitmapButton4;
         wxStaticBoxSizer* m_wsizerWordsStyleLang;
+        wxBitmapButton* m_wbtnReloadHtml;
         wxCheckBox* m_wcheckEnvCase;
+        wxBitmapButton* m_wbtnHomeStableHtml;
         wxButton* m_wbtnLoad;
         wxPanel* Panel2;
         wxTextCtrl* m_wtextBetaURL;

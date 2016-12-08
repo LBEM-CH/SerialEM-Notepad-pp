@@ -106,6 +106,7 @@ const long SerialEM4NPPFrame::ID_TEXTCTRL18 = wxNewId();
 const long SerialEM4NPPFrame::ID_BITMAPBUTTON7 = wxNewId();
 const long SerialEM4NPPFrame::ID_BITMAPBUTTON8 = wxNewId();
 const long SerialEM4NPPFrame::ID_BITMAPBUTTON5 = wxNewId();
+const long SerialEM4NPPFrame::ID_BITMAPBUTTON9 = wxNewId();
 const long SerialEM4NPPFrame::ID_HTMLWINDOW1 = wxNewId();
 const long SerialEM4NPPFrame::ID_PANEL9 = wxNewId();
 const long SerialEM4NPPFrame::ID_AUINOTEBOOK1 = wxNewId();
@@ -163,7 +164,7 @@ void debugLeave(const wxString &str)
 
 SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progress(NULL), m_apiLoaded(false), m_langLoaded(false)
 {
-#if DEBUG
+#if 0
     wxLogWindow *logger = new wxLogWindow(this, _("Logging Window"));
     wxLog::SetActiveTarget(logger);
     wxLogStatus(wxT("Started"));
@@ -185,6 +186,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxBoxSizer* BoxSizer8;
     wxBoxSizer* BoxSizer21;
     wxStaticBoxSizer* StaticBoxSizer21;
+    wxStaticBoxSizer* StaticBoxSizer15;
     wxMenuItem* MenuItem2;
     wxBoxSizer* BoxSizer13;
     wxStaticBoxSizer* StaticBoxSizer14;
@@ -206,6 +208,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxBoxSizer* BoxSizer28;
     wxStaticBoxSizer* StaticBoxSizer17;
     wxStaticBoxSizer* StaticBoxSizer13;
+    wxStaticBoxSizer* StaticBoxSizer10;
     wxBoxSizer* BoxSizer38;
     wxBoxSizer* BoxSizer14;
     wxStaticBoxSizer* StaticBoxSizer8;
@@ -548,17 +551,25 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     BoxSizer37 = new wxBoxSizer(wxHORIZONTAL);
     BoxSizer38 = new wxBoxSizer(wxVERTICAL);
     BoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
+    StaticBoxSizer10 = new wxStaticBoxSizer(wxHORIZONTAL, m_panel7, wxEmptyString);
     m_wtextBetaURL = new wxTextCtrl(m_panel7, ID_TEXTCTRL18, _("http://bio3d.colorado.edu/SerialEM/hlp/html/macro_commands.htm"), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER, wxDefaultValidator, _T("ID_TEXTCTRL18"));
-    BoxSizer39->Add(m_wtextBetaURL, 1, wxALL|wxEXPAND, 5);
-    m_whomeBetaHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON7, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_WARNING")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON7"));
-    m_whomeBetaHtml->SetToolTip(_("Load beta commands"));
-    BoxSizer39->Add(m_whomeBetaHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    m_whomeStableHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON8, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_INFORMATION")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON8"));
-    m_whomeStableHtml->SetToolTip(_("Load stable commands"));
-    BoxSizer39->Add(m_whomeStableHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    m_wreloadBetaHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON5, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_UNDO")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON5"));
-    m_wreloadBetaHtml->SetToolTip(_("Reload current page"));
-    BoxSizer39->Add(m_wreloadBetaHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    StaticBoxSizer10->Add(m_wtextBetaURL, 1, wxALL|wxEXPAND, 5);
+    m_wbtnHomeBetaHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON7, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_WARNING")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON7"));
+    m_wbtnHomeBetaHtml->SetToolTip(_("Load beta commands"));
+    StaticBoxSizer10->Add(m_wbtnHomeBetaHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    m_wbtnHomeStableHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON8, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_INFORMATION")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON8"));
+    m_wbtnHomeStableHtml->SetToolTip(_("Load stable commands"));
+    StaticBoxSizer10->Add(m_wbtnHomeStableHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    m_wbtnReloadHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON5, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_UNDO")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON5"));
+    m_wbtnReloadHtml->SetToolTip(_("Reload current page"));
+    StaticBoxSizer10->Add(m_wbtnReloadHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer39->Add(StaticBoxSizer10, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer39->Add(0,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    StaticBoxSizer15 = new wxStaticBoxSizer(wxHORIZONTAL, m_panel7, wxEmptyString);
+    m_wbtnHtmlSave = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON9, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_SAVE_AS")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON9"));
+    m_wbtnHtmlSave->SetToolTip(_("Save pqge context to text file"));
+    StaticBoxSizer15->Add(m_wbtnHtmlSave, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer39->Add(StaticBoxSizer15, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer38->Add(BoxSizer39, 0, wxALL|wxEXPAND, 5);
     m_whtmlWindowBeta = new wxHtmlWindow(m_panel7, ID_HTMLWINDOW1, wxDefaultPosition, wxDefaultSize, wxHW_SCROLLBAR_AUTO|wxSUNKEN_BORDER, _T("ID_HTMLWINDOW1"));
     m_whtmlWindowBeta->SetBorders(5);
@@ -643,7 +654,8 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Connect(ID_TEXTCTRL18,wxEVT_COMMAND_TEXT_ENTER,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_wtextBetaURLTextEnter);
     Connect(ID_BITMAPBUTTON7,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_whomeBetaHtmlClick);
     Connect(ID_BITMAPBUTTON8,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_whomeStableHtmlClick);
-    Connect(ID_BITMAPBUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_wreloadBetaHtmlClick);
+    Connect(ID_BITMAPBUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlReloadClick);
+    Connect(ID_BITMAPBUTTON9,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlSaveClick);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnAbout);
     //*)
@@ -2236,7 +2248,7 @@ void SerialEM4NPPFrame::OnSaveLangClick(wxCommandEvent& event)
     event.Skip();
 }
 
-void SerialEM4NPPFrame::Onm_wreloadBetaHtmlClick(wxCommandEvent& event)
+void SerialEM4NPPFrame::OnHtmlReloadClick(wxCommandEvent& event)
 {
     wxProgressDialog dialog(wxT("Loading page..."), wxT("Please wait..."));
 
@@ -2295,7 +2307,7 @@ void SerialEM4NPPFrame::Onm_whomeBetaHtmlClick(wxCommandEvent& event)
     m_wtextBetaURL->ChangeValue(wxT("http://bio3d.colorado.edu/SerialEM/hlp/html/macro_commands.htm"));
 
     wxCommandEvent evt;
-    Onm_wreloadBetaHtmlClick(evt);
+    OnHtmlReloadClick(evt);
 
     event.Skip();
 }
@@ -2306,7 +2318,74 @@ void SerialEM4NPPFrame::Onm_whomeStableHtmlClick(wxCommandEvent& event)
     m_wtextBetaURL->ChangeValue(wxT("http://bio3d.colorado.edu/SerialEM/stableHlp/html/macro_commands.htm"));
 
     wxCommandEvent evt;
-    Onm_wreloadBetaHtmlClick(evt);
+    OnHtmlReloadClick(evt);
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::OnHtmlSaveClick(wxCommandEvent& event)
+{    wxLogNull noLog; // Shut up please ;-)
+
+    m_wfileDialog->SetWildcard(wxT("Text files (*.txt)|*.txt|All types (*.*)|*.*"));
+    m_wfileDialog->SetPath(wxT("Content.txt"));
+
+    if (m_wfileDialog->ShowModal() == wxID_OK)
+    {
+        wxString filename = m_wfileDialog->GetPath();
+        wxTextFile file(filename);
+
+        // The file already exists, ask to overwrite
+        if (wxFileName::Exists(filename))
+        {
+            wxFileName fn(filename);
+
+            if (wxMessageBox(wxT("The file ") + fn.GetFullName() + wxT(" already exists, do you want to override it ?"),
+                             wxT("Warning"), wxYES_NO|wxNO_DEFAULT|wxICON_QUESTION) == wxNO)
+            {
+                return;
+            }
+        }
+
+        // Try to reopen file
+        if (! file.Open())
+        {
+            // File did not exist, create it.
+            if (!file.Create())
+            {
+                wxMessageBox(wxT("Failed to Create() '") + filename + wxT("': ") + wxSysErrorMsg(wxSysErrorCode()), wxT("Error"), wxOK|wxICON_ERROR);
+                return;
+            }
+
+            if (! file.Open())
+                wxMessageBox(wxT("Failed to Open() '") + filename + wxT("': ") + wxSysErrorMsg(wxSysErrorCode()), wxT("Error"), wxOK|wxICON_ERROR);
+        }
+
+        // Ensure file is open now
+        if (! file.IsOpened())
+        {
+            wxMessageBox(wxT("File not opened:  ") + filename, wxT("Error"), wxOK|wxICON_ERROR);
+
+            return;
+        }
+
+        // Erase file content (in memory)
+        file.Clear();
+
+        file.AddLine(m_whtmlWindowBeta->ToText());
+
+        // Dude! something's wrong in wonderland...
+        if (! file.Write())
+        {
+            wxMessageBox(wxT("Unable to save ") + file.GetName() + wxT(": ") + wxSysErrorMsg(wxSysErrorCode()),  wxT("Error"), wxOK|wxICON_ERROR);
+            return;
+        }
+
+        if (! file.Close())
+        {
+            wxMessageBox(wxT("Unable to save ") + file.GetName() + wxT(": ") + wxSysErrorMsg(wxSysErrorCode()),  wxT("Error"), wxOK|wxICON_ERROR);
+        }
+
+    }
 
     event.Skip();
 }
@@ -2314,7 +2393,7 @@ void SerialEM4NPPFrame::Onm_whomeStableHtmlClick(wxCommandEvent& event)
 void SerialEM4NPPFrame::Onm_wtextBetaURLTextEnter(wxCommandEvent& event)
 {
     wxCommandEvent evt;
-    Onm_wreloadBetaHtmlClick(evt);
+    OnHtmlReloadClick(evt);
 
     event.Skip();
 }
@@ -2357,3 +2436,4 @@ void SerialEM4NPPFrame::OnHtmlPaste(wxCommandEvent& event)
 {
     event.Skip();
 }
+
