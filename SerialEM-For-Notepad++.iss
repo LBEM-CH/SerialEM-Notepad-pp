@@ -12,15 +12,15 @@ AppVersion={#SERIALEM4NPP_VERSION}
 AppCopyright=Copyright (C) 2016 Daniel Caujolle-Bert, BioEM Lab.
 AppPublisher=BioEM Lab.
 AppPublisherURL=https://c-cina.unibas.ch/bioem/
-AppComments=SerialEM for Notepad++ {#SERIALEM4NPP_VERSION} x86
+AppComments=SerialEM for Notepad++ {#SERIALEM4NPP_VERSION} {code:Architecture}
 ;AppUpdatesURL=http://www.example.com/updates.html
 ;AppContact=My Company Customer Support
 LicenseFile=LICENSE.txt
 WizardImageFile="Logos\BioEM-Lab-Vertical.bmp"
 WizardSmallImageFile="Logos\SerialEM4NPP-Icon55_58.bmp"
 SetupIconFile="Logos\SerialEM4NPP-Icon64.ico"
-OutputBaseFilename=SerialEM4NPP-{#SERIALEM4NPP_VERSION}-x86
-DefaultDirName={pf}\SerialEM4NPP
+OutputBaseFilename=SerialEM4NPP-{#SERIALEM4NPP_VERSION}-x86_x64
+DefaultDirName={pf}\SerialEM for Notepad++
 DefaultGroupName=SerialEM For Notepad++
 UninstallDisplayIcon={uninstallexe}
 Compression=lzma2
@@ -39,9 +39,10 @@ WindowVisible=no
 
 [Files]
 ; Place all x86 files here, first one should be marked 'solidbreak'
-Source: "UserLanguages\DeepBlack\SerialEM_Lang.xml"; DestDir: "{app}\DeepBlack"; DestName: "SerialEM_Lang.xml"; Check: not Is64BitInstallMode; Flags: solidbreak
-Source: "UserLanguages\Default\SerialEM_Lang.xml"; DestDir: "{app}\Default"; DestName: "SerialEM_Lang.xml"; Check: not Is64BitInstallMode; Flags: solidbreak
-Source: "Notepad++\plugins\APIs\SerialEM.xml"; DestDir: "{pf}\Notepad++\plugins\APIs"; DestName: "SerialEM.xml"; Check: not Is64BitInstallMode; Flags: solidbreak
+Source: "UserLanguages\DeepBlack\SerialEM_Lang.xml"; DestDir: "{app}\DeepBlack"; DestName: "SerialEM_Lang.xml"; Flags: solidbreak
+Source: "UserLanguages\Default\SerialEM_Lang.xml"; DestDir: "{app}\Default"; DestName: "SerialEM_Lang.xml"; Flags: solidbreak
+Source: "Notepad++\plugins\APIs\SerialEM.xml"; DestDir: "{pf32}\Notepad++\plugins\APIs"; DestName: "SerialEM.xml"; Check: IsNPP32; Flags: solidbreak
+Source: "Notepad++\plugins\APIs\SerialEM.xml"; DestDir: "{pf64}\Notepad++\plugins\APIs"; DestName: "SerialEM.xml"; Check: IsNPP64; Flags: solidbreak
 ; Place all common files here, first one should be marked 'solidbreak'
 Source: "LICENSE.txt"; DestDir: "{app}"; Flags: solidbreak
 
@@ -58,6 +59,16 @@ Name: "{group}\License"; Filename: "{app}\LICENSE.txt"
 const
     RegKey = 'SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\' + '{#SERIALEM4NPP_UUID}' + '_is1';
     SerialEM4NPPVersion = '{#SERIALEM4NPP_VERSION}';
+
+function IsNPP32: Boolean;
+begin
+    Result := DirExists(ExpandConstant('{pf32}\Notepad++'));
+end;
+
+function IsNPP64: Boolean;
+begin
+    Result := DirExists(ExpandConstant('{pf64}\Notepad++'));
+end;
 
 // Returns architecture string
 function Architecture(str: String): String;
@@ -99,31 +110,42 @@ var
     ErrorCode: Integer;
     
 begin
-    if RegKeyExists(HKEY_LOCAL_MACHINE, RegKey) then
-        begin
-        
-            RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'DisplayVersion', oldVersion);
-            
-            if (CompareVersion(oldVersion, SerialEM4NPPVersion) <> 0) then
-                begin
-                    //MsgBox('Uninstall version ' + oldVersion + ' of Serial for Notepad++', mbInformation, MB_OK);    
 
-                    RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'UninstallString', uninstaller);
-                    ShellExec('runas', uninstaller, '/SILENT', '', SW_HIDE, ewWaitUntilTerminated, ErrorCode);
-                    Result := True;
-                    
-                end
-            else
-                begin
-                
-                    MsgBox('Version ' + oldVersion + ' of Serial for Notepad++ is already installed.'+#13#10+'This installer will exit.', mbInformation, MB_OK);    
-                    Result := False;
-                    
-                end;
-        end
+    // Check if at least one of Notepad++ version is installed (x86 or x64)
+    if ((not DirExists(ExpandConstant('{pf32}\Notepad++'))) AND (not DirExists(ExpandConstant('{pf64}\Notepad++')))) then
+      begin
+          MsgBox('You should install Notepad++ before installing this package.' + #13#10 + 'This installer will exit now.', mbInformation, MB_OK);
+          Result := False;
+      end
     else
-        begin
-            //MsgBox('No uninstall of Serial for Notepad++', mbInformation, MB_OK);    
-            Result := True;
-        end;
+      begin
+    
+          if RegKeyExists(HKEY_LOCAL_MACHINE, RegKey) then
+              begin
+              
+                  RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'DisplayVersion', oldVersion);
+                  
+                  if (CompareVersion(oldVersion, SerialEM4NPPVersion) <> 0) then
+                      begin
+                          //MsgBox('Uninstall version ' + oldVersion + ' of SerialEM for Notepad++', mbInformation, MB_OK);    
+
+                          RegQueryStringValue(HKEY_LOCAL_MACHINE, RegKey, 'UninstallString', uninstaller);
+                          ShellExec('runas', uninstaller, '/SILENT', '', SW_HIDE, ewWaitUntilTerminated, ErrorCode);
+                          Result := True;
+                          
+                      end
+                  else
+                      begin
+                      
+                          MsgBox('Version ' + oldVersion + ' of SerialEM for Notepad++ is already installed.'+#13#10+'This installer will exit.', mbInformation, MB_OK);    
+                          Result := False;
+                          
+                      end;
+              end
+          else
+              begin
+                  //MsgBox('No uninstall of SerialEM for Notepad++', mbInformation, MB_OK);    
+                  Result := True;
+              end;
+      end;
 end;

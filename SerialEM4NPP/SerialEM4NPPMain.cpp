@@ -102,12 +102,21 @@ const long SerialEM4NPPFrame::ID_TEXTCTRL14 = wxNewId();
 const long SerialEM4NPPFrame::ID_SCROLLEDWINDOW2 = wxNewId();
 const long SerialEM4NPPFrame::ID_SPLITTERWINDOW2 = wxNewId();
 const long SerialEM4NPPFrame::ID_PANEL3 = wxNewId();
+const long SerialEM4NPPFrame::ID_TEXTCTRL18 = wxNewId();
+const long SerialEM4NPPFrame::ID_BITMAPBUTTON7 = wxNewId();
+const long SerialEM4NPPFrame::ID_BITMAPBUTTON8 = wxNewId();
+const long SerialEM4NPPFrame::ID_BITMAPBUTTON5 = wxNewId();
+const long SerialEM4NPPFrame::ID_HTMLWINDOW1 = wxNewId();
+const long SerialEM4NPPFrame::ID_PANEL9 = wxNewId();
 const long SerialEM4NPPFrame::ID_AUINOTEBOOK1 = wxNewId();
 const long SerialEM4NPPFrame::ID_PANEL1 = wxNewId();
 const long SerialEM4NPPFrame::idMenuQuit = wxNewId();
 const long SerialEM4NPPFrame::idMenuAbout = wxNewId();
 const long SerialEM4NPPFrame::ID_STATUSBAR1 = wxNewId();
 //*)
+const long SerialEM4NPPFrame::ID_CTXMENU_COPY = wxNewId();
+const long SerialEM4NPPFrame::ID_CTXMENU_SELECTALL = wxNewId();
+const long SerialEM4NPPFrame::ID_CTXMENU_PASTE = wxNewId();
 
 BEGIN_EVENT_TABLE(SerialEM4NPPFrame,wxFrame)
     //(*EventTable(SerialEM4NPPFrame)
@@ -172,6 +181,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxBoxSizer* BoxSizer10;
     wxBoxSizer* BoxSizer7;
     wxStaticBoxSizer* StaticBoxSizer12;
+    wxBoxSizer* BoxSizer39;
     wxBoxSizer* BoxSizer8;
     wxBoxSizer* BoxSizer21;
     wxStaticBoxSizer* StaticBoxSizer21;
@@ -182,6 +192,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxBoxSizer* BoxSizer36;
     wxMenuItem* MenuItem1;
     wxStaticBoxSizer* StaticBoxSizer16;
+    wxBoxSizer* BoxSizer37;
     wxBoxSizer* BoxSizer23;
     wxStaticBoxSizer* StaticBoxSizer9;
     wxBoxSizer* BoxSizer2;
@@ -195,6 +206,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxBoxSizer* BoxSizer28;
     wxStaticBoxSizer* StaticBoxSizer17;
     wxStaticBoxSizer* StaticBoxSizer13;
+    wxBoxSizer* BoxSizer38;
     wxBoxSizer* BoxSizer14;
     wxStaticBoxSizer* StaticBoxSizer8;
     wxStaticBoxSizer* StaticBoxSizer3;
@@ -532,8 +544,32 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Panel3->SetSizer(BoxSizer17);
     BoxSizer17->Fit(Panel3);
     BoxSizer17->SetSizeHints(Panel3);
+    m_panel7 = new wxPanel(m_notebook, ID_PANEL9, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL9"));
+    BoxSizer37 = new wxBoxSizer(wxHORIZONTAL);
+    BoxSizer38 = new wxBoxSizer(wxVERTICAL);
+    BoxSizer39 = new wxBoxSizer(wxHORIZONTAL);
+    m_wtextBetaURL = new wxTextCtrl(m_panel7, ID_TEXTCTRL18, _("http://bio3d.colorado.edu/SerialEM/hlp/html/macro_commands.htm"), wxDefaultPosition, wxDefaultSize, wxTE_PROCESS_ENTER, wxDefaultValidator, _T("ID_TEXTCTRL18"));
+    BoxSizer39->Add(m_wtextBetaURL, 1, wxALL|wxEXPAND, 5);
+    m_whomeBetaHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON7, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_WARNING")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON7"));
+    m_whomeBetaHtml->SetToolTip(_("Load beta commands"));
+    BoxSizer39->Add(m_whomeBetaHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    m_whomeStableHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON8, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_INFORMATION")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON8"));
+    m_whomeStableHtml->SetToolTip(_("Load stable commands"));
+    BoxSizer39->Add(m_whomeStableHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    m_wreloadBetaHtml = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON5, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_UNDO")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON5"));
+    m_wreloadBetaHtml->SetToolTip(_("Reload current page"));
+    BoxSizer39->Add(m_wreloadBetaHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer38->Add(BoxSizer39, 0, wxALL|wxEXPAND, 5);
+    m_whtmlWindowBeta = new wxHtmlWindow(m_panel7, ID_HTMLWINDOW1, wxDefaultPosition, wxDefaultSize, wxHW_SCROLLBAR_AUTO|wxSUNKEN_BORDER, _T("ID_HTMLWINDOW1"));
+    m_whtmlWindowBeta->SetBorders(5);
+    BoxSizer38->Add(m_whtmlWindowBeta, 1, wxALL|wxEXPAND, 5);
+    BoxSizer37->Add(BoxSizer38, 1, wxALL|wxEXPAND, 5);
+    m_panel7->SetSizer(BoxSizer37);
+    BoxSizer37->Fit(m_panel7);
+    BoxSizer37->SetSizeHints(m_panel7);
     m_notebook->AddPage(Panel2, _("Plugin"));
     m_notebook->AddPage(Panel3, _("Language"));
+    m_notebook->AddPage(m_panel7, _("Online Commands"));
     BoxSizer2->Add(m_notebook, 1, wxALL|wxEXPAND, 5);
     BoxSizer1->Add(BoxSizer2, 1, wxALL|wxEXPAND, 5);
     Panel1->SetSizer(BoxSizer1);
@@ -604,9 +640,30 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Connect(ID_TEXTCTRL15,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnInputTextLang);
     Connect(ID_TEXTCTRL14,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnInputTextLang);
     Connect(ID_SPLITTERWINDOW2,wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnSplitterWindow1SashPosChanged);
+    Connect(ID_TEXTCTRL18,wxEVT_COMMAND_TEXT_ENTER,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_wtextBetaURLTextEnter);
+    Connect(ID_BITMAPBUTTON7,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_whomeBetaHtmlClick);
+    Connect(ID_BITMAPBUTTON8,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_whomeStableHtmlClick);
+    Connect(ID_BITMAPBUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_wreloadBetaHtmlClick);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnAbout);
     //*)
+
+    m_whtmlWindowBeta->GetHTMLWindow()->Connect(wxEVT_RIGHT_DOWN, (wxObjectEventFunction)&SerialEM4NPPFrame::OnPanel7RightDown, 0, this);
+
+    m_whtmlCtxMenu = new wxMenu();
+    m_whtmlCtxMenu->Append(ID_CTXMENU_COPY, wxT("Copy"));
+    m_whtmlCtxMenu->Append(ID_CTXMENU_PASTE, wxT("Paste"));
+    m_whtmlCtxMenu->AppendSeparator();
+    m_whtmlCtxMenu->Append(ID_CTXMENU_SELECTALL, wxT("Select All"));
+
+    Connect(ID_CTXMENU_COPY, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlCopy);
+    Connect(ID_CTXMENU_PASTE, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlPaste);
+    Connect(ID_CTXMENU_SELECTALL, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlSelectAll);
+
+    SetIcon(wxICON(MAINICON));
+    SetTitle(wxGetApp().GetAppName() + wxT(" ")
+             + wxString::FromAscii(AutoVersion::FULLVERSION_STRING)
+             + wxString::FromAscii(AutoVersion::STATUS_SHORT));
 
     m_scrolledWindow->SetScrollRate(-1, 5);
 
@@ -618,6 +675,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     _enableSizerChilds(m_wsizerUserLang, false);
     _enableSizerChilds(m_wsizerWordsStyleLang, false);
     _enableSizerChilds(m_wsizerContentLang, false);
+
 
 
     wxSize s = GetSize();
@@ -878,7 +936,7 @@ void SerialEM4NPPFrame::_traverseXmlNodes(wxTreeCtrl *tree, wxTreeItemId rootID,
 
         appendItem = true;
     }
-    else if ((tree == m_wtreeLang) && (node->GetContent() != wxEmptyString))
+    else if (data && ((tree == m_wtreeLang) && (node->GetContent() != wxEmptyString)))
     {
         ((sTreeItemLangKeywordsData *)data)->SetText(node->GetContent());
     }
@@ -1906,7 +1964,10 @@ void SerialEM4NPPFrame::OnBitmapButton1Click(wxCommandEvent& event)
     wxTreeItemId id = m_wtree->GetSelection();
 
     if (id.IsOk())
+    {
         _storeItem(m_wtree, id);
+        m_wtree->SelectItem(id, true);
+    }
 
     event.Skip();
 }
@@ -1977,7 +2038,10 @@ void SerialEM4NPPFrame::OnBitmapButton4Click(wxCommandEvent& event)
     wxTreeItemId id = m_wtreeLang->GetSelection();
 
     if (id.IsOk())
+    {
         _storeItem(m_wtree, id);
+        m_wtreeLang->SelectItem(id, true);
+    }
 
     event.Skip();
 }
@@ -2169,5 +2233,127 @@ void SerialEM4NPPFrame::OnSaveLangClick(wxCommandEvent& event)
 
         }
     }
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::Onm_wreloadBetaHtmlClick(wxCommandEvent& event)
+{
+    wxProgressDialog dialog(wxT("Loading page..."), wxT("Please wait..."));
+
+    dialog.Show();
+
+    wxString uri = m_wtextBetaURL->GetValue();
+
+    dialog.Pulse();
+
+    //if it isn't a full url, try appending http:// to it
+    if(wxURI(uri).IsReference())
+        uri = wxString(wxT("http://")) + uri;
+
+    dialog.Pulse();
+
+    wxURL *url = new wxURL(uri);
+
+
+    dialog.Pulse();
+
+    wxInputStream *in_stream;
+
+    dialog.Pulse();
+
+    in_stream = url->GetInputStream();
+
+    dialog.Pulse();
+
+    size_t FileSize = in_stream->GetSize();
+
+    dialog.Pulse();
+
+    char *buffer = new char [FileSize];
+
+    dialog.Pulse();
+
+    in_stream->ReadAll(buffer, FileSize);
+
+    dialog.Pulse();
+
+    wxString content = buffer;
+
+    m_whtmlWindowBeta->SetPage(content);
+
+    dialog.Pulse();
+
+    delete buffer;
+    delete url;
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::Onm_whomeBetaHtmlClick(wxCommandEvent& event)
+{
+    // Beta URL
+    m_wtextBetaURL->ChangeValue(wxT("http://bio3d.colorado.edu/SerialEM/hlp/html/macro_commands.htm"));
+
+    wxCommandEvent evt;
+    Onm_wreloadBetaHtmlClick(evt);
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::Onm_whomeStableHtmlClick(wxCommandEvent& event)
+{
+    // Stable URL
+    m_wtextBetaURL->ChangeValue(wxT("http://bio3d.colorado.edu/SerialEM/stableHlp/html/macro_commands.htm"));
+
+    wxCommandEvent evt;
+    Onm_wreloadBetaHtmlClick(evt);
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::Onm_wtextBetaURLTextEnter(wxCommandEvent& event)
+{
+    wxCommandEvent evt;
+    Onm_wreloadBetaHtmlClick(evt);
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::OnPanel7RightDown(wxMouseEvent& event)
+{
+    wxString str = m_whtmlWindowBeta->SelectionToText();
+
+    m_whtmlCtxMenu->Enable(ID_CTXMENU_COPY, str != wxEmptyString);
+    m_whtmlCtxMenu->Enable(ID_CTXMENU_PASTE, false);
+
+    PopupMenu(m_whtmlCtxMenu);
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::OnHtmlCopy(wxCommandEvent& event)
+{
+    wxString str = m_whtmlWindowBeta->SelectionToText();
+
+    if (wxTheClipboard->Open())
+    {
+        // Data objects are held by the clipboard,
+        // so do not delete them in the app.
+        wxTheClipboard->SetData(new wxTextDataObject(str));
+        wxTheClipboard->Close();
+    }
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::OnHtmlSelectAll(wxCommandEvent& event)
+{
+    m_whtmlWindowBeta->SelectAll();
+
+    event.Skip();
+}
+
+void SerialEM4NPPFrame::OnHtmlPaste(wxCommandEvent& event)
+{
     event.Skip();
 }

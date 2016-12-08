@@ -26,10 +26,11 @@
 #include <wx/bmpbuttn.h>
 #include <wx/button.h>
 #include <wx/frame.h>
+#include <wx/html/htmlwin.h>
 #include <wx/statusbr.h>
 //*)
 
-
+//#include <wx/app.h>
 #include <wx/msgdlg.h>
 #include <wx/progdlg.h>
 #include <wx/xml/xml.h>
@@ -38,8 +39,13 @@
 #include <wx/dir.h>
 #include <wx/log.h>
 #include <wx/textfile.h>
+#include <wx/url.h>
+#include <wx/clipbrd.h>
 
 #include <vector>
+
+#include "SerialEM4NPPApp.h"
+#include "version.h"
 
 class SerialEM4NPPFrame;
 
@@ -474,7 +480,16 @@ class SerialEM4NPPFrame: public wxFrame
         void OnInputTextLang(wxCommandEvent& event);
         void OnCheckLangClick(wxCommandEvent& event);
         void OnSaveLangClick(wxCommandEvent& event);
+        void Onm_wreloadBetaHtmlClick(wxCommandEvent& event);
+        void Onm_whomeBetaHtmlClick(wxCommandEvent& event);
+        void Onm_whomeStableHtmlClick(wxCommandEvent& event);
+        void Onm_wtextBetaURLTextEnter(wxCommandEvent& event);
+        void OnPanel7RightDown(wxMouseEvent& event);
         //*)
+
+        void                            OnHtmlCopy(wxCommandEvent &);
+        void                            OnHtmlSelectAll(wxCommandEvent &);
+        void                            OnHtmlPaste(wxCommandEvent &);
 
         void                            _enableSizerChilds(wxSizer *, bool);
 
@@ -541,21 +556,32 @@ class SerialEM4NPPFrame: public wxFrame
         static const long ID_SCROLLEDWINDOW2;
         static const long ID_SPLITTERWINDOW2;
         static const long ID_PANEL3;
+        static const long ID_TEXTCTRL18;
+        static const long ID_BITMAPBUTTON7;
+        static const long ID_BITMAPBUTTON8;
+        static const long ID_BITMAPBUTTON5;
+        static const long ID_HTMLWINDOW1;
+        static const long ID_PANEL9;
         static const long ID_AUINOTEBOOK1;
         static const long ID_PANEL1;
         static const long idMenuQuit;
         static const long idMenuAbout;
         static const long ID_STATUSBAR1;
         //*)
+        static const long ID_CTXMENU_COPY;
+        static const long ID_CTXMENU_SELECTALL;
+        static const long ID_CTXMENU_PASTE;
 
         //(*Declarations(SerialEM4NPPFrame)
         wxTextCtrl* m_wtextEnvStop;
         wxTreeCtrl* m_wtree;
+        wxPanel* m_panel7;
         wxButton* m_wbtnSave;
         wxTextCtrl* m_wtextForcePureLC;
         wxPanel* Panel5;
         wxTextCtrl* m_wtextTextLang;
         wxButton* m_wbtnSaveLang;
+        wxBitmapButton* m_wreloadBetaHtml;
         wxTextCtrl* m_wtextDecimalSeparator;
         wxButton* m_wbtnLoadLang;
         wxTextCtrl* m_wtextUserLangExt;
@@ -569,8 +595,10 @@ class SerialEM4NPPFrame: public wxFrame
         wxTextCtrl* m_wtextInput;
         wxCheckBox* m_wcheckKeywords8;
         wxColourDialog* m_wcolourDialog;
+        wxBitmapButton* m_whomeStableHtml;
         wxBitmapButton* m_wbtmBtnSave;
         wxCheckBox* m_wcheckKeywords3;
+        wxBitmapButton* m_whomeBetaHtml;
         wxStaticBoxSizer* m_wsizerPrefixLang;
         wxPanel* Panel1;
         wxTextCtrl* m_wtextEnvSep;
@@ -600,6 +628,7 @@ class SerialEM4NPPFrame: public wxFrame
         wxCheckBox* m_wcheckEnvCase;
         wxButton* m_wbtnLoad;
         wxPanel* Panel2;
+        wxTextCtrl* m_wtextBetaURL;
         wxTreeCtrl* m_wtreeLang;
         wxFileDialog* m_wfileDialog;
         wxStaticBoxSizer* m_wsizerNameLang;
@@ -614,12 +643,15 @@ class SerialEM4NPPFrame: public wxFrame
         wxCheckBox* m_wcheckCaseIgnored;
         wxTextCtrl* m_wtextUserLangName;
         wxBitmapButton* m_wbtnItemDel;
+        wxHtmlWindow* m_whtmlWindowBeta;
         //*)
 
         wxProgressDialog               *m_progress;
         bool                            m_apiLoaded;
         bool                            m_langLoaded;
         wxTreeItemId                    m_draggedItem;
+
+        wxMenu                         *m_whtmlCtxMenu;
 
         DECLARE_EVENT_TABLE()
 };

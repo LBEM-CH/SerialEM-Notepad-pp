@@ -18,4 +18,6 @@ class SerialEM4NPPApp : public wxApp
         virtual bool OnInit();
 };
 
+DECLARE_APP(SerialEM4NPPApp)
+
 #endif // SERIALEM4NPPAPP_H

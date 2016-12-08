@@ -1,3 +1,48 @@
-aaaa ICON "wx/msw/std.ico"
-
 #include "wx/msw/wx.rc"
+#include "version.h"
+
+MAINICON   ICON    "../Logos/SerialEM4NPP-Icon64.ico"
+
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+
+VS_VERSION_INFO    VERSIONINFO
+  FILEVERSION      RC_FILEVERSION
+  PRODUCTVERSION   RC_FILEVERSION
+  FILEFLAGSMASK    0x3fL // VS_FFI_FILEFLAGSMASK
+#ifdef _DEBUG
+  FILEFLAGS        0x1L  // VS_FF_DEBUG|VS_FF_PRIVATEBUILD|VS_FF_PRERELEASE
+#else
+  FILEFLAGS        0x0L  // final version
+#endif
+  FILEOS           VOS_NT_WINDOWS32
+  FILETYPE         VFT_APP
+  FILESUBTYPE      VFT2_UNKNOWN // not used
+{
+  BLOCK "StringFileInfo"
+  {
+    BLOCK "040904E4" // Lang=US English, CharSet=Windows Multilingual
+    {
+      VALUE "Build",            "December 2016\0"
+      VALUE "Comments",         "Free.\0"
+      VALUE "CompanyName",      "BioEM Lab\0"
+      VALUE "Developer",        "Daniel Caujolle-Bert\0"
+      VALUE "FileDescription",  "SerialEM for Notepad++ Tool\0"
+      VALUE "FileVersion",      RC_FILEVERSION_STRING
+      VALUE "InternalName",     "SerialEM4NPP\0"
+      VALUE "LegalCopyright",   "Copyright (C) 2016 BioEM Lab\0"
+      VALUE "LegalTrademarks",  "All rights reserved.\0"
+      VALUE "OriginalFilename", "SerialEM4NPP.exe\0"
+      VALUE "PrivateBuild",     "\0"
+      VALUE "ProductName",      "SerialEM For Notepad++ Tool\0"
+      VALUE "ProductVersion",   RC_FILEVERSION_STRING
+      VALUE "SpecialBuild",     "\0"
+      VALUE "Support",          "daniel.caujolle-bert@unibas.ch\0"
+      VALUE "Users",            "Unlimited.\0"
+    } // BLOCK "040904E4"
+  } // BLOCK "StringFileInfo"
+  BLOCK "VarFileInfo"
+  {
+    VALUE "Translation", 0x409, 1252 // 1252 = 0x04E4
+  } // BLOCK "VarFileInfo"
+}
+

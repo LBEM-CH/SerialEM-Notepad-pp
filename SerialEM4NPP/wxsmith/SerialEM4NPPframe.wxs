@@ -917,6 +917,73 @@
 									</object>
 									<label>Language</label>
 								</object>
+								<object class="AuiNotebookPage">
+									<object class="wxPanel" name="ID_PANEL9" variable="m_panel7" member="yes">
+										<object class="wxBoxSizer" variable="BoxSizer37" member="no">
+											<object class="sizeritem">
+												<object class="wxBoxSizer" variable="BoxSizer38" member="no">
+													<orient>wxVERTICAL</orient>
+													<object class="sizeritem">
+														<object class="wxBoxSizer" variable="BoxSizer39" member="no">
+															<object class="sizeritem">
+																<object class="wxTextCtrl" name="ID_TEXTCTRL18" variable="m_wtextBetaURL" member="yes">
+																	<value>http://bio3d.colorado.edu/SerialEM/hlp/html/macro__commands.htm</value>
+																	<style>wxTE_PROCESS_ENTER</style>
+																	<handler function="Onm_wtextBetaURLTextEnter" entry="EVT_TEXT_ENTER" />
+																</object>
+																<flag>wxALL|wxEXPAND</flag>
+																<border>5</border>
+																<option>1</option>
+															</object>
+															<object class="sizeritem">
+																<object class="wxBitmapButton" name="ID_BITMAPBUTTON7" variable="m_whomeBetaHtml" member="yes">
+																	<bitmap stock_id="wxART_WARNING" stock_client="wxART_TOOLBAR" />
+																	<tooltip>Load beta commands</tooltip>
+																	<handler function="Onm_whomeBetaHtmlClick" entry="EVT_BUTTON" />
+																</object>
+																<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																<border>5</border>
+															</object>
+															<object class="sizeritem">
+																<object class="wxBitmapButton" name="ID_BITMAPBUTTON8" variable="m_whomeStableHtml" member="yes">
+																	<bitmap stock_id="wxART_INFORMATION" stock_client="wxART_TOOLBAR" />
+																	<tooltip>Load stable commands</tooltip>
+																	<handler function="Onm_whomeStableHtmlClick" entry="EVT_BUTTON" />
+																</object>
+																<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																<border>5</border>
+															</object>
+															<object class="sizeritem">
+																<object class="wxBitmapButton" name="ID_BITMAPBUTTON5" variable="m_wreloadBetaHtml" member="yes">
+																	<bitmap stock_id="wxART_UNDO" stock_client="wxART_TOOLBAR" />
+																	<tooltip>Reload current page</tooltip>
+																	<handler function="Onm_wreloadBetaHtmlClick" entry="EVT_BUTTON" />
+																</object>
+																<flag>wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL</flag>
+																<border>5</border>
+															</object>
+														</object>
+														<flag>wxALL|wxEXPAND</flag>
+														<border>5</border>
+													</object>
+													<object class="sizeritem">
+														<object class="wxHtmlWindow" name="ID_HTMLWINDOW1" variable="m_whtmlWindowBeta" member="yes">
+															<borders>5</borders>
+															<style>wxHW_SCROLLBAR_AUTO|wxSUNKEN_BORDER</style>
+														</object>
+														<flag>wxALL|wxEXPAND</flag>
+														<border>5</border>
+														<option>1</option>
+													</object>
+												</object>
+												<flag>wxALL|wxEXPAND</flag>
+												<border>5</border>
+												<option>1</option>
+											</object>
+										</object>
+									</object>
+									<label>Online Commands</label>
+								</object>
 							</object>
 							<flag>wxALL|wxEXPAND</flag>
 							<border>5</border>
