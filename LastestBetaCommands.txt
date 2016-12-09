@@ -1,0 +1,645 @@
+
+Script commands 
+The script processor is case-insensitive; you can enter commands as ALLCAPS or alllowercase, but for readability it is helpful to use MixedCase as in the table. Completing a command by typing tab or ` will convert it to MixedCase. 
+Script Control Commands 
+     Flow Control Commands
+     Other Script Operation Control Commands
+Camera Commands 
+     Acquisition and Parameter Commands
+     Continuous Mode Control
+     Other Camera Commands
+Buffer and File Commands 
+     Buffer and Image Commands
+     File and Directory Commands
+Microscope and Filter Commands 
+     Stage-Related Commands
+     Focus-Related Commands
+     Magnification-Related Commands
+     Beam-Related Commands
+     Image Shift-Related Commands
+     Miscellaneous Scope Commands
+     Energy Filter Commands
+     Autoloader, Refrigerant, and Vacuum Commands
+     Piezo Drive Commands
+Higher Level Operations and Tasks 
+     Autoalign-Related Commands
+     Autofocus/Autotuning-Related Commands
+     Low Dose Commands
+     Task-Related Commands
+     Navigator-Related Commands
+Miscellaneous Commands 
+Script Control Commands 
+Flow Control Commands
+Repeat
+Place at end of script to repeat it
+Loop # [variable]
+Loop the given # of times until EndLoop; optionally set variable with index
+EndLoop
+Marks the end of the loop
+DoScript #
+DoMacro #
+Switches to given script #
+CallScript #
+CallMacro #
+Calls other script by # and returns
+Call text
+Calls other script by name. Names are case-sensitive and must match exactly, including spaces
+Function name [#n] [s]
+Defines a function with the given name (without embedded spaces).  The optional #n indicates the number of numeric arguments and s is non-zero to indicate that a string argument occurs after the numeric ones.  Functions must be placed at the ends of scripts.
+EndFunction
+Required ending to a function definition.
+CallFunction name [args]
+Calls the function with the given name and supplies arguments for the function to receive.  If the name could occur in more than one script, it must be qualified with a script number or name, i.e. '5::GoodFunc' or 'Func Script::GoodFunc'.
+If expression
+Starts a block that is executed conditionally on the value of 'expression'
+Endif
+Ends a block started with If
+Elseif expression
+Inside of an If/Endif block, starts a block that is executed conditionally on the value of 'expression' if the expressions in the starting If statement and any preceding Elseif statements were not true.
+Else
+Inside of an If/Endif block, starts a block that is executed if the expression after the 'If' and any preceding 'Elseif' commands is false
+Break
+Stops execution of the innermost Loop containing this statement
+KeyBreak [key]
+If the user presses 'B', or the key given by the optional 'key' entry, the script breaks out of the innermost Loop containing this statement.  'key' should be a letter or number; the test for the key is case-insensitive.
+Continue
+Skips the rest of the current iteration of the innermost Loop containing this statement
+SkipTo label
+Skips forward to the line starting with the given label, where the label has a colon (:) at the end of it and is the only item on the line.  The colon is not included in the label in the SkipTo statement.
+OnStopCallFunc name
+Calls the function with the given name when the script is stopped by the user pressing STOP or by an error in a script operation or in an external routine.  The function must not take any arguments, and it should not call other functions or scripts (such calls will be skipped).  The function will be called only once, even if there is an error or STOP while it is running.  The script will be aborted (not left in a resumable state) when the end of the function is reached.  
+Return
+Without executing to the end of the current script, returns to calling script or ends execution if this is the top-level script
+Exit
+Ends execution unconditionally
+Other Script Operation Control Commands
+ScriptName text
+MacroName text
+Name the script to the given text, which can include spaces
+LongName text
+A longer name to appear in the Run submenu of the Script menu; if this name is not defined, the regular name defined by ScriptName or MacroName appears there.
+Delay # [units]
+Wait for given amount of time. The optional 'units' can be 'msec', 'sec', or 'min'. If no units are given, a # <= 60 is taken to be seconds, and a # > 60 is taken to be milliseconds
+Echo [text]
+Prints the text to the log window, or a blank line if there is no text.
+Pause [text]
+Opens message box with optional text plus question of whether to proceed with script
+YesNoBox text
+Opens a Yes-No message box with the given text, which should be a question that can be answered with yes or no. Sets ReportedValue1 to 1 or 0 for a yes or no answer.
+EnterOneNumber text
+Opens a dialog box for the user to enter one floating point number, with the given text as the prompt.  Sets ReportedValue1 to the entered value.
+EnterDefaultedNumber #V #D text
+Opens a dialog box for the user to enter one floating point or integer value.  Follow with the default value to show in the box, the number of decimal places to show for a float entry or -1 for an integer entry, and the prompt text on the rest of the line.  Sets ReportedValue1 to the entered value.
+FlashDisplay [#T] [#D]
+Flashes between a yellow screen and normal image display several times.  The first optional entry, #T, sets the number of times to flash (default 4) and the second optional entry, #D, sets the duration of each state in seconds (default 0.3).  Total duration may not exceed 6 seconds.
+Verbose #
+Turns echoing of each script line on or off for # 1 or 0
+SuppressReports
+Do not print any of these reports, just assign the values to report variables
+ErrorsToLog [#]
+Makes most script error messages be duplicated in the log window.  Follow with a 0 to turn off the feature again.
+NoMessageBoxOnError [#]
+Outputs an error message to the log instead of opening a message box.  The script stops, but if it is being run from Navigator Aqcuire at Points, the Navigator is able to go to the next item.  Follow with 0 to turn the feature off again.
+ClearPersistentVars
+Removes all persistent variables defined with :=
+IsVariableDefined Var
+Reports whether a variable is defined, placing a 1 in reportedValue1 if it is and a 0 if it is not.  Follow with the variable name without a $.  Value can be assigned to a variable at end of commmand.
+Require feature [feature] ...
+This command tests whether the given script features are available in this version of SerialEM.  Earlier versions will not generate an error when some newer features are used, so including this command is the only way to test whether the script will run correctly.  The available features are: 1) 'variable1', which includes two capabilities: assigning reported values directly to variables listed after a command, and assigning function arguments directly to variables listed on the 'Function' line.  2) 'arrays', which is the ability to define a variable with an indexable array of values.  3) 'keepcase', which means that case will be preserved when assigning text to a variable.
+Test expression
+Evaluates a conditional expression (just as would be used for an IF statement) or a single number or variable value and stores whether the test passed (i.e., if the expression is true or if the number is non-zero) internally, as well as storing a 1 for success or 0 for failure in ReportedValue1 and a veariable TestResult
+PauseIfFailed [text]
+If the last 'Test' command failed, this command opens a message box with the optional text plus the question of whether to proceed with the script, even if 'NoMessageBoxOnError' is set.
+AbortIfFailed [text]
+If the last 'Test' command failed, this command opens a message box with the optional text (unless 'NoMessageBoxOnError' is set) and aborts the script.
+Camera Commands 
+Acquisition and Parameter Commands
+V or View
+Acquire image with 'view' parameters
+F or Focus
+Acquire image with 'focus' parameters
+T or Trial
+Acquire image with 'trial' parameters
+R or Record
+Acquire image with 'record' parameters
+L or Preview
+Acquire image with 'preview' parameters
+M or Montage
+Acquire montage
+PreCookMontage #
+If montaging is enabled with stage movement, this command lowers the screen to expose the specimen, then moves the stage to each piece position and waits there for the number of seconds indicated by #, if the number is positive.  If the number is negative, it skips pieces, with an interval given by the negative of the number: -2 will stop at every second piece, -3 at every third, etc.  For  convenience, -1 is equivalent to a large negative number and will make it stop only at the bottom and top of each column.
+ContinuousMontage [#]
+Take a montage in continuous mode, or do a Prescan if the optional # is non-zero.  This cannot be used with image shift realignment or focusing on every frame.  Precede with a 'SetLiveSettleFraction' command to impose an adjustable amount of setting time.  This may be a temporary command, the option may be supported explicitly in the interface.
+Set Parameter Commands 
+The following 'Set...' commands change values in one of the camera parameter sets.  The set 'S' can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.  Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is suspended, any changed parameters will be set again when the script resumes.
+    SetExposure S #E [#D]
+Set exposure and, optionally, drift settling for exposure set S  to the given values E and D.   If D is omitted, the existing drift settling will be unchanged. 
+    SetBinning S #B
+Set binning for exposure set S to B.
+    SetCameraArea S L R T B
+Set the acquisition area for exposure set S.  Follow the set specifier S with either 4 numbers for the unbinned left, right, top, and bottom coordinates (the same kind of numbers as in the camera setup dialog) or with F, H, Q, WH or WQ for full, half, quarter, wide half, or wide quarter.  Values will be adjusted for a legal area.  
+    SetCenteredSize S #B # #
+Set exposure set S for acquisition from a centered area.  Follow the set specifier S with 3 numbers: the binning B, the binned size in X, and the binned size in Y.  
+    SetContinuous S #
+Set the acquisition mode for exposure set S for continuous if # is non-zero, or single-frame if # is 0.
+    SetSTEMDetectors S #D...
+Set the STEM detectors for each available channel of exposure set S.  Follow the set specifier S with a detector number for each channel, numbered from 0, or -1 to select no detector for that channel.  At least one actual detector must be specified.
+    SetProcessing S #P
+Set processing for exposure set S to the given value, which should be 0 for unporcessed, 1 for dark-subtracted, or 2 for gain-normalized.
+    SetK2ReadMode S #M 
+Set the K2 'read mode' for exposure set S to the given value, which should be 0 for linear, 1 for counting, or 2 for super-resolution mode.
+    SetFrameTime  S #F
+Set the frame time for a K2 camera to the given number.
+    SetDoseFracParams S #D
+      [#S] [#A] [#M] [#C] 
+Set dose fractionation parametes for exposure set S; follow with up to 5 numbers: D non-zero for dose-fractionation mode on K2; S non-zero to save frames (not just for K2); A non-zero to align frames; M 0 to align in DM, 1 to align in plugin, or 2 to save a command file for alignframes; C non-zero to combine frames into sums.
+RestoreCameraSet [S]
+Restore one or all camera parameter set(s) modified with the 'Set' commands above.  If S is omitted, all modified sets will be restored.
+Continuous Mode Control
+StopContinuous
+Stops continuous acquisition if it is running.
+ReportContinuous
+Returns -1 if continuous acquisition is not running, or the camera parameter set number being used if it is running, numbered from 0.
+UseContinuousFrames #
+If # is non-zero, the script will keep executing commands (such as stage movement and alignment) even when the camera is acquiring in continuous mode.  Use 0 to return to normal operation, in which the script will wait for continuous acquisition to be ended by the user.
+WaitForNextFrame
+After starting a continuous acquisition, use this command to wait until the next image becomes available in buffer A.  The program will wait until the exposure time has elapsed so that the image is likely to be taken after completion of previous operations. The 'UseContinuousFrames 1' command must be used before the acquisition is started.
+StartFrameWaitTimer
+Sets the time from which the next 'WaitForNextFrame' will require an exposure time to elapse.  Without this command, the program will wait the full exposure time after the 'WaitNextFrameCommand'. If this command is given just after getting a frame, and operations are done before waiting for the next frame, the next frame will be obtained sooner.
+SetLiveSettleFraction #
+Set the fraction of the usual settling time to apply in continuous mode after image shift or stage movement.  By default, no settling is applied in continuous mode (i.e., the fraction is 0), but some settling may be needed when a script or other operation is using continuous frames.  The fraction is reset to zero when continuous mode ends.
+Other Camera Commands
+CameraProperties
+Reports unbinned size in X and Y of current camera, and RotationAndFlip property.   Values can be assigned to variables at end of command.
+SelectCamera #
+Make the given camera (numbered from 1) be the active camera.  Will switch in and out of EFTEM mode or STEM mode if appropriate.
+RetractCamera
+Retracts all retractable cameras
+OppositeFocus
+In low dose mode, acquire Focus image from area on opposite side of Record from the defined Focus area.  Opposite areas are not available if Balance Shifts is turned on.
+OppositeTrial
+In low dose mode, acquire Trial image from area on opposite side of Record from the defined Trial area.
+StepFocusNextShot # # [# #]
+Do one or two focus changes during the next exposure.  Follow with 2 or 4 numbers: the time in seconds from start of the exposure to the first focus change, the first focus change in microns, the time from start of the exposure to the second focus change if any, and the second focus change relative to the starting focus, not relative to the focus after the first change.  The command will have no effect if the exposure time is less than the time to the  first change, and the second change will not be done if the time for it is greater than the exposure time.
+SmoothFocusNextShot # #
+Change focus linearly through next exposure.  Follow with 2 numbers, the starting and ending defocus relative to the current focus.  This command and StepFocusNextShot are enabled for Gatan, Falcon, and Tietz cameras.
+EarlyReturnNextShot # [#]
+Return as early as possible from the next acquisition, which must involve either aligning or saving dose-fractionation frames from a K2 camera.  Follow with the number of frames to be summed in the returned image, 0 to return without any summed image, or -1 to return with the full sum (the latter is available only on GMS 2.31 or higher).  The second optional number should be 1 to make a deferred full sum when not aligning; this sum is always made when aligning.  Single-shot and dose-fractionation images can be requested without delay in the script.  The single-shot images will be taken as soon as possible (after the end of the exposure before GMS 2.31, after the frame stack has been accessed in GMS 2.31 and higher).  Another dose-fractionation shot will be delayed until saving is finished for the current shot.
+GetDeferredSum
+Acquire the deferred full sum that was saved as a result of 'EarlyReturnNextShot'.
+RecordAndTiltUp
+Starts a Record acquisition and tilts the stage up by the current increment after the exposure is expected to be done.
+RecordAndTiltDown
+Starts a Record acquisition and tilts the stage down by the current increment after the exposure is expected to be done.
+TiltDuringRecord #A #D [#S]
+Starts a Record acquisition and starts the stage tilting to angle #A after the delay #D in milliseconds.  On FEI scopes with recent enough versions of FEI scripting, #S can be added with a speed multiplier (< 1 for slower, > 1 for faster).  On FEI scopes this command will freeze the user interface and prevent scope updates while the stage is tilting.
+DeferStackingNextShot
+Do not stack Falcon intermediate frames after the next exposure.  To stack frames from multiple exposures into one stack, use this command before each exposure except the last one.
+OpenDECameraCover
+Opens the protection cover of the Direct Electron camera for the remainder of the script, if it is the current camera.  Without this command, the cover will be opened and closed for each exposure except during tasks.
+UpdateHWDarkRef #
+Updates the K2 hardware dark reference if the known interval since the last update is longer than # in hours.  If # is 0, the update is done unconditionally; if # is negative (-1), it simply records the current time as the time of the last update. 
+ReportK2FileParams
+Reports values selected in the Frame File Options dialog: 0 for MRC, 1 for TIFF LZW, or 2 for TIFF ZIP; sum of 1 to pack unnormalized data at all, plus 2 to pack counting mode to bytes; 1 to save MRC files in 4-bit mode 101; 1 to save normalized data times 100; 1 to skip rotation and flip of frames; 1 for one file per frame. 
+SetK2FileParams #T [#P]
+    [#M] [#N] [#R] [#O]
+Set values to control K2 frame file saving.  Follow with up to 6 values: T 0 for MRC, 1 for TIFF LZW, or 2 for TIFF ZIP; P as the sum of 1 to pack unnormalized data at all, plus 2 to pack counting mode to bytes; M non-zero to save MRC files in 4-bit mode 101; N non-zero to save normalized data times 100; R non-zero to skip rotation and flip of frames; O non-zero for one file per frame.
+ReportCountScaling
+Reports two values of current camera: either the scaling being applied to counting/super-resolution mode images returned from a K2 camera, or the 'CountsPerElectron' property; and whether division by 2 is.
+SetDivideBy2 #
+Turns division by 2 for the current camera on or off if # is 1 or 0, respectively.
+ReportNumFramesSaved
+Reports the number of frames saved, or beng saved, in the last acquisition that saved frames.
+ReportFrameAliParams
+Reports six values for the frame alignment parameter set selected to be used for Record images: the binning for alignment, whether to keep precision for gain-normalized images when doing early returns, the strategy (0 to 3, corresponding to the radio buttons in the Frame Alignment dialog), the number of frames to align all pairs among, the number of iterations to refine (negative if refinement off), and the group size (negative if using groups is off).
+SetFrameAliParams #B [#K]
+    [#S] [#A] [#R] [#G]
+In the frame alignment parameter set selected to be used for Record images, sets the binning to B, and optionally sets whether to keep precision during early returns if K is 1, the strategy from S, the number of frames for all pairs from A, the number of refinement iterations from |R| and to do refinement if R is positive, and the group size from |G| and the whether to use groups if G is positive.  
+ReportFrameAli2
+Reports more values for frame alignment: whether GPU use is selected, and for the Record parameter set: truncation limit (negative if truncation is off), whether to use hybrid shifts, and the three flter radii.
+SetFrameAli2 #G [#T] [#H]
+    [#R1] [#R2] [#R3]
+Sets whether to use GPU for frame alignment and, in the frame alignment parameters for Record, optionally sets truncation limit from |T| and to truncate if T is positive, whether to use hybrid shifts if H is 1, primary filter radius from R1, and second and third filter radii from R2 and R3 or 0 for either if R1 is present and R2 or R3 is not.
+Buffer and File Commands 
+Buffer and Image Commands
+Copy buf1 buf2
+Copy from buf1 to buf2 (e.g., Copy C A)
+Show buf
+Display the given buffer (e.g., Show C)
+CropImage buf x0 x1 y0 y1
+Crop out a subarea of the given buffer from x0 to x1 in X and from y0 to y1 in Y. Coordinates are numbered from 0 to size - 1 in each dimension and 0 in Y is at the top.
+FFT buf [#B]
+Takes the FFT of the image in the given buffer, optionally applying the binning given in #B.  The FFT will appear in buffer A, or in the side-by-side FFT window if that option is on.
+ImageProperties [buf]
+Report size in X and Y, binning, exposure, pixel size, and parameter set used for the image in buffer A or in the buffer indicated by 'buf'.   Values can be assigned to variables after a buffer letter.
+ImageLowDoseSet [buf]
+Report the parameter set that an image was taken with and whether it was taken in Low Dose mode, for the image in buffer A or in the buffer indicated by 'buf'.  For one of the 5 standard parameter sets, it will report the set name.  For a montage image, it will report Record.  For a tracking image, it will report View if the mag matches that of View in Low Dose; if the mag matches Record in Low Dose, it will report Record or Preview depending on which has an closest exposure time closest to that of the image.   Values can be assigned to variables after a buffer letter.
+ReportMeanCounts [buf] [#]
+Report the mean counts of the A buffer, or of the buffer indicated by 'buf'; add a 1 to get unbinned counts per second.   No optional assignment to variable.
+ElectronStats [buf]
+Report the min, max, mean, and SD of the A buffer, or of the buffer indicated by 'buf', scaled to electrons, and also report the electrons per unbinned pixel per second.  The camera must have a defined counts per electron.   Values can be assigned to variables after a buffer letter.
+SubareaMean x0 x1 y0 y1
+Report the mean counts in a subarea of the A buffer from x0 to x1 in X and from y0 to y1 in Y. Coordinates are numbered from 0 to size - 1 in each dimension and 0 in Y is at the top.  Value can be assigned to variable at end of command.
+QuadrantMeans [n] [f1] [f2]
+Report means of strips along quadrant boundaries. Optional entries are 'n' for the number of pixels between strip and boundary (default 2), 'f1' for the strip width as a fraction of quadrant extent (default 0.1), and 'f2' for the fraction of quadrant extent to trim off the length of the strip (default 0.1). Output is labeled by quadrant number (1 to 4) and 'h' for horizontal strips or 'v' for vertical strips.
+File and Directory Commands
+S or Save [buf] [file #]
+Save image in A or in buf to current open file, or to the given file number
+SetDirectory dir
+Change the working directory to 'dir', which can contain spaces.
+ReportDirectory
+Reports the current working directory, which is where a file will be created if it is opened from a script command without a full path.
+UserSetDirectory [prompt]
+Open a directory chooser dialog to allow user to select or make a directory, and change the working directory to it.  If the optional prompt string is not supplied, the dialog title is 'Choose a new current working directory'.  The chosen directory is stored in ReportedValue1.
+MakeDirectory dir
+Create the directory 'dir' if it does not already exist.  'dir' can contain spaces.  The parent directory must already exist.
+MakeDateTimeDir
+Create a directory named by the date and time (e.g., Aug15_12.23.15) under the current directory and change to this as the new working directory.
+SetNewFileType # [#]
+Set to 0 to open files as MRC, or 1 to open files as a TIFF series described in an image autodoc file. The optional second value sets whether to open montaged files as MRC or as a TIFF series, but only if the property MontageAutodocOptions is set.
+OpenNewFile file
+Open a file with the given name, which can contain spaces. The file properties dialog will be bypassed. Since the current working directory can be unpredictable, depending on whether the user has opened a file with the file chooser, it is advisable either to specify an absolute path for the filename, use a 'SetDirectory' with an absolute path, or use a filename in a variable set by 'ChooserForNewFile'.
+OpenNewMontage #x #y file
+Open a file with the given name for montaging, with the number of frames in X and Y given by '#x' and '#y'. If either #x or #y is 0, the number of frames will be taken from the last montage that was open. The file properties and montage setup dialogs will be bypassed, and some properties like overlap and whether to do a stage montage will be taken from the last montage that was open.
+SetupWaffleMontage #B file
+Open a montage file or adjust the current file's properties so that it will hold an image of the cross-line (waffle) replica grating with at least #B blocks in X and Y at the current magnification. Follow with the minimum # of blocks and the name of the file to be opened if necessary.  If montaging is not needed, no changes are made.  If there is an existing montage that is adequate, its properties will be adjusted to work at the current mag.  If a new montage is needed, it will close the current file if it is a montage and open a new one with the given name.  Variables will be substituted, so the name can contain the mag index, for example. It sets reportedValue1 to 1 or 0 depending on whether montaging is needed or not. 
+EnterNameOpenFile [prompt]
+Get a filename through a dialog with a simple text box and open it as a new file.  If the optional prompt string is not supplied, the prompt is "Enter name for new file:".
+ChooserForNewFile # var
+Open a file chooser for the user to specify a new file; # should be 0 for an MRC file or non-zero for an .idoc file, and 'var' must be the name of a variable to which the full filename will be assigned.  Since the user will confirm the replacement of a file, the command also allows 'OpenNewFile' and 'OpenNewMontage' to overwrite an existing file.
+OpenFrameSumFile suffix
+Open a file whose name starts with the last name used for saving frames from a K2 or Falcon camera, and ends with the string given in the command.  The string can contain spaces and variables. 
+AllowFileOverwrite #
+Allow 'OpenNewFile' and 'OpenNewMontage' to overwrite an existing file if # is 1, or disallow it again if # is 0.
+OpenOldFile file
+Open an existing MRC or ADOC file with the given name, which can contain spaces.
+ReadFile # [buf]
+Reads the given section # (numbered from 0) from the current open file into the standard Read buffer, or into the buffer indicated by the optional 'buf'
+ReadOtherFile # buf file
+Reads the given section # (numbered from 0) from a file into the given buffer buf and leaves the file closed; buf can be a buffer letter or -1 to use the standard Read buffer; end with filename.  This command can read from a TIFF file, which cannot be opened otherwise.
+RetryReadOtherFile #
+Sets the number of times to retry if there is an error in ReadOtherFile, with a 2-second wait between trials.
+CloseFile [e]
+Close the current file. Enter optional 'e' to stop script if no file is open.
+SwitchToFile #
+Make the given file number be the current open file.
+RemoveFile file
+Removes the given file unconditionally, prints a warning if it cannot be removed.
+ReportFileZsize
+Report the number of frames in currently open file
+ReadTextFile var file
+Reads the contents of the given text file, breaks it up by spaces or tabs, and stores the words or numbers as an array in the variable 'var'.  All lines will be read and combined into the one variable.
+SetMontageParams # [# # # # #]
+Sets up to 6 montage parameters; enter a value or -1 to leave the parameter unchanged. The entries are: 1 to use stage movement or 0 not to; overlap in X; overlap in Y; frame size in X; frame size in Y, 1 to skip correlations or 0 not to.
+AddToAutodoc key value
+Adds a key-value pair to the last section of the autodoc associated with the current open file, if any.  The next word after the command is the key, and the remainder of the text on the line is taken as the value.  Variables are substituted before using the text.  After one or more additions to a section of the autodoc, a WriteAutodoc command must be used to save the values before closing the file or saving another image to it.
+WriteAutodoc
+Writes the autodoc associated with the current open file.  Use this command once after adding one or more values to a section of the autodoc.
+AddToFrameMdoc key value
+Adds a key-value pair to the last section of the autodoc opened with the Open .mdoc for Frames command.  This works just like AddToAutodoc, but the WriteFrameMdoc command must be used instead after adding values.
+WriteFrameMdoc
+Writes the frame autodoc file; use this command after adding one or more values to a section.
+ReportFrameMdocOpen
+Reports whether a frame .mdoc file is open; sets ReportedValue1 to 1 if so.
+SaveLogOpenNew [newFile]
+Closes the log window and opens a new one.  If a log file has been saved, the log is automatically saved to it before closing.  If there is no log file and the log has new contents since program startup, the program will ask the user whether to save to log first; if the user cancels, the script is aborted.  If a filename (newFile) is added, the new log will be saved with that name.  An extension in this name will be stripped off before adding '.log', so if you want to preserve extensions or other text after a period, add '.log' to the end of the name.  If the file already exists, a number will be added to get a unique new name.
+ReportCurrentFilename [#]
+Reports the full path and filename of the current open file and sets it into ReportedValue1; or if the optional # is entered with a 1, sets the root of the filename in ReportedValue1 and the extension (including the dot) in ReportedValue2.  No optional assignment to variable.
+ReportLastFrameFile
+Reports the full path and filename of the last frame file saved from a K2 or Falcon camera and sets it into ReporrtedValue1.
+Microscope and Filter Control Commands 
+Stage-Related Commands
+U or TiltUp
+Tilt up by preset increment
+D or TiltDown
+Tilt down by preset increment
+TiltTo #
+Tilt to given angle
+TiltBy #
+Change tilt by the given amount
+BackgroundTilt #A [#S]
+Start tilting stage in the background; images can be taken and scripts can run during the tilt.  Follow with #A, the angle to tilt to, and optionally with #S, a speed factor for FEI scopes (< 1 for slower than normal tilting).
+ReportTiltAngle
+Report current tilt angle
+MoveStage #X #Y #Z
+Move stage by micron increments in X, Y, Z (Z optional)
+MoveStageTo #X #Y #Z
+Move stage to given position in microns. Z is optional and Z will not be changed if it is omitted.
+ReportStageXYZ
+Report current stage position
+ReportStageBusy
+Reports if the stage is busy and sets ReportedValue1 to 1 if so, 0 if not.
+Focus-Related Commands
+ChangeFocus #
+Change defocus by the given value in microns
+SetDefocus #
+Set the defocus to the given value in microns
+SetAbsoluteFocus #
+Set focus to a an absolute (standardized) value as reported earlier by ReportAbsoluteFocus or ReportFocus
+SetStandardFocus #
+Same as 'SetAbsoluteFocus', which is preferred to avoid confusion with the calibrated standard or eucentric focus value
+SetObjFocus #
+Calls SetObjFocus on JEOL with the given #, an integer increment, and reports change in focus
+ReportDefocus
+Report current defocus readout in microns
+ReportAbsoluteFocus
+Report an absolute (standardized) value for the current focus setting
+ReportFocus
+Same as 'ReportAbsoluteFocus', which is a better description of the operation
+SetEucentricFocus
+If in low mag, sets to the standard focus for the current mag or nearest LM mag if one has been set; otherwise on FEI it assumes standard focus is 0 and on JEOL it stops with an error.  If not in LM, sets to the standard focus for the nearest nonLM mag if one has been set or stops with an an error if none were set.  On FEI scopes, it issues a warning if it is using a calibrated value from a different mag.
+CalEucentricFocus
+Stores the current standardized focus value as the standard focus for the current mag, just as the Calibrate menu item Standard Focus does.
+SaveFocus
+Saves the current focus; the focus will be restored to this value either by RestoreFocus or when the script stops or exits.  The script will not be resumable if it stops.
+RestoreFocus
+Restores the focus value when SaveFocus was run.  After this is run, the focus will not be restored again when the script ends.
+ResetDefocus
+Sets the defocus readout to 0, just as Reset Defocus in Focus menu does.
+Magnification-Related Commands
+SetMag #
+Set the mag to an actual film mag value
+ChangeMag #
+Change mag by given number of mag steps
+ReportMag
+Report the current mag; also set ReportedValue2 to 1 if low mag mode, 0 if not
+ReportMagIndex
+Report the current mag index; also set ReportedValue2 to 1 if low mag mode, 0 if not
+SetCamLenIndex #
+Set the camera length index to the given number; on the Tecnai, values higher than 30 set the index to (# - 30) in LAD mode
+SetMagAndIntensity #
+Set the mag to the actual film mag value and change the beam to maintain the same brightness. Two values are reported: the initial percent C2 value and the remaining factor of intensity change needed if it was not possible to change the intensity by the full amount needed. The C2 value should be used to restore intensity when the mag is restored. The remaining intensity change could be applied to the exposure time if necessary. The script will stop if there is an error in the intensity change.
+ChangeMagAndIntensity #
+Change mag by the given number of mag steps and change the beam to maintain the same brightness. Behaves same as SetMagAndIntensity.
+IncMagIfFoundPixel #
+Increase or decrease mag by one step if the pixel size has been found at the current mag with the Find Pixel Size routine, depending on whether # is positive or negative.  Sets reportedValue1 to 1 if the mag is changed, 0 otherwise.
+Beam-Related Commands
+SetSpotSize #
+Set the spot size to the given number
+ReportSpotSize
+Report the current spot size
+SetPercentC2 #
+Set the C2/C3 lens strength to the given percentage, or illuminated area on Titan to given value in microns.
+IncPercentC2 #
+Change the C2/C3 lens strength percentage or illuminated area in microns by the given amount
+ReportPercentC2
+Report the percent C2/C3 (on the Tecnai, this number matches the value in TUI) and the fractional lens strength.  On a Titan, if illuminated area is being used for intensity, this reports the illuminated area value.
+ReportIlluminatedArea
+Report the illuminated area on a Titan
+SetIntensityForMean #
+Adjust beam intensity to yield the given number of counts, based on counts in the tilt-foreshortened area of the image in A. In Low Dose mode, this operates only on Record images and will change the intensity only of the Record area.
+SetExposureForMean #M [#K]
+Adjust Record exposure time to yield the gven number of counts #M, based on counts in the tilt-foreshortened area of the image in A, which must be a Record image in Low Dose mode.  For a K2 camera taking dose-fractionated images, a non-zero value can be given for the optional #K to modify frame time so as to keep the same number of frames.
+SetIntensityByLastTilt
+Adjust beam intensity by the change in cosine of the tilt angle from the last tilt change. In low dose mode, this changes the intensity only of the Record area.
+ChangeIntensityBy #
+Change beam intensity by the given factor using calibrations. In low dose mode this changes the intensity of the current area.
+SetAlpha #
+Sets alpha value on JEOL.
+ReportAlpha
+Reports alpha value on JEOL.
+SetBeamShift #X #Y
+Set the beam shift to the given values (nominal micron units)
+ReportBeamShift
+Report the beam shift in nominal micron units
+SetBeamTilt #X #Y
+Set the beam tilt to the given values (milliradians or % of full scale)
+ReportBeamTilt
+Reports the beam tilt in milliradians for FEI, % of full-scale value for JEOL
+SetProbeMode #
+Sets the mode to microprobe or nanoprobe on an FEI scope.  Follow with 0 or "nano" for nanoprobe, or 1 or "micro" for microprobe.
+ReportProbeMode
+Reports whether an FEI scope is in nanoprobe or microprobe mode; sets first reported value to 0 or 1, respectively.
+Image Shift-Related Commands
+SetImageShift #X #Y [#D]
+Set the image shift to the given values (image shift units).  The values correspond to the ones give by ReportImageShift, which are adjusted for tilt axis offset, image shift offset, and low dose area shift.  Add the optional #D to impose a settling time before the next camera image equal to  D times the normal settling time (i.e., 1 for regular settling).
+ImageShiftByPixels #X #Y [#D]
+Change image shift by given # of pixels in camera X and Y; optional #D provides settling time as just described.
+ImageShiftByUnits #X #Y  [#D]
+Change image shift by given # of IS units in X & Y; optional #D provides settling time as just described.
+ImageShiftByMicrons #X #Y [#D]
+Change image shift by given distance on specimen (X is tilt axis); optional #D provides settling time as just described.
+ReportImageShift
+Report the image shift in IS units, adjusted for tilt axis offset, image shift offset, and low dose area shift; if image shift is calibrated, also report the equivalent shift in unbinned pixels on the current camera at the current magnification, and the amount the stage would need to be moved to compensate for resetting this image shift.  Positive values of the camera shift will result from an image shift imposed by dragging an image to the upper right.
+Miscellaneous Scope Commands
+SetObjectiveStigmator #X #Y
+Set the objective lens stigmator to the given values (between -1 and 1)
+ReportObjectiveStigmator
+Report the X and Y values of the objective stigmator, between -1 and 1
+SetBeamBlank #
+Blank beam if # is 1, unblank if # is 0
+NormalizeLenses #
+Normalize selected lenses on an FEI or Hitachi scope; # is the sum of 1 for projector, 2 for objective, 4 for condenser lenses
+NormalizeAllLenses [#]
+Normalize all lenses, or in a lens group, on an FEI scope.  With # 0 or not present, it normalizes all lenses in one call.  Otherwise, # can be the sum of 1 to normalize the illumination group (which includes condenser, minicondenser, and objective lenses) and 2 to normalize the projection group (which includes objective and projector lenses) in a separate call.
+ReportColumnOrGunValve
+Reports 0 or 1 if column/gun valve is closed or open on FEG scopes, or if filament on JEOL is clearly off or on.  Reports -1 if the filament current is inconsistent with the beam switch state.
+SetColumnOrGunValve #
+Close column/gun valve on FEG scope or turn off filament on JEOL if # is 0; open valve if # is 1 (turning on filament does not work).
+ScreenUp
+Raise the main screen
+ScreenDown
+Lower the main screen
+ReportScreen
+Report if screen is up or down; reportedValue1 is set to 0 or 1, respectively.
+ManualFilmExposure #
+Film exposure time in seconds for manual exposures, or 0 for automatic exposure (the default)
+ExposeFilm
+Take a film exposure
+SpecialExposeFilm # [#] [#]
+Expose film with special handling: the first # specifies a delay in seconds after loading the plate; the second # specifies a pre-exposure of the specimen before exposing the plate, in seconds. The third # suppresses dimming of the screen if it is nonzero. This command command does not raise the screen if it is down. It requires the adaexp server to be installed.
+Energy Filter Commands
+SetSlitWidth #
+Set energy filter slit width in eV
+SetSlitIn [#]
+Insert the slit; or if # is entered, insert if 1 or retract if 0
+SetEnergyLoss #
+Set the energy loss to the #
+ChangeEnergyLoss #
+Change the energy loss by the #
+ReportEnergyFilter
+Report the slit width, energy loss, and whether the slit is in or out (the latter is placed in ReportedValue3 as a 1 or 0)
+Autoloader, Refrigerant, and Vacuum Commands
+LoadCartridge #
+Loads the cartridge from the given slot # (numbered from 1) if there is an autoloader.
+UnloadCartridge
+If there is an autoloader, unloads the cartridge.
+ReportSlotStatus #
+Report the status of the cartridge slot given by # (numbered from 1) if there is an autoloader.  Status is -1 for an error, 0 for empty, and 1 for occupied.
+AreDewarsFilling
+Report whether any of the dewars in a temperature control system are busy filling (reported value 1 is set to 0 or 1).   Value can be assigned to a variable at end of commmand.
+DewarsRemainingTime
+Report the time remaining for until next automatic dewar filling, or -1 if none is scheduled.  Value can be assigned to a variable at end of commmand.
+RefrigerantLevel #
+Report the refrigerant level of the given dewar: 1 for autoloader, 2 for column, 3 for liquid helium.   Value can be assigned to a variable at end of commmand.
+IsPVPRunning
+Report whether the PVP is running on an FEI scope.  Value can be assigned to a variable at end of commmand.
+LongOperation Op # [Op #...]
+Starts one or more time-consuming operations: Buffer cycle (Bu), Refill refrigerant (Re), Inventory cassettes (In), Loader buffer cycle (Lo), Dark reference update for K2 (Da).  Operations are identified by the first two letters of whatever full word you use (case insensitive).  Each operation except Inventory must be followed by an interval in hours (#).  If # is > 0, the operation is done only if the time since the last such operation is greater than #; if # is 0, the operation is done unconditionally; if # is < 0, it simply records the current time as the time of the last operation.   The scope operations will occur sequentially and be started in  the order that they are listed. The dark reference update will be done simultaneously with scope operations.  If an error occurs in a scope operation, other operations will be finished and the error reported at the end.  Errors other than in refilling refrigerant will cause the script to stop.  The user interface should not hang during long operations, and users will be asked to confirm that they want to kill the operation threads if they press STOP or try to exit the program.  The consequences of killing these threads are uncertain.
+Piezo Drive Commands
+SelectPiezo # #
+Select a piezo drive for reports or movements, follow with the plugin number (numbered from 0, enter 0 if there is only one plugin controlling piezos) and the piezo number (numbered from 0).
+ReportPiezoXY
+Reports the X and Y position of the currently selected piezo
+ReportPiezoZ
+Reports the Z position, or the position of the only axis for a single-axis piezo, of the currently selected piezo
+MovePiezoXY #X #Y [#]
+Sets the X and Y position of the currently selected piezo to #X, #Y, or if the optional third # is non-zero, moves the piezo by #X, #Y
+MovePiezoZ #Z [#]
+Sets the Z position, or position of a single-axis piezo, to #Z for the currently selected piezo, or if the optional second # is non-zero, moves the piezo by #Z
+Higher Level Operations and Tasks 
+Autoalign-Related Commands
+A or Autoalign
+Align buffer A to autoalign buffer
+AlignTo buffer_letter [noIS]
+Align buffer A to given buffer (e.g. B). Optionally, enter 1 for 'noIS' to avoid changing microscope image shift
+ClearAlignment
+Clear the alignment shift of the image in buffer A
+ConicalAlignTo buf # [show]
+Align buffer A to the given buffer 'buf' assuming a specimen rotation given by #. Optionally, enter 1 for 'show' to show the cross-correlation.
+ReportAlignTrimming
+Report the sum of left and right borders and the sum of top and bottom borders in the last autoalign for the image in A and for the reference image.  The numbers are in pixels of the respective images before the additional binning applied for correlation, and will thus differ from the binned values reported by the autoalign routine.
+ReportAlignShift
+Report the X and Y alignment shift of the current image in A in unbinned pixels on image, in nanometers along the image shift axes, and in nanometers on the specimen, where the tilt axis is along X.
+ReportShiftDiffFrom #
+Report the difference between the alignment shift of the current image and the given value in microns, as percentage of the value; the cumulative sum of differences in microns, and the total sum of shifts in microns. For monitoring variability in successive stage movements.
+ReportAccumShift
+Report sum of shifts given by ReportAlignShift or ReportShiftDiffFrom
+ResetAccumShift
+Reset the sum of shifts given by ReportAlignShift to 0 or ReportShiftDiffFrom
+Autofocus/Autotuning-Related Commands
+G or Autofocus [#] [#]
+Autofocus; set optional first # to -2 to measure shift and drift, -1 to just measure defocus without changing, or 1 for normal autofocus that changes focus to target; set optional second # to 1 to focus with View area in Low Dose mode.
+IncTargetDefocus #
+Change the defocus target by #
+SetTargetDefocus #
+Set the defocus target to #
+ReportAutofocusOffset
+Report the current value of the defocus offset used for autofocusing
+SetAutofocusOffset #
+Set the defocus offset for autofocusing to the given #.  The first time it is set, the current value is saved, and it will be restored automatically when the script ends.
+BeamTiltDirection #
+Set beam tilt direction for autofocusing to # (a value from 0 to 3)
+OppositeAutofocus [#]
+In low dose mode, autofocus in area on opposite side of Record from the defined Focus area; if optional # is -1, just measure defocus without changing.  Not available if Balance Shifts is on.
+FocusChangeLimits # #
+Set limits on the focus change during autofocus runs for the remainder of the script; follow with a negative and a positive number for the limits in microns.  When an autofocus run exceeds a limit, it will abort and return to the starting defocus.  Enter with 0 0 to cancel these limits.
+AbsoluteFocusLimits # #
+Set limits on the absolute focus reached during autofocus runs.  Follow with a lower and a upper limit as given by ReportAbsoluteFocus, or 0 0 to cancel these limits.  Autofocus will abort when a limit is exceeded.
+ReportFocusDrift
+Report the drift estimate from the last autofocus, if available
+ReportAutofocus
+Report measured defocus from last autofocus
+ReportTargetDefocus
+Report the defocus target
+CorrectAstigmatism [#]
+Measure astigmatism, report the stigmator values, and correct for those values (or do not correct, if the optional # is -1)
+CorrectComa [#]
+Measure beam-tilt misalignment, report the estimated beam tilt, and correct to bring beam tilt to zero (or do not correct, if the optional # is -1)
+Low Dose Commands
+GoToLowDoseArea area
+Switches to the low dose area given by 'area', which must be one of V, F, T, R, or S. This will not work if the screen is down. 
+SetLowDoseMode #
+Turns low dose mode on for # nonzero or off for # 0; the previous state of low dose is saved in ReportedValue1 as a 0 or 1.  This value can be assigned to a variable at the end of the command.
+ReportLowDose
+Report whether low dose is on or not and the current area, if it is defined.  The number of the area (0 for V, etc.) is placed in ReportedValue2.
+SetLDContinuousUpdate #
+Turns "Continuous update of Mag & Beam" in the Low Dose panel on if # is non-zero or off if # is 0.
+SetAxisPosition F/T #D [#A]
+Modifies the axis position, and optionally the rotation of the inter-area axis, for the Focus and/or Trial area.  Follow with F or T to specify the area (both will be changed if Focus and Trial settings are being kept identical); with #D, the distance in microns; and optionally with #A, a rotation angle.  If an angle is set, the option to apply the angle will be turned on in the Low Dose control panel.  Low dose mode must be on to use this command.
+Task-Related Commands
+ResetImageShift [1]
+Reset image shift and move stage to compensate.  Follow with an optional 1 to move the stage so as to retain or impose backlash, even if the user has not selected the option to do so in the Image Alignment & Focus control panel.
+ResetShiftIfAbove #
+Reset image shift and realign image if image shift is greater than the given # in microns
+Eucentricity [#]
+Refine eucentricity, or if optional # is entered, do rough eucentricity only (1), refine only (2), both steps (3), or refine and realign (6)
+ReportLastAxisOffset
+Reports the lateral offset of the tilt axis estimated from the last Refine Eucentricity run; aborts the script if no offset is available.
+WalkUpTo #
+Tilt up to given angle in steps and track image position
+ReverseTilt [#]
+Work out backlash and realign image after reversing tilt direction; enter optional 1 or -1 to specify a specific direction for further tilts
+RefineZLP [#]
+Report time of day and run Refine Zero Loss Peak procedure.  If the optional # is entered with an interval in minutes, the procedure is not run if the time since the last run is less than that interval.
+AutocenterBeam
+Start the Beam Autocenter routine
+CookSpecimen
+Run the Specimen Cooker routine
+WaitForDose #d [#r]
+Start accumulating dose and wait until it reaches the given #d in electrons per square Angstrom. Enter the optional #r to set how many times it reports progress while waiting (default is 10). Be sure that the screen is down and, if in low dose, that the beam is unblanked.
+CenterBeamFromImage [#]
+Center beam using the existing image in the active buffer by detecting the edges of the beam, or from the centroid of the image intensities if # is nonzero. In the latter case the beam should be completely within the camera field.
+CalibrateImageShift [#]
+Calibrate image shift at the current mag. Do the calibration from scratch if the optional # is nonzero.
+ShiftCalSkipLensNorm [0]
+Keeps projector lens normalization from being done before the next image or stage shift calibration provided that normalization was last done at the current magnification.  Follow with an optional 0 to NOT skip normalization.
+FindPixelSize
+Run the routine to find the pixel size in an image of a cross-line grating.
+QuickFlyback set# #e
+Run the camera timing calibration routine in quick flyback mode for an FEI STEM camera, where 'set#' specifies the camera parameter set and must be V, F, T, R, or P, and #e is the exposure time to use.  The routine will not ask for confirmation before saving the resulting flyback time and startup delay in the master list of flyback times.
+ShiftImageForDrift # # #
+Apply image shift during the next exposure to compensate for a drift in X and Y given by the first and second numbers; the third number should be 0 if the drift is in unbinned pixels/sec and 1 if it is in nm/sec
+Navigator-Related Commands
+NewMap
+Make the current image or montage a new Navigator map
+MoveToNavItem [#]
+Move the stage to a Navigator item; if no # is entered, move to the current Navigator item or to the item that this script is being run on, otherwise move to the item whose index in the table is # (numbered from 1)
+RealignToNavItem #r [#c]
+Realign to the current Navigator item, or to the item that this script is being run on. For #r, enter 1 to restore the microscope state to the current state after the procedure, or 0 not to.  For optional #c, enter 1 to use continuous acquisition mode and end it at end of procedure, or 2 to leave it running if possible.
+RealignToOtherItem #i #r [#c]
+Realign to the Navigator item whose index in the table is #i, numbered from 1. For #r, enter 1 to restore the microscope state to the current state after the procedure, or 0 not to.  For optional #c, enter 1 to use continuous acquisition mode and end it at end of procedure, or 2 to leave it running if possible.
+ForceCenterRealign
+Makes Realign to Item align to the map center instead of skipping the first round because it was aligned to recently
+ShiftItemsByAlignment
+Shift items at the current registration by the alignment shift of the image in buffer A. If rerun on the same image, it applied the change in shift between the current and previous run.
+ShiftItemsByCurrentDiff #
+Shift items at the current registration by the difference between the current stage position and the recorded position of the current Navigator item or the item that this script is being run on.  The shift is done only if the difference is less than the # in microns.
+UpdateItemZ
+Assign current stage Z value to the current Navigator item, or item that this script is being run on.
+UpdateGroupZ
+Assign current stage Z value to the whole group that the current Navigator item, or item that this script is being run on, belongs to. The item must have a non-zero group ID. If the group would show up on more than one line with 'Collapse groups' on, items on all lines will be updated, unlike with the 'Update Z' button.
+ReportNavItem
+Report the index, stage X, Y, Z, label, and note string for the current Navigator item, or the item this script is being run on. The index and stage coordinates are placed in 'reportedValue' variables as usual, and the item type is placed in 'reportedValue5' (0 for point, 1 for polygon, 2 for map). In addition, variables 'navLabel', and 'navNote' are set with the label and note strings, and variables 'navIndex' and 'navIntLabel' are set with integer values of the item index (numbered from 1) and of the label (up to any non-numeric characters). If the Navigator is currently acquiring at points, a variable 'navAcqIndex' is set with the number of items already acquired plus 1.  Any of these variables can then be used to make filenames, and the latter two can be used in arithmetic and IF statements.
+ReportOtherItem #
+Report similarly on the Navigator item whose index in the table is #, numbered from 1.
+ReportGroupStatus
+For the current Navigator item or the item this script is being run on, reports a code for whether the item is first to be acquired in a group: -1 if Navigator not acquiring, 0 if not in a group, 1 if first to be acquired in a group, 2 if later in the group. If the group would show up on more than one line with 'Collapse groups' on, a value of 1 is returned for the first item to be acquired in each subgroup.  It also reports the group ID of the item  (ID is 0 for an item not in a group).
+ReportNumNavAcquire
+Report the number of Navigator marked for Acquire and marked for Tilt Series as two values; return each as -1 if Navigator is not open.
+ItemIndexWithLabel str
+Report the index in the Navigator table of the item whose label is the given string, or 0 if there is none.  Sets reportedValue1 with the index.  The string can contain spaces and the comparison is not case-sensitive.
+ItemIndexWithNote str
+Report the Navigator index of the item whose note is the given string, otherwise just like ItemIndexWithLabel.
+ItemForSuperCoord #
+Set the item number that Navigator supplies supermontage coordinates from when a montage image is acquired. Set the number to 0 to restore Navigator to using coordinates from the item currently being acquired.
+SkipPiecesOutsideItem #
+Sets the current montage to skip pieces outside the Navigator item whose position in the table is # (numbered from 1). If # is 0, uses the current item. If # is < 0, disables the skipping of pieces.
+SuffixForExtraFile
+Sets a suffix so that the Acquire at Points routine will open an extra file whenever it opens a regular file for output.  The name of the extra file will be the root of the regular filename, plus the suffix, followed by the extension of the regular filename.  The extra file will be opened before the regular file.  It will be closed when the regular file is closed (at the end of acquisition or before opening a new file).
+Miscellaneous Commands 
+CircleFromPoints x y x y x y
+Report the X and Y center coordinate and the radius in microns for the circle through three points whose coordinates are given on the line as x1 y1 x2 y2 x3 y3..  Values can be assigned to variables at end of command.
+ReportClock
+Report seconds elapsed since last ResetClock command
+ResetClock
+Reset the time reported by ReportClock to 0
+ReportMinuteTime
+Report an absolute time in minutes, a large integer. The difference between two such values will give an elapsed time in minutes. If a variable name is included after the command, the value will automatically be assigned to a persistent variable so that it is available across multiple runs of the macro. 
+ReportTickTime
+Report the time in seconds since the program started, like the times that prefix program debug output. The difference between two such values will give an elapsed time in seconds with nominal millisecond precision, as long as the program has been running for fewer than 57 days. If a variable name is included after the command, the value will automatically be assigned to a persistent variable so that it is available across multiple runs of the macro. 
+ElapsedTickTime start
+Report the time in seconds since the tick time given in 'start', which should be a variable assigned with the result from 'ReportTickTime'.  This command should be used to measure intervals between tick times if there is any chance that the program will run for more than 57 days.  The value can be assigned to a variable at the end of the command.
+ProgramTimeStamps
+Print the program version and build date, and the current date and time.
+Plugin name func [args]
+Call the function 'func' in the plugin named 'name' with appropriate list of arguments for that function.  Arguments are entered as items separated by spaces, except that a string argument at the end may consist of multiple words.  The return value of the function is reported and placed into reportedValue1.
+ListPluginCalls
+List the names of script-callable functions in all loaded plugins along with the arguments that they expect, in parentheses.  For each argument, there should be one item provided on the command line calling the function, with all items separated by spaces as usual.  Two exceptions to this are: a string argument at the end can include spaces; an argument listed as [out]double is a returned value, assigned to reportedValue2 or higher.
+MailSubject text
+Subject line for an email message (default is 'Message from SerialEM script'). The text can include variables to be substituted.
+SendEmail text
+Send an email containing the given text, which can include variables to be substituted. An SMTP server and address to send from must be defined in the properties file, and recipient(s) must be defined using 'Set Email Address' in the Tilt Series Menu.
+ErrorBoxSendEmail text
+Send an email containing the given text if the script stops with a message box; the text can have variables to be substituted.  Requirements are the same as for 'SendEmail'.  If the message box occurs during Navigator Acquire at Points and the user has selected to send emails there, two emails will be sent, thus allowing more specific information from the one specified here.
+RunInShell command
