@@ -15,7 +15,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
   
   - API extraction made from SerialEM v3.6.8-beta from Dec. 7th 2016 documentation.
-  - File version: 4
+  - File version: 5
 -->
 <NotepadPlus>
     <AutoComplete language="SEM">
@@ -106,7 +106,7 @@
         <KeyWord name="Autofocus" func="yes">
             <Overload retVal="" descr="Autofocus; set optional &lt;value&gt; to -2 to measure shift and drift, -1 to just measure&#xA;defocus without changing, or 1 for normal autofocus that changes focus to target; set&#xA;optional &lt;view&gt; to 1 to focus with View area in Low Dose mode.">
                 <Param name="[int change]"/>
-                <Param name="{int view]"/>
+                <Param name="[int view]"/>
             </Overload>
         </KeyWord>
         <KeyWord name="BackgroundTilt" func="yes">
@@ -132,18 +132,18 @@
             </Overload>
         </KeyWord>
         <KeyWord name="Call" func="yes">
-            <Overload retVal="" descr="Calls other macro by &lt;name&gt;. Names are case-sensitive and must match exactly, including spaces">
+            <Overload retVal="" descr="Calls other script by &lt;name&gt;. Names are case-sensitive and must match exactly, including spaces">
                 <Param name="string name"/>
             </Overload>
         </KeyWord>
         <KeyWord name="CallFunction" func="yes">
-            <Overload retVal="" descr="Calls the function with the given &lt;name&gt; and supplies &lt;arguments&gt; for the function to receive.&#xA;If the name could occur in more than one script, it must be qualified with a macro number or name, i.e. '5::GoodFunc' or&#xA;'Func Macro::GoodFunc'.">
+            <Overload retVal="" descr="Calls the function with the given &lt;name&gt; and supplies &lt;arguments&gt; for the function to receive.&#xA;If the name could occur in more than one script, it must be qualified with a script number or name, i.e. '5::GoodFunc' or&#xA;'Func Script::GoodFunc'.">
                 <Param name="string name"/>
                 <Param name="[variant arguments]"/>
             </Overload>
         </KeyWord>
         <KeyWord name="CallMacro" func="yes">
-            <Overload retVal="" descr="Calls other macro by &lt;name&gt; and returns">
+            <Overload retVal="" descr="Calls other script by &lt;name&gt; and returns">
                 <Param name="string name"/>
             </Overload>
         </KeyWord>
@@ -208,7 +208,7 @@
             <Overload retVal="" descr="Removes all persistent variables defined with :="/>
         </KeyWord>
         <KeyWord name="CloseFile" func="yes">
-            <Overload retVal="" descr="Close the current file. Enter optional &lt;e&gt; to stop macro if no file is open.">
+            <Overload retVal="" descr="Close the current file. Enter optional &lt;e&gt; to stop script if no file is open.">
                 <Param name="[char e]"/>
             </Overload>
         </KeyWord>
@@ -276,8 +276,8 @@
             <Overload retVal="" descr="Report the time remaining for until next automatic dewar filling, or -1 if none is scheduled.&#xA;Value can be assigned to a variable at end of commmand."/>
         </KeyWord>
         <KeyWord name="DoMacro" func="yes">
-            <Overload retVal="" descr="Switches to given &lt;macro&gt;">
-                <Param name="string macro"/>
+            <Overload retVal="" descr="Switches to given &lt;script&gt;">
+                <Param name="string script"/>
             </Overload>
         </KeyWord>
         <KeyWord name="DoScript" func="yes">
@@ -383,7 +383,7 @@
             <Overload retVal="" descr="Acquire image with 'focus' parameters"/>
         </KeyWord>
         <KeyWord name="FocusChangeLimits" func="yes">
-            <Overload retVal="" descr="Set limits on the focus change during autofocus runs for the remainder of the macro; follow&#xA;with a &lt;negative&gt; and a &lt;positive&gt; number for the limits in microns. When an autofocus run&#xA;exceeds a limit, it will abort and return to the starting defocus. Enter with 0 0 to cancel&#xA;these limits.">
+            <Overload retVal="" descr="Set limits on the focus change during autofocus runs for the remainder of the script; follow&#xA;with a &lt;negative&gt; and a &lt;positive&gt; number for the limits in microns. When an autofocus run&#xA;exceeds a limit, it will abort and return to the starting defocus. Enter with 0 0 to cancel&#xA;these limits.">
                 <Param name="float negative"/>
                 <Param name="float positive"/>
             </Overload>
@@ -392,7 +392,7 @@
             <Overload retVal="" descr="Makes Realign to Item align to the map center instead of skipping the first round because it&#xA;was aligned to recently."/>
         </KeyWord>
         <KeyWord name="Function" func="yes">
-            <Overload retVal="" descr="Defines a function with the given &lt;name&gt; (without embedded spaces). The optional &lt;number&gt;&#xA;indicates the number of numeric arguments and &lt;s&gt; is non-zero to indicate that a string argument occurs after the numeric&#xA;ones. Functions must be placed at the ends of macros.">
+            <Overload retVal="" descr="Defines a function with the given &lt;name&gt; (without embedded spaces). The optional &lt;number&gt;&#xA;indicates the number of numeric arguments and &lt;s&gt; is non-zero to indicate that a string argument occurs after the numeric&#xA;ones. Functions must be placed at the ends of script.">
                 <Param name="string name"/>
                 <Param name="int number"/>
                 <Param name="int s"/>
@@ -487,7 +487,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="KeyBreak" func="yes">
-            <Overload retVal="" descr="If the user presses 'B', or the key given by the optional &lt;key&gt; entry, the macro breaks out of&#xA;the innermost Loop containing this statement. &lt;key&gt; should be a letter or number; the test for the key is case-insensitive.">
+            <Overload retVal="" descr="If the user presses 'B', or the key given by the optional &lt;key&gt; entry, the script breaks out of&#xA;the innermost Loop containing this statement. &lt;key&gt; should be a letter or number; the test for the key is case-insensitive.">
                 <Param name="char key"/>
             </Overload>
         </KeyWord>
@@ -495,7 +495,7 @@
             <Overload retVal="" descr="Acquire image with 'preview' parameters"/>
         </KeyWord>
         <KeyWord name="ListPluginCalls" func="yes">
-            <Overload retVal="" descr="List the names of macro-callable functions in all loaded plugins along with the arguments&#xA;that they expect, in parentheses. For each argument, there should be one item provided on&#xA;the command line calling the function, with all items separated by spaces as usual. Two&#xA;exceptions to this are: a string argument at the end can include spaces; an argument listed&#xA;as [out]double is a returned value, assigned to reportedValue2 or higher."/>
+            <Overload retVal="" descr="List the names of script-callable functions in all loaded plugins along with the arguments&#xA;that they expect, in parentheses. For each argument, there should be one item provided on&#xA;the command line calling the function, with all items separated by spaces as usual. Two&#xA;exceptions to this are: a string argument at the end can include spaces; an argument listed&#xA;as [out]double is a returned value, assigned to reportedValue2 or higher."/>
         </KeyWord>
         <KeyWord name="LoadCartridge" func="yes">
             <Overload retVal="" descr="Loads the cartridge from the given &lt;slot&gt; (numbered from 1) if there is an autoloader.">
@@ -508,7 +508,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="LongOperation" func="yes">
-            <Overload retVal="" descr="Starts one or more time-consuming &lt;operation&gt;s: Buffer cycle (Bu), Refill refrigerant (Re),&#xA;Inventory cassettes (In), Loader buffer cycle (Lo), Dark reference update for K2 (Da).&#xA;Operations are identified by the first two letters of whatever full word you use (case &#xA;insensitive). Each operation except Inventory must be followed by an &lt;interval&gt; in hours.&#xA;If &lt;interval&gt; is &gt; 0, the operation is done only if the time since the last such operation&#xA;is greater than &lt;interval&gt;; if &lt;interval&gt; is 0, the operation is done unconditionally; &#xA;if &lt;interval&gt; is &lt; 0, it simply records the current time as the time of the last operation.&#xA;The scope operations will occur sequentially and be started in the order that they are&#xA;listed. The dark reference update will be done simultaneously with scope operations. If an&#xA;error occurs in a scope operation, other operations will be finished and the error reported&#xA;at the end. Errors other than in refilling refrigerant will cause the macro to stop.&#xA;The user interface should not hang during long operations, and users will be asked to &#xA;confirm that they want to kill the operation threads if they press STOP or try to exit&#xA;the program. The consequences of killing these threads are uncertain.">
+            <Overload retVal="" descr="Starts one or more time-consuming &lt;operation&gt;s: Buffer cycle (Bu), Refill refrigerant (Re),&#xA;Inventory cassettes (In), Loader buffer cycle (Lo), Dark reference update for K2 (Da).&#xA;Operations are identified by the first two letters of whatever full word you use (case &#xA;insensitive). Each operation except Inventory must be followed by an &lt;interval&gt; in hours.&#xA;If &lt;interval&gt; is &gt; 0, the operation is done only if the time since the last such operation&#xA;is greater than &lt;interval&gt;; if &lt;interval&gt; is 0, the operation is done unconditionally; &#xA;if &lt;interval&gt; is &lt; 0, it simply records the current time as the time of the last operation.&#xA;The scope operations will occur sequentially and be started in the order that they are&#xA;listed. The dark reference update will be done simultaneously with scope operations. If an&#xA;error occurs in a scope operation, other operations will be finished and the error reported&#xA;at the end. Errors other than in refilling refrigerant will cause the script to stop.&#xA;The user interface should not hang during long operations, and users will be asked to &#xA;confirm that they want to kill the operation threads if they press STOP or try to exit&#xA;the program. The consequences of killing these threads are uncertain.">
                 <Param name="string operation"/>
                 <Param name="int interval"/>
                 <Param name="[... ...]"/>
@@ -529,7 +529,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="MailSubject" func="yes">
-            <Overload retVal="" descr="Subject line for an email message (default is 'Message from SerialEM macro'). The &lt;text&gt;&#xA;can include variables to be substituted.">
+            <Overload retVal="" descr="Subject line for an email message (default is 'Message from SerialEM script'). The &lt;text&gt;&#xA;can include variables to be substituted.">
                 <Param name="string text"/>
             </Overload>
         </KeyWord>
@@ -583,7 +583,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="MoveToNavItem" func="yes">
-            <Overload retVal="" descr="Move the stage to a Navigator &lt;item&gt;; if no &lt;item&gt; is entered, move to the current Navigator&#xA;item or to the item that this macro is being run on, otherwise move to the item whose index in the&#xA;table is &lt;item&gt; (numbered from 1).">
+            <Overload retVal="" descr="Move the stage to a Navigator &lt;item&gt;; if no &lt;item&gt; is entered, move to the current Navigator&#xA;item or to the item that this script is being run on, otherwise move to the item whose index in the&#xA;table is &lt;item&gt; (numbered from 1).">
                 <Param name="[int item]"/>
             </Overload>
         </KeyWord>
@@ -616,7 +616,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="OpenDECameraCover" func="yes">
-            <Overload retVal="" descr="Opens the protection cover of the Direct Electron camera for the remainder of the macro,&#xA;if it is the current camera. Without this command, the cover will be opened and closed for each exposure except&#xA;during tasks."/>
+            <Overload retVal="" descr="Opens the protection cover of the Direct Electron camera for the remainder of the script,&#xA;if it is the current camera. Without this command, the cover will be opened and closed for each exposure except&#xA;during tasks."/>
         </KeyWord>
         <KeyWord name="OpenFrameSumFile" func="yes">
             <Overload retVal="" descr="Open a file whose name starts with the last name used for saving frames from a K2 or&#xA;Falcon camera, and ends with the string &lt;suffix&gt; given in the command. The string can contain spaces and variables.">
@@ -724,7 +724,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="RealignToNavItem" func="yes">
-            <Overload retVal="" descr="Realign to the current Navigator item, or to the item that this macro is being run on.&#xA;For &lt;restore&gt;, enter 1 to restore the microscope state to the current state after the procedure,&#xA;or 0 not to. For optional &lt;continous&gt;, enter 1 to use continuous acquisition mode and end it&#xA;at end of procedure, or 2 to leave it running if possible.">
+            <Overload retVal="" descr="Realign to the current Navigator item, or to the item that this script is being run on.&#xA;For &lt;restore&gt;, enter 1 to restore the microscope state to the current state after the procedure,&#xA;or 0 not to. For optional &lt;continous&gt;, enter 1 to use continuous acquisition mode and end it&#xA;at end of procedure, or 2 to leave it running if possible.">
                 <Param name="bool restore"/>
                 <Param name="[int continous]"/>
             </Overload>
@@ -761,7 +761,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="Repeat" func="yes">
-            <Overload retVal="" descr="Place at end of macro to repeat it"/>
+            <Overload retVal="" descr="Place at end of script to repeat it"/>
         </KeyWord>
         <KeyWord name="ReportAbsoluteFocus" func="yes">
             <Overload retVal="" descr="Report an absolute (standardized) value for the current focus setting"/>
@@ -847,7 +847,7 @@
             <Overload retVal="" descr="Reports values selected in the Frame File Options dialog: 0 for MRC, 1 for TIFF LZW, &#xA;or 2 for TIFF ZIP; sum of 1 to pack unnormalized data at all, plus 2 to pack counting mode &#xA;to bytes; 1 to save MRC files in 4-bit mode 101; 1 to save normalized data times 100; 1 to&#xA;skip rotation and flip of frames; 1 for one file per frame."/>
         </KeyWord>
         <KeyWord name="ReportLastAxisOffset" func="yes">
-            <Overload retVal="" descr="Reports the lateral offset of the tilt axis estimated from the last Refine Eucentricity run;&#xA;aborts the macro if no offset is available."/>
+            <Overload retVal="" descr="Reports the lateral offset of the tilt axis estimated from the last Refine Eucentricity run;&#xA;aborts the script if no offset is available."/>
         </KeyWord>
         <KeyWord name="ReportLastFrameFile" func="yes">
             <Overload retVal="" descr="Reports the full path and filename of the last frame file saved from a K2 or Falcon camera&#xA;and sets it into reportedValue1."/>
@@ -868,7 +868,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="ReportMinuteTime" func="yes">
-            <Overload retVal="" descr="Report an absolute time in minutes, a large integer. The difference between two such values&#xA;will give an elapsed time in minutes. If a &lt;variable&gt; name is included after the command, &#xA;the value will automatically be assigned to a persistent variable so that it is available&#xA;across multiple runs of the macro.">
+            <Overload retVal="" descr="Report an absolute time in minutes, a large integer. The difference between two such values&#xA;will give an elapsed time in minutes. If a &lt;variable&gt; name is included after the command, &#xA;the value will automatically be assigned to a persistent variable so that it is available&#xA;across multiple runs of the script.">
                 <Param name="[string variable]"/>
             </Overload>
         </KeyWord>
@@ -927,7 +927,7 @@
             <Overload retVal="" descr="Report the defocus target"/>
         </KeyWord>
         <KeyWord name="ReportTickTime" func="yes">
-            <Overload retVal="" descr="Report the time in seconds since the program started, like the times that prefix program&#xA;debug output. The difference between two such values will give an elapsed time in seconds&#xA;with nominal millisecond precision, as long as the program has been running for fewer than&#xA;57 days. If a &lt;variable&gt; name is included after the command, the value will automatically&#xA;be assigned to a persistent variable so that it is available across multiple runs of the macro.">
+            <Overload retVal="" descr="Report the time in seconds since the program started, like the times that prefix program&#xA;debug output. The difference between two such values will give an elapsed time in seconds&#xA;with nominal millisecond precision, as long as the program has been running for fewer than&#xA;57 days. If a &lt;variable&gt; name is included after the command, the value will automatically&#xA;be assigned to a persistent variable so that it is available across multiple runs of the script.">
                 <Param name="[string variable]"/>
             </Overload>
         </KeyWord>
@@ -997,12 +997,12 @@
             </Overload>
         </KeyWord>
         <KeyWord name="RestoreCameraSet" func="yes">
-            <Overload retVal="" descr="Restore one or all camera parameter set(s) modified with the 'Set*' commands. If &lt;set&gt; is &#xA;omitted, all modified sets will be restored.&#xA;The set &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Restore one or all camera parameter set(s) modified with the 'Set*' commands. If &lt;set&gt; is &#xA;omitted, all modified sets will be restored.&#xA;The set &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="[char set]"/>
             </Overload>
         </KeyWord>
         <KeyWord name="RestoreFocus" func="yes">
-            <Overload retVal="" descr="Restores the focus value when SaveFocus was run. After this is run, the focus will&#xA;not be restored again when the macro ends."/>
+            <Overload retVal="" descr="Restores the focus value when SaveFocus was run. After this is run, the focus will&#xA;not be restored again when the script ends."/>
         </KeyWord>
         <KeyWord name="RetractCamera" func="yes">
             <Overload retVal="" descr="Retracts all retractable cameras"/>
@@ -1044,7 +1044,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SaveFocus" func="yes">
-            <Overload retVal="" descr="Saves the current focus; the focus will be restored to this value either by&#xA;RestoreFocus or when the macro stops or exits. The macro will not be resumable if it stops."/>
+            <Overload retVal="" descr="Saves the current focus; the focus will be restored to this value either by&#xA;RestoreFocus or when the script stops or exits. The script will not be resumable if it stops."/>
         </KeyWord>
         <KeyWord name="SaveLogOpenNew" func="yes">
             <Overload retVal="" descr="Closes the log window and opens a new one.  If a log file has been saved, the log is&#xA;automatically saved to it before closing. If there is no log file and the log has new&#xA;contents since program startup, the program will ask the user whether to save to log first;&#xA;if the user cancels, the script is aborted.  If a &lt;filename&gt; is added, the new log will be &#xA;saved with that name.  An extension in this name will be stripped off before adding '.log',&#xA;so if you want to preserve extensions or other text after a period, add '.log' to the end&#xA;of the name.  If the file already exists, a number will be added to get a unique new name.">
@@ -1118,7 +1118,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetBinning" func="yes">
-            <Overload retVal="" descr="Set &lt;binning&gt; for exposure &lt;set&gt;.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro&#xA;is suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set &lt;binning&gt; for exposure &lt;set&gt;.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script&#xA;is suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int binning"/>
             </Overload>
@@ -1129,7 +1129,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetCameraArea" func="yes">
-            <Overload retVal="" descr="Set the acquisition area for exposure &lt;set&gt;. Follow the set specifier S with either&#xA;4 numbers for the unbinned &lt;left&gt;, &lt;right&gt;, &lt;top&gt;, and &lt;bottom&gt; coordinates (the same kind of numbers as in the camera setup dialog)&#xA;or with F, H, Q, WH or WQ for full, half, quarter, wide half, or wide quarter. Values will be adjusted for a legal area.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set the acquisition area for exposure &lt;set&gt;. Follow the set specifier S with either&#xA;4 numbers for the unbinned &lt;left&gt;, &lt;right&gt;, &lt;top&gt;, and &lt;bottom&gt; coordinates (the same kind of numbers as in the camera setup dialog)&#xA;or with F, H, Q, WH or WQ for full, half, quarter, wide half, or wide quarter. Values will be adjusted for a legal area.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int left"/>
                 <Param name="int right"/>
@@ -1138,7 +1138,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetCenteredSize" func="yes">
-            <Overload retVal="" descr="Set exposure &lt;set&gt; for acquisition from a centered area.&#xA;Follow the &lt;set&gt; specifier with 3 numbers: the &lt;binning&gt;, the binned size in &lt;X&gt;, and the binned size in &lt;Y&gt;.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set exposure &lt;set&gt; for acquisition from a centered area.&#xA;Follow the &lt;set&gt; specifier with 3 numbers: the &lt;binning&gt;, the binned size in &lt;X&gt;, and the binned size in &lt;Y&gt;.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int binning"/>
                 <Param name="int X"/>
@@ -1151,7 +1151,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetContinuous" func="yes">
-            <Overload retVal="" descr="Set the acquisition mode for exposure &lt;set&gt; for continuous if &lt;cont&gt; is non-zero, or single-frame&#xA;if &lt;cont&gt; is 0.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set the acquisition mode for exposure &lt;set&gt; for continuous if &lt;cont&gt; is non-zero, or single-frame&#xA;if &lt;cont&gt; is 0.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="bool cont"/>
             </Overload>
@@ -1172,7 +1172,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetDoseFracParams" func="yes">
-            <Overload retVal="" descr="Set dose fractionation parametes for exposure &lt;set&gt;; follow with up to 5 numbers: &#xA;&lt;dose&gt; non-zero for dose-fractionation mode on K2; &#xA;&lt;save&gt; non-zero to save frames (not just for K2); &#xA;&lt;align&gt; non-zero to align frames; &#xA;&lt;dm&gt; 0 to align in DM, 1 to align in plugin, or 2 to save a command file for alignframes; &#xA;&lt;comb&gt; non-zero to combine frames into sums.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set dose fractionation parametes for exposure &lt;set&gt;; follow with up to 5 numbers: &#xA;&lt;dose&gt; non-zero for dose-fractionation mode on K2; &#xA;&lt;save&gt; non-zero to save frames (not just for K2); &#xA;&lt;align&gt; non-zero to align frames; &#xA;&lt;dm&gt; 0 to align in DM, 1 to align in plugin, or 2 to save a command file for alignframes; &#xA;&lt;comb&gt; non-zero to combine frames into sums.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="bool dose"/>
                 <Param name="[bool save"/>
@@ -1190,7 +1190,7 @@
             <Overload retVal="" descr="If in low mag, sets to the standard focus for the current mag or nearest LM mag if one has&#xA;been set; otherwise on FEI it assumes standard focus is 0 and on JEOL it stops with an error.&#xA;If not in LM, sets to the standard focus for the nearest nonLM mag if one has been set or&#xA;stops with an an error if none were set. On FEI scopes, it issues a warning if it is using&#xA;a calibrated value from a different mag."/>
         </KeyWord>
         <KeyWord name="SetExposure" func="yes">
-            <Overload retVal="" descr="Set exposure and, optionally, drift settling for exposure &lt;set&gt; to the given values &lt;exp&gt; and &lt;drift&gt;.&#xA;If D is omitted, the existing drift settling will be unchanged.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set exposure and, optionally, drift settling for exposure &lt;set&gt; to the given values &lt;exp&gt; and &lt;drift&gt;.&#xA;If D is omitted, the existing drift settling will be unchanged.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int exp"/>
                 <Param name="[int drift]"/>
@@ -1223,7 +1223,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetFrameTime" func="yes">
-            <Overload retVal="" descr="Set the frame time for a K2 camera to the given &lt;number&gt;.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set the frame time for a K2 camera to the given &lt;number&gt;.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int number"/>
             </Overload>
@@ -1254,7 +1254,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetK2ReadMode" func="yes">
-            <Overload retVal="" descr="Set the K2 'read mode' for exposure &lt;set&gt; to the given &lt;value&gt;, which should be 0 for linear,&#xA;1 for counting, or 2 for super-resolution mode.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set the K2 'read mode' for exposure &lt;set&gt; to the given &lt;value&gt;, which should be 0 for linear,&#xA;1 for counting, or 2 for super-resolution mode.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int value"/>
             </Overload>
@@ -1265,7 +1265,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetLiveSettleFraction" func="yes">
-            <Overload retVal="" descr="Set the &lt;fraction&gt; of the usual settling time to apply in continuous mode after image shift&#xA;or stage movement. By default, no settling is applied in continuous mode (i.e., the fraction is 0), but some settling may be&#xA;needed when a macro or other operation is using continuous frames. The fraction is reset to zero when continuous mode ends.">
+            <Overload retVal="" descr="Set the &lt;fraction&gt; of the usual settling time to apply in continuous mode after image shift&#xA;or stage movement. By default, no settling is applied in continuous mode (i.e., the fraction is 0), but some settling may be&#xA;needed when a script or other operation is using continuous frames. The fraction is reset to zero when continuous mode ends.">
                 <Param name="int fraction"/>
             </Overload>
         </KeyWord>
@@ -1280,7 +1280,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetMagAndIntensity" func="yes">
-            <Overload retVal="" descr="Set the &lt;mag&gt; to the actual film mag value and change the beam to maintain the same brightness.&#xA;Two values are reported: the initial percent C2 value and the remaining factor of intensity&#xA;change needed if it was not possible to change the intensity by the full amount needed.&#xA;The C2 value should be used to restore intensity when the mag is restored. The remaining&#xA;intensity change could be applied to the exposure time if necessary. The macro will stop&#xA;if there is an error in the intensity change.">
+            <Overload retVal="" descr="Set the &lt;mag&gt; to the actual film mag value and change the beam to maintain the same brightness.&#xA;Two values are reported: the initial percent C2 value and the remaining factor of intensity&#xA;change needed if it was not possible to change the intensity by the full amount needed.&#xA;The C2 value should be used to restore intensity when the mag is restored. The remaining&#xA;intensity change could be applied to the exposure time if necessary. The script will stop&#xA;if there is an error in the intensity change.">
                 <Param name="int mag"/>
             </Overload>
         </KeyWord>
@@ -1322,7 +1322,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetProcessing" func="yes">
-            <Overload retVal="" descr="Set processing for exposure &lt;set&gt; to the given &lt;value&gt;, which should be 0 for unporcessed,&#xA;1 for dark-subtracted, or 2 for gain-normalized.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set processing for exposure &lt;set&gt; to the given &lt;value&gt;, which should be 0 for unporcessed,&#xA;1 for dark-subtracted, or 2 for gain-normalized.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int value"/>
             </Overload>
@@ -1338,7 +1338,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="SetSTEMDetectors" func="yes">
-            <Overload retVal="" descr="Set the STEM &lt;detector&gt;s for each available channel of exposure &lt;set&gt;. Follow the set&#xA;specifier with a detector number for each channel, numbered from 0, or -1 to select no detector for that channel. At least&#xA;one actual detector must be specified.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the macro ends or stops or when a different camera is selected.  However, if the macro is&#xA;suspended, any changed parameters will be set again when the macro resumes.">
+            <Overload retVal="" descr="Set the STEM &lt;detector&gt;s for each available channel of exposure &lt;set&gt;. Follow the set&#xA;specifier with a detector number for each channel, numbered from 0, or -1 to select no detector for that channel. At least&#xA;one actual detector must be specified.&#xA;The &lt;set&gt; can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.&#xA;Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is&#xA;suspended, any changed parameters will be set again when the script resumes.">
                 <Param name="char set"/>
                 <Param name="int detector"/>
                 <Param name="[... ...]"/>
@@ -1504,7 +1504,7 @@
             <Overload retVal="" descr="If there is an autoloader, unloads the cartridge."/>
         </KeyWord>
         <KeyWord name="UpdateGroupZ" func="yes">
-            <Overload retVal="" descr="Assign current stage Z value to the whole group that the current Navigator item, or item&#xA;that this macro is being run on, belongs to. The item must have a non-zero group ID. If&#xA;the group would show up on more than one line with 'Collapse groups' on, items on all lines&#xA;will be updated, unlike with the 'Update Z' button."/>
+            <Overload retVal="" descr="Assign current stage Z value to the whole group that the current Navigator item, or item&#xA;that this script is being run on, belongs to. The item must have a non-zero group ID. If&#xA;the group would show up on more than one line with 'Collapse groups' on, items on all lines&#xA;will be updated, unlike with the 'Update Z' button."/>
         </KeyWord>
         <KeyWord name="UpdateHWDarkRef" func="yes">
             <Overload retVal="" descr="Updates the K2 hardware dark reference if the known interval since the last update is longer&#xA;than &lt;value&gt; in hours. If value is 0, the update is done unconditionally; if value is negative (-1), it simply records the current time as&#xA;the time of the last update.">
@@ -1512,10 +1512,10 @@
             </Overload>
         </KeyWord>
         <KeyWord name="UpdateItemZ" func="yes">
-            <Overload retVal="" descr="Assign current stage Z value to the current Navigator item, or item that this macro is being run on."/>
+            <Overload retVal="" descr="Assign current stage Z value to the current Navigator item, or item that this script is being run on."/>
         </KeyWord>
         <KeyWord name="UseContinuousFrames" func="yes">
-            <Overload retVal="" descr="If &lt;value&gt; is non-zero, the macro will keep executing commands (such as stage movement and alignment)&#xA;even when the camera is acquiring in continuous mode. Use 0 to return to normal operation, in which the macro will wait for&#xA;continuous acquisition to be ended by the user.">
+            <Overload retVal="" descr="If &lt;value&gt; is non-zero, the script will keep executing commands (such as stage movement and alignment)&#xA;even when the camera is acquiring in continuous mode. Use 0 to return to normal operation, in which the script will wait for&#xA;continuous acquisition to be ended by the user.">
                 <Param name="bool value"/>
             </Overload>
         </KeyWord>
@@ -1528,7 +1528,7 @@
             <Overload retVal="" descr="Acquire image with 'view' parameters"/>
         </KeyWord>
         <KeyWord name="Verbose" func="yes">
-            <Overload retVal="" descr="Turns echoing of each macro line on or off for &lt;value&gt; 1 or 0">
+            <Overload retVal="" descr="Turns echoing of each script line on or off for &lt;value&gt; 1 or 0">
                 <Param name="bool value"/>
             </Overload>
         </KeyWord>

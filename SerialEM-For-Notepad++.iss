@@ -1,7 +1,7 @@
 ; -- SerialEM-For-Notpad++.iss --
 ; Install SerialEM language support for Notepad++
 
-#define SERIALEM4NPP_VERSION "3.6.8.3"
+#define SERIALEM4NPP_VERSION "3.6.8.5"
 #define SERIALEM4NPP_UUID "{61aba454-af81-4469-8770-f1859da5026b}"
 
 [Setup]
