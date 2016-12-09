@@ -74,6 +74,7 @@ const long SerialEM4NPPFrame::ID_PANEL2 = wxNewId();
 const long SerialEM4NPPFrame::ID_TEXTCTRL8 = wxNewId();
 const long SerialEM4NPPFrame::ID_BUTTON3 = wxNewId();
 const long SerialEM4NPPFrame::ID_BUTTON4 = wxNewId();
+const long SerialEM4NPPFrame::ID_BUTTON5 = wxNewId();
 const long SerialEM4NPPFrame::ID_TREECTRL1 = wxNewId();
 const long SerialEM4NPPFrame::ID_PANEL6 = wxNewId();
 const long SerialEM4NPPFrame::ID_TEXTCTRL9 = wxNewId();
@@ -99,6 +100,7 @@ const long SerialEM4NPPFrame::ID_TEXTCTRL11 = wxNewId();
 const long SerialEM4NPPFrame::ID_TEXTCTRL12 = wxNewId();
 const long SerialEM4NPPFrame::ID_TEXTCTRL15 = wxNewId();
 const long SerialEM4NPPFrame::ID_TEXTCTRL14 = wxNewId();
+const long SerialEM4NPPFrame::ID_BITMAPBUTTON10 = wxNewId();
 const long SerialEM4NPPFrame::ID_SCROLLEDWINDOW2 = wxNewId();
 const long SerialEM4NPPFrame::ID_SPLITTERWINDOW2 = wxNewId();
 const long SerialEM4NPPFrame::ID_PANEL3 = wxNewId();
@@ -164,7 +166,7 @@ void debugLeave(const wxString &str)
 
 SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progress(NULL), m_apiLoaded(false), m_langLoaded(false)
 {
-#if 0
+#if 1
     wxLogWindow *logger = new wxLogWindow(this, _("Logging Window"));
     wxLog::SetActiveTarget(logger);
     wxLogStatus(wxT("Started"));
@@ -178,6 +180,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxBoxSizer* BoxSizer19;
     wxBoxSizer* BoxSizer15;
     wxBoxSizer* BoxSizer20;
+    wxBoxSizer* BoxSizer43;
     wxBoxSizer* BoxSizer5;
     wxBoxSizer* BoxSizer10;
     wxBoxSizer* BoxSizer7;
@@ -193,8 +196,10 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxStaticBoxSizer* StaticBoxSizer4;
     wxBoxSizer* BoxSizer36;
     wxMenuItem* MenuItem1;
+    wxBoxSizer* BoxSizer41;
     wxStaticBoxSizer* StaticBoxSizer16;
     wxBoxSizer* BoxSizer37;
+    wxBoxSizer* BoxSizer42;
     wxBoxSizer* BoxSizer23;
     wxStaticBoxSizer* StaticBoxSizer9;
     wxBoxSizer* BoxSizer2;
@@ -211,6 +216,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxStaticBoxSizer* StaticBoxSizer10;
     wxBoxSizer* BoxSizer38;
     wxBoxSizer* BoxSizer14;
+    wxStaticBoxSizer* StaticBoxSizer19;
     wxStaticBoxSizer* StaticBoxSizer8;
     wxStaticBoxSizer* StaticBoxSizer3;
     wxStaticBoxSizer* StaticBoxSizer6;
@@ -230,6 +236,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     wxBoxSizer* BoxSizer33;
     wxBoxSizer* BoxSizer22;
     wxBoxSizer* BoxSizer35;
+    wxStaticBoxSizer* StaticBoxSizer23;
     wxBoxSizer* BoxSizer3;
     wxMenu* Menu2;
     wxStaticBoxSizer* StaticBoxSizer5;
@@ -245,6 +252,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Panel2 = new wxPanel(m_notebook, ID_PANEL2, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL2"));
     BoxSizer8 = new wxBoxSizer(wxHORIZONTAL);
     BoxSizer9 = new wxBoxSizer(wxVERTICAL);
+    BoxSizer41 = new wxBoxSizer(wxHORIZONTAL);
     StaticBoxSizer1 = new wxStaticBoxSizer(wxHORIZONTAL, Panel2, _("  Source file  "));
     m_wtextInput = new wxTextCtrl(Panel2, ID_TEXTCTRL1, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL1"));
     StaticBoxSizer1->Add(m_wtextInput, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -253,7 +261,8 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     m_wbtnSave = new wxButton(Panel2, ID_BUTTON2, _("Save As..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON2"));
     m_wbtnSave->Disable();
     StaticBoxSizer1->Add(m_wbtnSave, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    BoxSizer9->Add(StaticBoxSizer1, 0, wxALL|wxEXPAND, 5);
+    BoxSizer41->Add(StaticBoxSizer1, 1, wxALL|wxEXPAND, 5);
+    BoxSizer9->Add(BoxSizer41, 0, wxALL|wxEXPAND, 5);
     BoxSizer3 = new wxBoxSizer(wxHORIZONTAL);
     SplitterWindow1 = new wxSplitterWindow(Panel2, ID_SPLITTERWINDOW1, wxDefaultPosition, wxSize(348,364), wxSP_3DSASH|wxSP_3DBORDER, _T("ID_SPLITTERWINDOW1"));
     SplitterWindow1->SetMinSize(wxSize(250,250));
@@ -292,10 +301,10 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     m_wtextFunctionName->SetMinSize(wxSize(300,-1));
     StaticBoxSizer2->Add(m_wtextFunctionName, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer13->Add(StaticBoxSizer2, 0, wxALL, 5);
-    BoxSizer13->Add(-1,-1,1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer13->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     m_wbtmBtnSave = new wxBitmapButton(m_scrolledWindow, ID_BITMAPBUTTON3, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_SAVE")),wxART_BUTTON), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON3"));
     BoxSizer13->Add(m_wbtmBtnSave, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    BoxSizer5->Add(BoxSizer13, 0, wxALL, 5);
+    BoxSizer5->Add(BoxSizer13, 0, wxALL|wxEXPAND, 5);
     BoxSizer6 = new wxBoxSizer(wxHORIZONTAL);
     StaticBoxSizer3 = new wxStaticBoxSizer(wxHORIZONTAL, m_scrolledWindow, _("  Arguments  "));
     m_wtextFunctionArgs = new wxTextCtrl(m_scrolledWindow, ID_TEXTCTRL3, wxEmptyString, wxDefaultPosition, wxDefaultSize, wxTE_MULTILINE, wxDefaultValidator, _T("ID_TEXTCTRL3"));
@@ -377,6 +386,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Panel3 = new wxPanel(m_notebook, ID_PANEL3, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL3"));
     BoxSizer17 = new wxBoxSizer(wxHORIZONTAL);
     BoxSizer18 = new wxBoxSizer(wxVERTICAL);
+    BoxSizer42 = new wxBoxSizer(wxHORIZONTAL);
     StaticBoxSizer5 = new wxStaticBoxSizer(wxHORIZONTAL, Panel3, _("  Source file  "));
     m_wtextInputLang = new wxTextCtrl(Panel3, ID_TEXTCTRL8, wxEmptyString, wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_TEXTCTRL8"));
     StaticBoxSizer5->Add(m_wtextInputLang, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
@@ -385,7 +395,14 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     m_wbtnSaveLang = new wxButton(Panel3, ID_BUTTON4, _("Save As..."), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON4"));
     m_wbtnSaveLang->Disable();
     StaticBoxSizer5->Add(m_wbtnSaveLang, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    BoxSizer18->Add(StaticBoxSizer5, 0, wxALL|wxEXPAND, 5);
+    BoxSizer42->Add(StaticBoxSizer5, 1, wxALL|wxEXPAND, 5);
+    StaticBoxSizer23 = new wxStaticBoxSizer(wxHORIZONTAL, Panel3, wxEmptyString);
+    BoxSizer42->Add(StaticBoxSizer23, 0, wxALL|wxEXPAND, 5);
+    StaticBoxSizer19 = new wxStaticBoxSizer(wxHORIZONTAL, Panel3, _("  Check  "));
+    m_wbtnMissingKeywords = new wxButton(Panel3, ID_BUTTON5, _("Missing Keywords"), wxDefaultPosition, wxDefaultSize, 0, wxDefaultValidator, _T("ID_BUTTON5"));
+    StaticBoxSizer19->Add(m_wbtnMissingKeywords, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer42->Add(StaticBoxSizer19, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer18->Add(BoxSizer42, 0, wxALL|wxEXPAND, 5);
     BoxSizer20 = new wxBoxSizer(wxHORIZONTAL);
     SplitterWindow2 = new wxSplitterWindow(Panel3, ID_SPLITTERWINDOW2, wxDefaultPosition, wxSize(348,364), wxSP_3DSASH|wxSP_3DBORDER, _T("ID_SPLITTERWINDOW2"));
     SplitterWindow2->SetMinSize(wxSize(250,250));
@@ -534,6 +551,11 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     BoxSizer30->Add(m_wtextContentLang, 1, wxBOTTOM|wxLEFT|wxRIGHT|wxEXPAND, 0);
     BoxSizer29->Add(BoxSizer30, 1, wxALL|wxEXPAND, 5);
     m_wsizerContentLang->Add(BoxSizer29, 1, wxALL|wxEXPAND, 0);
+    BoxSizer43 = new wxBoxSizer(wxHORIZONTAL);
+    m_wbtnSortContent = new wxBitmapButton(ScrolledWindow1, ID_BITMAPBUTTON10, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_HELP_SETTINGS")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON10"));
+    m_wbtnSortContent->SetToolTip(_("Sort Alphabeticaly"));
+    BoxSizer43->Add(m_wbtnSortContent, 0, wxALL|wxALIGN_TOP, 5);
+    m_wsizerContentLang->Add(BoxSizer43, 0, wxALL|wxEXPAND, 0);
     BoxSizer25->Add(m_wsizerContentLang, 1, wxALL|wxEXPAND, 5);
     BoxSizer24->Add(BoxSizer25, 0, wxALL|wxEXPAND, 0);
     ScrolledWindow1->SetSizer(BoxSizer24);
@@ -564,7 +586,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     m_wbtnReloadHtml->SetToolTip(_("Reload current page"));
     StaticBoxSizer10->Add(m_wbtnReloadHtml, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer39->Add(StaticBoxSizer10, 1, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
-    BoxSizer39->Add(0,0,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
+    BoxSizer39->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     StaticBoxSizer15 = new wxStaticBoxSizer(wxHORIZONTAL, m_panel7, wxEmptyString);
     m_wbtnHtmlSave = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON9, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_SAVE_AS")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON9"));
     m_wbtnHtmlSave->SetToolTip(_("Save pqge context to text file"));
@@ -625,6 +647,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Connect(ID_SPLITTERWINDOW1,wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnSplitterWindow1SashPosChanged);
     Connect(ID_BUTTON3,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnLoadLangClick);
     Connect(ID_BUTTON4,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnSaveLangClick);
+    Connect(ID_BUTTON5,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_wbtnMissingKeywordsClick);
     Connect(ID_TREECTRL1,wxEVT_COMMAND_TREE_SEL_CHANGED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnSelectionChanged);
     Connect(ID_TREECTRL1,wxEVT_COMMAND_TREE_SEL_CHANGING,(wxObjectEventFunction)&SerialEM4NPPFrame::OnSelectionChanging);
     Connect(ID_TEXTCTRL9,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnInputTextLang);
@@ -650,6 +673,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Connect(ID_TEXTCTRL12,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnInputTextLang);
     Connect(ID_TEXTCTRL15,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnInputTextLang);
     Connect(ID_TEXTCTRL14,wxEVT_COMMAND_TEXT_UPDATED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnInputTextLang);
+    Connect(ID_BITMAPBUTTON10,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_wbtnSortContentClick);
     Connect(ID_SPLITTERWINDOW2,wxEVT_COMMAND_SPLITTER_SASH_POS_CHANGED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnSplitterWindow1SashPosChanged);
     Connect(ID_TEXTCTRL18,wxEVT_COMMAND_TEXT_ENTER,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_wtextBetaURLTextEnter);
     Connect(ID_BITMAPBUTTON7,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::Onm_whomeBetaHtmlClick);
@@ -2437,3 +2461,189 @@ void SerialEM4NPPFrame::OnHtmlPaste(wxCommandEvent& event)
     event.Skip();
 }
 
+
+void SerialEM4NPPFrame::Onm_wbtnMissingKeywordsClick(wxCommandEvent& event)
+{
+    wxArrayString   keywords;
+    wxTreeItemId    root = m_wtree->GetRootItem();
+
+    if (root.IsOk())
+    {
+        wxTreeItemIdValue   cookie;
+        wxTreeItemId        id = m_wtree->GetFirstChild(root, cookie);
+
+        if (id.IsOk())
+        {
+            do
+            {
+                if (id.IsOk())
+                {
+                    sTreeItemData *data = (sTreeItemData *)m_wtree->GetItemData(id);
+
+                    switch (data->GetType())
+                    {
+                        case ITEM_TYPE_FUNCTION:
+                            {
+                                sTreeItemFunctionData *d = (sTreeItemFunctionData *)data;
+
+                                keywords.Add(d->GetFunctionName());
+                            }
+                            break;
+
+                        case ITEM_TYPE_ENVIRONMENT:
+                        case ITEM_TYPE_COMMENT:
+                        case ITEM_TYPE_LANG_USERLANG:
+                        case ITEM_TYPE_LANG_SETTINGS:
+                        case ITEM_TYPE_LANG_KEYWORDS:
+                        case ITEM_TYPE_LANG_WORDSTYLE:
+                        case ITEM_TYPE_UNDEF:
+                            break;
+                    }
+                }
+
+            } while ((id = m_wtree->GetNextChild(id, cookie)) && id.IsOk());
+
+            if (! keywords.IsEmpty())
+            {
+                wxArrayString karray;
+
+                // Get keywords 1 & 2 from lang file
+                root = m_wtreeLang->GetRootItem();
+                id = m_wtreeLang->GetFirstChild(root, cookie);
+
+                do
+                {
+                    if (id.IsOk())
+                    {
+                        sTreeItemData *data = (sTreeItemData *)m_wtreeLang->GetItemData(id);
+
+                        switch (data->GetType())
+                        {
+                            case ITEM_TYPE_LANG_KEYWORDS:
+                                {
+                                    sTreeItemLangKeywordsData *d = (sTreeItemLangKeywordsData *)data;
+                                    wxString str = d->GetName();
+
+                                    if ((str == wxT("Keywords1")) || (str == wxT("Keywords2")))
+                                        karray.Add(d->GetText());
+                                }
+                                break;
+
+                            case ITEM_TYPE_FUNCTION:
+                            case ITEM_TYPE_ENVIRONMENT:
+                            case ITEM_TYPE_COMMENT:
+                            case ITEM_TYPE_LANG_USERLANG:
+                            case ITEM_TYPE_LANG_SETTINGS:
+                            case ITEM_TYPE_LANG_WORDSTYLE:
+                            case ITEM_TYPE_UNDEF:
+                                break;
+                        }
+                    }
+
+                } while ((id = m_wtreeLang->GetNextChild(id, cookie)) && id.IsOk());
+
+
+                if (! karray.IsEmpty())
+                {
+                    wxArrayString keywordsLang;
+
+                    // Splits karray items
+                    for (size_t i = 0; i < karray.Count(); i++)
+                    {
+                        wxStringTokenizer tokenizer(karray.Item(i), " ");
+
+                        while (tokenizer.HasMoreTokens())
+                        {
+                            keywordsLang.Add(tokenizer.GetNextToken());
+                        }
+                    }
+
+
+                    if (! keywordsLang.IsEmpty())
+                    {
+                        // Check for missing.
+                        wxArrayString missing;
+
+                        for (size_t i = 0; i < keywords.Count(); i++)
+                        {
+                            bool found = false;
+
+                            for (size_t j = 0; j < keywordsLang.Count(); j++)
+                            {
+                                if (keywords.Item(i).Cmp(keywordsLang.Item(j)) == 0)
+                                {
+                                    found = true;
+                                    break;
+                                }
+
+                            }
+
+                            if (! found)
+                            {
+                                missing.Add(keywords.Item(i));
+                            }
+                        }
+
+                        if (missing.IsEmpty())
+                            wxMessageBox(wxT("No keyword is missing."), wxT("Success"), wxOK|wxICON_INFORMATION);
+                        else
+                        {
+                            wxString message = wxT("Missing keywords: \n");
+
+                            for (size_t i = 0; i < missing.Count(); i++)
+                            {
+                                message << missing.Item(i) << wxT("\n");
+
+                                //debug(wxT("Missing: ") + missing.Item(i));
+                            }
+
+                            wxMessageBox(message, wxT("Warning"), wxOK|wxICON_WARNING);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    event.Skip();
+}
+
+int _sort(const wxString &first, const wxString &second)
+{
+    return first.CmpNoCase(second);
+}
+
+void SerialEM4NPPFrame::Onm_wbtnSortContentClick(wxCommandEvent& event)
+{
+    wxString        content = m_wtextContentLang->GetValue();
+
+    if (content != wxEmptyString)
+    {
+        wxArrayString   ar;
+
+        content.Replace(wxT("\n"), wxT(" "), true);
+
+        while (content.Find(wxT("  ")) != wxNOT_FOUND)
+            content.Replace(wxT("  "), wxT(" "), true);
+
+        // Content should be clean now
+        wxStringTokenizer tokenizer(content, " ");
+
+        while (tokenizer.HasMoreTokens())
+            ar.Add(tokenizer.GetNextToken());
+
+        if (ar.Count())
+        {
+            wxString s;
+
+            ar.Sort(_sort);
+
+            for (size_t i = 0; i < ar.Count(); i++)
+                s << ar.Item(i) + wxT(" ");
+
+
+            m_wtextContentLang->SetValue(s.Trim(true));
+        }
+    }
+
+}

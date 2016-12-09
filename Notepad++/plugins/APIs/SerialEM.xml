@@ -14,8 +14,8 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
   
-  - API extraction made from SerialEM v3.5.5 documentation.
-  - File version: 2
+  - API extraction made from SerialEM v3.6.8-beta from Dec. 7th 2016 documentation.
+  - File version: 3
 -->
 <NotepadPlus>
     <AutoComplete language="SEM">

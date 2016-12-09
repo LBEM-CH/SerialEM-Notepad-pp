@@ -41,6 +41,7 @@
 #include <wx/textfile.h>
 #include <wx/url.h>
 #include <wx/clipbrd.h>
+#include <wx/tokenzr.h>
 
 #include <vector>
 
@@ -486,6 +487,8 @@ class SerialEM4NPPFrame: public wxFrame
         void OnPanel7RightDown(wxMouseEvent& event);
         void OnHtmlReloadClick(wxCommandEvent& event);
         void OnHtmlSaveClick(wxCommandEvent& event);
+        void Onm_wbtnMissingKeywordsClick(wxCommandEvent& event);
+        void Onm_wbtnSortContentClick(wxCommandEvent& event);
         //*)
 
         void                            OnHtmlCopy(wxCommandEvent &);
@@ -529,6 +532,7 @@ class SerialEM4NPPFrame: public wxFrame
         static const long ID_TEXTCTRL8;
         static const long ID_BUTTON3;
         static const long ID_BUTTON4;
+        static const long ID_BUTTON5;
         static const long ID_TREECTRL1;
         static const long ID_PANEL6;
         static const long ID_TEXTCTRL9;
@@ -554,6 +558,7 @@ class SerialEM4NPPFrame: public wxFrame
         static const long ID_TEXTCTRL12;
         static const long ID_TEXTCTRL15;
         static const long ID_TEXTCTRL14;
+        static const long ID_BITMAPBUTTON10;
         static const long ID_SCROLLEDWINDOW2;
         static const long ID_SPLITTERWINDOW2;
         static const long ID_PANEL3;
@@ -607,6 +612,7 @@ class SerialEM4NPPFrame: public wxFrame
         wxCheckBox* m_wcheckKeywords7;
         wxTextCtrl* m_wtextFunctionDescription;
         wxCheckBox* m_wcheckKeywords6;
+        wxButton* m_wbtnMissingKeywords;
         wxBitmapButton* m_wbtnItemAdd;
         wxPanel* Panel6;
         wxPanel* Panel3;
@@ -645,6 +651,7 @@ class SerialEM4NPPFrame: public wxFrame
         wxAuiNotebook* m_notebook;
         wxCheckBox* m_wcheckCaseIgnored;
         wxTextCtrl* m_wtextUserLangName;
+        wxBitmapButton* m_wbtnSortContent;
         wxBitmapButton* m_wbtnItemDel;
         wxHtmlWindow* m_whtmlWindowBeta;
         //*)
