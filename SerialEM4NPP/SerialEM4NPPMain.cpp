@@ -2524,8 +2524,16 @@ void SerialEM4NPPFrame::Onm_wbtnMissingKeywordsClick(wxCommandEvent& event)
                                     sTreeItemLangKeywordsData *d = (sTreeItemLangKeywordsData *)data;
                                     wxString str = d->GetName();
 
-                                    if ((str == wxT("Keywords1")) || (str == wxT("Keywords2")))
+                                    if ((d->GetText() != wxEmptyString) &&
+                                        ((str == wxT("Keywords1")) || (str == wxT("Keywords2"))
+                                        || (str == wxT("Keywords3")) || (str == wxT("Keywords4")) || (str == wxT("Keywords5"))
+                                        || (str == wxT("Folders in code1, open")) || (str == wxT("Folders in code1, middle"))
+                                            || (str == wxT("Folders in code1, close"))
+                                        || (str == wxT("Folders in code2, open")) || (str == wxT("Folders in code2, middle"))
+                                            || (str == wxT("Folders in code2, close"))))
+                                    {
                                         karray.Add(d->GetText());
+                                    }
                                 }
                                 break;
 

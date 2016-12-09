@@ -15,7 +15,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
   
   - API extraction made from SerialEM v3.6.8-beta from Dec. 7th 2016 documentation.
-  - File version: 3
+  - File version: 4
 -->
 <NotepadPlus>
     <AutoComplete language="SEM">
@@ -23,46 +23,14 @@
         <KeyWord name="A" func="yes">
             <Overload retVal="" descr="Align buffer A to autoalign buffer"/>
         </KeyWord>
-        <KeyWord name="ABS" func="yes">
-            <Overload retVal="" descr="Absolute value of following &lt;number&gt;">
-                <Param name="float number"/>
-            </Overload>
-        </KeyWord>
         <KeyWord name="AbortIfFailed" func="yes">
             <Overload retVal="" descr="If the last 'Test' command failed, this command opens a message box with the &#xA;optional &lt;text&gt; (unless 'NoMessageBoxOnError' is set) and aborts the script.">
                 <Param name="[string text]"/>
             </Overload>
         </KeyWord>
-        <KeyWord name="AND" func="yes">
-            <Overload retVal="" descr="Logical operator"/>
-        </KeyWord>
-        <KeyWord name="argVal1" func="yes">
-            <Overload retVal="" descr="First argument passed to a function"/>
-        </KeyWord>
-        <KeyWord name="argVal2" func="yes">
-            <Overload retVal="" descr="Second argument passed to a function"/>
-        </KeyWord>
-        <KeyWord name="argVal3" func="yes">
-            <Overload retVal="" descr="Third argument passed to a function"/>
-        </KeyWord>
-        <KeyWord name="argVal4" func="yes">
-            <Overload retVal="" descr="Fourth argument passed to a function"/>
-        </KeyWord>
-        <KeyWord name="argVal5" func="yes">
-            <Overload retVal="" descr="Fifth argument passed to a function"/>
-        </KeyWord>
-        <KeyWord name="argVal6" func="yes">
-            <Overload retVal="" descr="Sixth argument passed to a function"/>
-        </KeyWord>
-        <KeyWord name="ATAN" func="yes">
-            <Overload retVal="" descr="Arc-tangent of following &lt;number&gt;, between -90 and 90 degrees">
-                <Param name="int number"/>
-            </Overload>
-        </KeyWord>
-        <KeyWord name="ATAN2" func="yes">
-            <Overload retVal="" descr="Arc-tangent of first &lt;number&gt; divided by second &lt;number&gt;, between -180 and 180 degrees">
-                <Param name="int number1"/>
-                <Param name="int number2"/>
+        <KeyWord name="ABS" func="yes">
+            <Overload retVal="" descr="Absolute value of following &lt;number&gt;">
+                <Param name="float number"/>
             </Overload>
         </KeyWord>
         <KeyWord name="AbsoluteFocusLimits" func="yes">
@@ -94,8 +62,40 @@
                 <Param name="bool allow"/>
             </Overload>
         </KeyWord>
+        <KeyWord name="AND" func="yes">
+            <Overload retVal="" descr="Logical operator"/>
+        </KeyWord>
         <KeyWord name="AreDewarsFilling" func="yes">
             <Overload retVal="" descr="Report whether any of the dewars in a temperature control system are busy filling (reported&#xA;value 1 is set to 0 or 1). Value can be assigned to a variable at end of commmand."/>
+        </KeyWord>
+        <KeyWord name="argVal1" func="yes">
+            <Overload retVal="" descr="First argument passed to a function"/>
+        </KeyWord>
+        <KeyWord name="argVal2" func="yes">
+            <Overload retVal="" descr="Second argument passed to a function"/>
+        </KeyWord>
+        <KeyWord name="argVal3" func="yes">
+            <Overload retVal="" descr="Third argument passed to a function"/>
+        </KeyWord>
+        <KeyWord name="argVal4" func="yes">
+            <Overload retVal="" descr="Fourth argument passed to a function"/>
+        </KeyWord>
+        <KeyWord name="argVal5" func="yes">
+            <Overload retVal="" descr="Fifth argument passed to a function"/>
+        </KeyWord>
+        <KeyWord name="argVal6" func="yes">
+            <Overload retVal="" descr="Sixth argument passed to a function"/>
+        </KeyWord>
+        <KeyWord name="ATAN" func="yes">
+            <Overload retVal="" descr="Arc-tangent of following &lt;number&gt;, between -90 and 90 degrees">
+                <Param name="int number"/>
+            </Overload>
+        </KeyWord>
+        <KeyWord name="ATAN2" func="yes">
+            <Overload retVal="" descr="Arc-tangent of first &lt;number&gt; divided by second &lt;number&gt;, between -180 and 180 degrees">
+                <Param name="int number1"/>
+                <Param name="int number2"/>
+            </Overload>
         </KeyWord>
         <KeyWord name="Autoalign" func="yes">
             <Overload retVal="" descr="Align buffer A to autoalign buffer"/>
@@ -654,12 +654,6 @@
         <KeyWord name="OR" func="yes">
             <Overload retVal="" descr="Logical operator"/>
         </KeyWord>
-        <KeyWord name="POWER" func="yes">
-            <Overload retVal="" descr="&lt;First&gt; following number raised to the power of the &lt;second&gt; number">
-                <Param name="int first"/>
-                <Param name="int second"/>
-            </Overload>
-        </KeyWord>
         <KeyWord name="Pause" func="yes">
             <Overload retVal="" descr="Opens message box with optional &lt;text&gt; plus question of whether to proceed with script.">
                 <Param name="[string text]"/>
@@ -675,6 +669,12 @@
                 <Param name="string name"/>
                 <Param name="string func"/>
                 <Param name="[... arguments]"/>
+            </Overload>
+        </KeyWord>
+        <KeyWord name="POWER" func="yes">
+            <Overload retVal="" descr="&lt;First&gt; following number raised to the power of the &lt;second&gt; number">
+                <Param name="int first"/>
+                <Param name="int second"/>
             </Overload>
         </KeyWord>
         <KeyWord name="PreCookMontage" func="yes">
@@ -703,12 +703,6 @@
         </KeyWord>
         <KeyWord name="R" func="yes">
             <Overload retVal="" descr="Acquire image with 'record' parameters"/>
-        </KeyWord>
-        <KeyWord name="ROUND" func="yes">
-            <Overload retVal="" descr="Round &lt;first&gt; following number to the number of decimal places given by second &lt;number&gt;">
-                <Param name="float first"/>
-                <Param name="int number"/>
-            </Overload>
         </KeyWord>
         <KeyWord name="ReadFile" func="yes">
             <Overload retVal="" descr="Reads the given &lt;section&gt; (numbered from 0) from the current open file into the&#xA;standard Read buffer, or into the buffer indicated by the optional &lt;buffer&gt;">
@@ -765,24 +759,6 @@
             <Overload retVal="" descr="Removes the given &lt;file&gt; unconditionally, prints a warning if it cannot be removed.">
                 <Param name="string file"/>
             </Overload>
-        </KeyWord>
-        <KeyWord name="repVal1" func="yes">
-            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
-        </KeyWord>
-        <KeyWord name="repVal2" func="yes">
-            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
-        </KeyWord>
-        <KeyWord name="repVal3" func="yes">
-            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
-        </KeyWord>
-        <KeyWord name="repVal4" func="yes">
-            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
-        </KeyWord>
-        <KeyWord name="repVal5" func="yes">
-            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
-        </KeyWord>
-        <KeyWord name="repVal6" func="yes">
-            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
         </KeyWord>
         <KeyWord name="Repeat" func="yes">
             <Overload retVal="" descr="Place at end of macro to repeat it"/>
@@ -976,6 +952,24 @@
         <KeyWord name="reportedValue6" func="yes">
             <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
         </KeyWord>
+        <KeyWord name="repVal1" func="yes">
+            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
+        </KeyWord>
+        <KeyWord name="repVal2" func="yes">
+            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
+        </KeyWord>
+        <KeyWord name="repVal3" func="yes">
+            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
+        </KeyWord>
+        <KeyWord name="repVal4" func="yes">
+            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
+        </KeyWord>
+        <KeyWord name="repVal5" func="yes">
+            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
+        </KeyWord>
+        <KeyWord name="repVal6" func="yes">
+            <Overload retVal="" descr="When a 'Report...' command is used, the values reported are generally&#xA;assigned to variables named 'reportedValue1', 'reportedValue2', and so on up to 6"/>
+        </KeyWord>
         <KeyWord name="Require" func="yes">
             <Overload retVal="" descr="This command tests whether the given script &lt;feature&gt;s are available in this version of SerialEM.&#xA;Earlier versions will not generate an error when some newer features are used, so including&#xA;this command is the only way to test whether the script will run correctly. The available &#xA;&lt;feature&gt;s are:&#xA;1) 'variable1', which includes two capabilities: assigning reported values&#xA;   directly to variables listed after a command, and assigning function arguments directly &#xA;   to variables listed on the 'Function' line.&#xA;2) 'arrays', which is the ability to define a variable with an indexable array of values.&#xA;3) 'keepcase', which means that case will be preserved when assigning text to a variable.">
                 <Param name="string feature"/>
@@ -1024,6 +1018,12 @@
         <KeyWord name="ReverseTilt" func="yes">
             <Overload retVal="" descr="Work out backlash and realign image after reversing tilt direction; enter optional &lt;dir&gt; 1&#xA;or -1 to specify a specific direction for further tilts.">
                 <Param name="[int dir]"/>
+            </Overload>
+        </KeyWord>
+        <KeyWord name="ROUND" func="yes">
+            <Overload retVal="" descr="Round &lt;first&gt; following number to the number of decimal places given by second &lt;number&gt;">
+                <Param name="float first"/>
+                <Param name="int number"/>
             </Overload>
         </KeyWord>
         <KeyWord name="RunInShell" func="yes">
