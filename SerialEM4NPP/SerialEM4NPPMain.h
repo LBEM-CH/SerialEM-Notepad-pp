@@ -43,6 +43,11 @@
 #include <wx/clipbrd.h>
 #include <wx/tokenzr.h>
 
+
+#if ! defined(WIN32)
+#include <wx/mstream.h>
+#endif // defined
+
 #include <vector>
 
 #include "SerialEM4NPPApp.h"

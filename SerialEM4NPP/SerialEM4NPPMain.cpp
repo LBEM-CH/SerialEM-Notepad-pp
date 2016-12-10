@@ -19,6 +19,9 @@
 #include <wx/image.h>
 #include <wx/string.h>
 //*)
+
+#include "resource.h"
+
 #include <wx/log.h>
 
 
@@ -702,7 +705,21 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) :
     Connect(ID_CTXMENU_PASTE, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlPaste);
     Connect(ID_CTXMENU_SELECTALL, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlSelectAll);
 
+#if defined(WIN32)
     SetIcon(wxICON(MAINICON));
+#else
+    wxIcon              micon;
+    wxMemoryInputStream istream(SerialEM4NPP_PNG, sizeof(SerialEM4NPP_PNG));
+    wxImage             mimg(istream, wxBITMAP_TYPE_ANY); /* or wxBITMAP_TYPE_ANY, etc. */
+
+    mimg.SetMaskColour(221, 173, 115); // Set color mask
+
+    wxBitmap mbmp(mimg);
+
+    micon.CopyFromBitmap(mbmp);
+    SetIcon(micon);
+#endif
+
     SetTitle(wxGetApp().GetAppName() + wxT(" ")
              + wxString::FromAscii(AutoVersion::FULLVERSION_STRING)
              + wxString::FromAscii(AutoVersion::STATUS_SHORT));
