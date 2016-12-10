@@ -705,12 +705,12 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) :
     Connect(ID_CTXMENU_PASTE, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlPaste);
     Connect(ID_CTXMENU_SELECTALL, wxEVT_COMMAND_MENU_SELECTED, (wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlSelectAll);
 
-#if defined(WIN32)
+#if defined(__WXMSW__)
     SetIcon(wxICON(MAINICON));
 #else
     wxIcon              micon;
     wxMemoryInputStream istream(SerialEM4NPP_PNG, sizeof(SerialEM4NPP_PNG));
-    wxImage             mimg(istream, wxBITMAP_TYPE_ANY); /* or wxBITMAP_TYPE_ANY, etc. */
+    wxImage             mimg(istream, wxBITMAP_TYPE_ANY);
 
     mimg.SetMaskColour(221, 173, 115); // Set color mask
 

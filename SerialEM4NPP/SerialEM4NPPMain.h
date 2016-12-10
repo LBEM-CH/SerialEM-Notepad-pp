@@ -44,7 +44,7 @@
 #include <wx/tokenzr.h>
 
 
-#if ! defined(WIN32)
+#if ! defined(__WXMSW__)
 #include <wx/mstream.h>
 #endif // defined
 

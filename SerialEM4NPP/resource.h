@@ -1,4 +1,4 @@
-#if ! defined(WIN32)
+#if ! defined(__WXMSW__)
 static unsigned char
   SerialEM4NPP_PNG[] =
   {
