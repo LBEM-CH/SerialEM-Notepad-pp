@@ -489,11 +489,15 @@ class SerialEM4NPPFrame: public wxFrame
         void OnHtmlSaveClick(wxCommandEvent& event);
         void Onm_wbtnMissingKeywordsClick(wxCommandEvent& event);
         void Onm_wbtnSortContentClick(wxCommandEvent& event);
+        void OnClose(wxCloseEvent& event);
         //*)
 
         void                            OnHtmlCopy(wxCommandEvent &);
         void                            OnHtmlSelectAll(wxCommandEvent &);
         void                            OnHtmlPaste(wxCommandEvent &);
+
+        void                            _dataHasChanged(wxTreeCtrl *);
+        bool                            _isDataHasChanged();
 
         void                            _enableSizerChilds(wxSizer *, bool);
 
@@ -658,7 +662,9 @@ class SerialEM4NPPFrame: public wxFrame
 
         wxProgressDialog               *m_progress;
         bool                            m_apiLoaded;
+        bool                            m_apiChanged;
         bool                            m_langLoaded;
+        bool                            m_langChanged;
         wxTreeItemId                    m_draggedItem;
 
         wxMenu                         *m_whtmlCtxMenu;

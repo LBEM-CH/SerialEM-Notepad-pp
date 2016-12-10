@@ -164,9 +164,14 @@ void debugLeave(const wxString &str)
 }
 
 
-SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progress(NULL), m_apiLoaded(false), m_langLoaded(false)
+SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) :
+    m_progress(NULL),
+    m_apiLoaded(false),
+    m_apiChanged(false),
+    m_langLoaded(false),
+    m_langChanged(false)
 {
-#if 1
+#if 0
     wxLogWindow *logger = new wxLogWindow(this, _("Logging Window"));
     wxLog::SetActiveTarget(logger);
     wxLogStatus(wxT("Started"));
@@ -682,6 +687,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) : m_progres
     Connect(ID_BITMAPBUTTON9,wxEVT_COMMAND_BUTTON_CLICKED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnHtmlSaveClick);
     Connect(idMenuQuit,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnQuit);
     Connect(idMenuAbout,wxEVT_COMMAND_MENU_SELECTED,(wxObjectEventFunction)&SerialEM4NPPFrame::OnAbout);
+    Connect(wxID_ANY,wxEVT_CLOSE_WINDOW,(wxObjectEventFunction)&SerialEM4NPPFrame::OnClose);
     //*)
 
     m_whtmlWindowBeta->GetHTMLWindow()->Connect(wxEVT_RIGHT_DOWN, (wxObjectEventFunction)&SerialEM4NPPFrame::OnPanel7RightDown, 0, this);
@@ -730,10 +736,64 @@ void SerialEM4NPPFrame::OnQuit(wxCommandEvent& event)
     Close();
 }
 
+void SerialEM4NPPFrame::OnClose(wxCloseEvent& event)
+{
+    if (_isDataHasChanged())
+    {
+        if (wxMessageBox(wxT("Some data are unsaved, do you really want to quit"), wxT("Confirm..."), wxYES_NO|wxNO_DEFAULT|wxICON_QUESTION) == wxYES)
+        {
+            event.Skip();
+        }
+    }
+    else
+        event.Skip();
+
+}
+
 void SerialEM4NPPFrame::OnAbout(wxCommandEvent& event)
 {
     wxString msg = wxbuildinfo(long_f);
     wxMessageBox(msg, _("Welcome to..."));
+}
+
+void SerialEM4NPPFrame::_dataHasChanged(wxTreeCtrl *tree)
+{
+    if (tree == m_wtree)
+        m_apiChanged = true;
+    else if (tree == m_wtreeLang)
+        m_langChanged = true;
+}
+
+bool SerialEM4NPPFrame::_isDataHasChanged()
+{
+    wxTreeCtrl         *tree = m_wtree;
+
+    for (size_t i = 0; i < 2; i++)
+    {
+        wxTreeItemId        root = tree->GetRootItem();
+        wxTreeItemIdValue   cookie;
+
+        if (root.IsOk())
+        {
+            wxTreeItemId  id = tree->GetFirstChild(root, cookie);
+
+            do
+            {
+                if (id.IsOk())
+                {
+                    sTreeItemData *data = (sTreeItemData *)tree->GetItemData(id);
+
+                    if (data->HasChanged())
+                        return true;
+                }
+            } while ((id = tree->GetNextChild(id, cookie)) && id.IsOk());
+
+        }
+
+        tree = m_wtreeLang;
+    }
+
+    return m_apiChanged || m_langChanged;
 }
 
 void SerialEM4NPPFrame::_enableSizerChilds(wxSizer *sizer, bool enable)
@@ -1260,7 +1320,28 @@ void SerialEM4NPPFrame::_parse(wxXmlDocument *doc)
 
     id = m_wtree->AddRoot(wxT("Root"));
 
-    _traverseXmlNodes(m_wtree, id, doc->GetDocumentNode());//->GetChildren());
+    _traverseXmlNodes(m_wtree, id, doc->GetDocumentNode());
+
+    // Clear fields.
+    m_wbtnItemAdd->Enable(false);
+    m_wbtnItemDel->Enable(false);
+    //m_wbtnExportFunctionNames->Enable(false);
+
+    m_wcheckEnvCase->SetValue(false);
+    m_wtextEnvStart->ChangeValue(wxEmptyString);
+    m_wtextEnvStop->ChangeValue(wxEmptyString);
+    m_wtextEnvSep->ChangeValue(wxEmptyString);
+    _enableSizerChilds(m_wsizerEnv, false);
+
+    m_wtextFunctionName->Enable(false);
+    m_wtextFunctionName->ChangeValue(wxEmptyString);
+
+    m_wtextFunctionArgs->Enable(false);
+    m_wtextFunctionArgs->ChangeValue(wxEmptyString);
+
+    m_wtextFunctionDescription->Enable(false);
+    m_wtextFunctionDescription->ChangeValue(wxEmptyString);
+
 
     m_wtree->ExpandAll();
 
@@ -1284,6 +1365,47 @@ void SerialEM4NPPFrame::_parseLang(wxXmlDocument *doc)
 
     _traverseXmlNodes(m_wtreeLang, id, doc->GetDocumentNode());
 
+    // Clear fields.
+    _enableSizerChilds(m_wsizerNameLang, false);
+    _enableSizerChilds(m_wsizerPrefixLang, false);
+    _enableSizerChilds(m_wsizerSettingsLang, false);
+    _enableSizerChilds(m_wsizerUserLang, false);
+    _enableSizerChilds(m_wsizerWordsStyleLang, false);
+    _enableSizerChilds(m_wsizerContentLang, false);
+
+    m_wtextTextLang->ChangeValue(wxEmptyString);
+
+    m_wcheckKeywords1->SetValue(false);
+    m_wcheckKeywords2->SetValue(false);
+    m_wcheckKeywords3->SetValue(false);
+    m_wcheckKeywords4->SetValue(false);
+    m_wcheckKeywords5->SetValue(false);
+    m_wcheckKeywords6->SetValue(false);
+    m_wcheckKeywords7->SetValue(false);
+    m_wcheckKeywords8->SetValue(false);
+
+    m_wcheckCaseIgnored->SetValue(false);
+    m_wcheckAllowFoldOfComments->SetValue(false);
+    m_wcheckAllowFoldOfComments->SetValue(false);
+
+    m_wtextForcePureLC->ChangeValue(wxEmptyString);
+    m_wtextDecimalSeparator->ChangeValue(wxEmptyString);
+
+    m_wtextUserLangName->ChangeValue(wxEmptyString);
+    m_wtextUserLangExt->ChangeValue(wxEmptyString);
+
+    m_wpanelFgColor->SetBackgroundColour(wxNullColour);
+    m_wpanelFgColor->ClearBackground();
+    m_wpanelBgColor->SetBackgroundColour(wxNullColour);
+    m_wpanelBgColor->ClearBackground();
+
+    m_wtextFontName->ChangeValue(wxEmptyString);
+    m_wtextFontStyle->ChangeValue(wxEmptyString);
+    m_wtextFontSize->ChangeValue(wxEmptyString);
+
+    m_wtextContentLang->ChangeValue(wxEmptyString);
+
+
     m_wtreeLang->ExpandAll();
 
     m_progress = NULL;
@@ -1291,6 +1413,14 @@ void SerialEM4NPPFrame::_parseLang(wxXmlDocument *doc)
 
 void SerialEM4NPPFrame::OnLoadClick(wxCommandEvent& event)
 {
+    if (_isDataHasChanged())
+    {
+        if (wxMessageBox(wxT("Some data are unsaved, do you really want to loose your changes"), wxT("Confirm..."), wxYES_NO|wxNO_DEFAULT|wxICON_QUESTION) != wxYES)
+        {
+            return;
+        }
+    }
+
     m_wfileDialog->SetWildcard(wxT("XML files (*.xml)|*.xml|All types (*.*)|*.*"));
     m_wfileDialog->SetPath(wxT("SerialEM.xml"));
 
@@ -1343,6 +1473,7 @@ void SerialEM4NPPFrame::_storeItem(wxTreeCtrl *tree, wxTreeItemId id)
 
                     d->SetComment(m_wtextFunctionDescription->GetValue());
                     d->Changed(false);
+                    _dataHasChanged(tree);
                 }
                 break;
 
@@ -1355,6 +1486,7 @@ void SerialEM4NPPFrame::_storeItem(wxTreeCtrl *tree, wxTreeItemId id)
                     d->SetStopFunc(m_wtextEnvStop->GetValue());
                     d->SetParamSeparator(m_wtextEnvSep->GetValue());
                     d->Changed(false);
+                    _dataHasChanged(tree);
                 }
                 break;
 
@@ -1372,6 +1504,7 @@ void SerialEM4NPPFrame::_storeItem(wxTreeCtrl *tree, wxTreeItemId id)
 
                     d->SetFunctionDescription(m_wtextFunctionDescription->GetValue());
                     d->Changed(false);
+                    _dataHasChanged(tree);
                 }
                 break;
 
@@ -1385,6 +1518,7 @@ void SerialEM4NPPFrame::_storeItem(wxTreeCtrl *tree, wxTreeItemId id)
                     d->SetName(m_wtextUserLangName->GetValue());
                     d->SetExt(m_wtextUserLangExt->GetValue());
                     d->Changed(false);
+                    _dataHasChanged(tree);
                 }
                 break;
 
@@ -1407,6 +1541,7 @@ void SerialEM4NPPFrame::_storeItem(wxTreeCtrl *tree, wxTreeItemId id)
                     d->SetKeywords(6, m_wcheckKeywords7->GetValue());
                     d->SetKeywords(7, m_wcheckKeywords8->GetValue());
                     d->Changed(false);
+                    _dataHasChanged(tree);
                 }
                 break;
 
@@ -1417,6 +1552,7 @@ void SerialEM4NPPFrame::_storeItem(wxTreeCtrl *tree, wxTreeItemId id)
                     d->SetName(m_wtextTextLang->GetValue());
                     d->SetText(m_wtextContentLang->GetValue());
                     d->Changed(false);
+                    _dataHasChanged(tree);
                 }
                 break;
 
@@ -1433,6 +1569,7 @@ void SerialEM4NPPFrame::_storeItem(wxTreeCtrl *tree, wxTreeItemId id)
                     d->SetFontStyle(m_wtextFontStyle->GetValue());
                     d->SetFontSize(m_wtextFontSize->GetValue());
                     d->Changed(false);
+                    _dataHasChanged(tree);
                 }
                 break;
 
@@ -1447,7 +1584,6 @@ void SerialEM4NPPFrame::OnSelectionChanged(wxTreeEvent& event)
     wxTreeItemId id = event.GetItem();
     wxTreeCtrl *tree = wxDynamicCast(event.GetEventObject(), wxTreeCtrl);
     sTreeItemData *data = (sTreeItemData *)tree->GetItemData(id);
-
 
     if (data)
     {
@@ -1884,6 +2020,7 @@ void SerialEM4NPPFrame::OnSaveClick(wxCommandEvent& event)
         else
         {
             m_notebook->SetPageText(0, wxT("Plugin"));
+            m_apiChanged = false;
 
             // Clear all change states
             wxTreeItemId                root = m_wtree->GetRootItem();
@@ -2010,6 +2147,14 @@ void SerialEM4NPPFrame::OnBitmapButton1Click(wxCommandEvent& event)
 
 void SerialEM4NPPFrame::OnLoadLangClick(wxCommandEvent& event)
 {
+    if (_isDataHasChanged())
+    {
+        if (wxMessageBox(wxT("Some data are unsaved, do you really want to loose your changes"), wxT("Confirm..."), wxYES_NO|wxNO_DEFAULT|wxICON_QUESTION) != wxYES)
+        {
+            return;
+        }
+    }
+
     m_wfileDialog->SetWildcard(wxT("XML files (*.xml)|*.xml|All types (*.*)|*.*"));
     m_wfileDialog->SetPath(wxT("SerialEM_Lang.xml"));
 
@@ -2250,6 +2395,7 @@ void SerialEM4NPPFrame::OnSaveLangClick(wxCommandEvent& event)
         else
         {
             m_notebook->SetPageText(1, wxT("Language"));
+            m_langChanged = false;
 
             // Clear all change states
             wxTreeItemId                root = m_wtreeLang->GetRootItem();

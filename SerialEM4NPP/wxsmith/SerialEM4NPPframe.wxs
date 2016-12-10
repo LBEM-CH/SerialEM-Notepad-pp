@@ -3,6 +3,7 @@
 	<object class="wxFrame" name="SerialEM4NPPFrame">
 		<size>1290,700</size>
 		<id_arg>0</id_arg>
+		<handler function="OnClose" entry="EVT_CLOSE" />
 		<object class="wxPanel" name="ID_PANEL1" variable="Panel1" member="yes">
 			<object class="wxBoxSizer" variable="BoxSizer1" member="no">
 				<object class="sizeritem">
