@@ -352,7 +352,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) :
     BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
     BoxSizer15 = new wxBoxSizer(wxVERTICAL);
     Panel5 = new wxPanel(m_scrolledWindow, ID_PANEL5, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL5"));
-    Panel5->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_APPWORKSPACE));
+    Panel5->SetBackgroundColour(wxColour(176,176,176));
     BoxSizer16 = new wxBoxSizer(wxVERTICAL);
     StaticText2 = new wxStaticText(Panel5, ID_STATICTEXT2, _("0         1         2         3         4         5         6         7         8         9"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
     wxFont StaticText2Font = wxSystemSettings::GetFont(wxSYS_OEM_FIXED_FONT);
@@ -786,7 +786,7 @@ bool SerialEM4NPPFrame::_isDataHasChanged()
                     if (data->HasChanged())
                         return true;
                 }
-            } while ((id = tree->GetNextChild(id, cookie)) && id.IsOk());
+            } while ((id = tree->GetNextChild(root, cookie)) && id.IsOk());
 
         }
 
@@ -1141,7 +1141,7 @@ void SerialEM4NPPFrame::_fillXmlFromTree(wxXmlDocument *doc, wxTreeCtrl *tree)
         if (id.IsOk())
             ids.push_back(id);
 
-    } while ((id = tree->GetNextChild(id, cookie)) && id.IsOk());
+    } while ((id = tree->GetNextChild(root, cookie)) && id.IsOk());
 
     std::vector<wxTreeItemId>::reverse_iterator it = ids.rbegin();
 
@@ -2036,7 +2036,7 @@ void SerialEM4NPPFrame::OnSaveClick(wxCommandEvent& event)
                     data->Changed(false);
                 }
 
-            } while ((id = m_wtree->GetNextChild(id, cookie)) && id.IsOk());
+            } while ((id = m_wtree->GetNextChild(root, cookie)) && id.IsOk());
 
 
             //m_wbtnSave->Enable(false);
@@ -2312,7 +2312,7 @@ void SerialEM4NPPFrame::Onm_wbtnExportFunctionNamesClick(wxCommandEvent& event)
                 }
             }
 
-        } while ((id = m_wtree->GetNextChild(id, cookie)) && id.IsOk());
+        } while ((id = m_wtree->GetNextChild(root, cookie)) && id.IsOk());
 
         // Dude! something's wrong in wonderland...
         if (! file.Write())
@@ -2411,7 +2411,7 @@ void SerialEM4NPPFrame::OnSaveLangClick(wxCommandEvent& event)
                     data->Changed(false);
                 }
 
-            } while ((id = m_wtreeLang->GetNextChild(id, cookie)) && id.IsOk());
+            } while ((id = m_wtreeLang->GetNextChild(root, cookie)) && id.IsOk());
 
         }
     }
@@ -2647,7 +2647,7 @@ void SerialEM4NPPFrame::Onm_wbtnMissingKeywordsClick(wxCommandEvent& event)
                     }
                 }
 
-            } while ((id = m_wtree->GetNextChild(id, cookie)) && id.IsOk());
+            } while ((id = m_wtree->GetNextChild(root, cookie)) && id.IsOk());
 
             if (! keywords.IsEmpty())
             {
@@ -2694,7 +2694,7 @@ void SerialEM4NPPFrame::Onm_wbtnMissingKeywordsClick(wxCommandEvent& event)
                         }
                     }
 
-                } while ((id = m_wtreeLang->GetNextChild(id, cookie)) && id.IsOk());
+                } while ((id = m_wtreeLang->GetNextChild(root, cookie)) && id.IsOk());
 
 
                 if (! karray.IsEmpty())
