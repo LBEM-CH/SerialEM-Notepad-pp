@@ -2449,41 +2449,27 @@ void SerialEM4NPPFrame::OnHtmlReloadClick(wxCommandEvent& event)
     if(wxURI(uri).IsReference())
         uri = wxString(wxT("http://")) + uri;
 
-    dialog.Pulse();
-
-    wxURL *url = new wxURL(uri);
-
+    wxURL url(uri);
 
     dialog.Pulse();
 
-    wxInputStream *in_stream;
+    wxInputStream *in_stream = url.GetInputStream();
 
     dialog.Pulse();
 
-    in_stream = url->GetInputStream();
+    size_t  fsize = in_stream->GetSize();
+    char    buffer[fsize + 1];
 
     dialog.Pulse();
 
-    size_t FileSize = in_stream->GetSize();
+    in_stream->ReadAll(&buffer, fsize);
+    buffer[fsize] = '\0';
 
     dialog.Pulse();
 
-    char *buffer = new char [FileSize];
+    m_whtmlWindowBeta->SetPage(buffer);
 
     dialog.Pulse();
-
-    in_stream->ReadAll(buffer, FileSize);
-
-    dialog.Pulse();
-
-    wxString content = buffer;
-
-    m_whtmlWindowBeta->SetPage(content);
-
-    dialog.Pulse();
-
-    delete buffer;
-    delete url;
 
     event.Skip();
 }
