@@ -355,7 +355,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) :
     BoxSizer14 = new wxBoxSizer(wxHORIZONTAL);
     BoxSizer15 = new wxBoxSizer(wxVERTICAL);
     Panel5 = new wxPanel(m_scrolledWindow, ID_PANEL5, wxDefaultPosition, wxDefaultSize, wxTAB_TRAVERSAL, _T("ID_PANEL5"));
-    Panel5->SetBackgroundColour(wxColour(176,176,176));
+    Panel5->SetBackgroundColour(wxSystemSettings::GetColour(wxSYS_COLOUR_APPWORKSPACE));
     BoxSizer16 = new wxBoxSizer(wxVERTICAL);
     StaticText2 = new wxStaticText(Panel5, ID_STATICTEXT2, _("0         1         2         3         4         5         6         7         8         9"), wxDefaultPosition, wxDefaultSize, 0, _T("ID_STATICTEXT2"));
     wxFont StaticText2Font = wxSystemSettings::GetFont(wxSYS_OEM_FIXED_FONT);
