@@ -1,0 +1,6 @@
+CHANGELOG text eol=crlf
+*.h         eol=crlf
+*.cpp       eol=crlf
+*.rc        eol=crlf
+*.txt	    eol=crlf
+*.cbp       eol=crlf

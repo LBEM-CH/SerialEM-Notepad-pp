@@ -1,6 +1,6 @@
 License:
 -------
-  Copyright (c) 2016 Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, BioEM Lab <https://c-cina.unibas.ch/bioem>, C-CINA <https://c-cina.unibas.ch>
+  Copyright (c) 2016-2017 Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, BioEM Lab <https://c-cina.unibas.ch/bioem>, C-CINA <https://c-cina.unibas.ch>
 
   This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License
   as published by the Free Software Foundation; version 2 of the License.
