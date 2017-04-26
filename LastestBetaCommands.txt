@@ -33,7 +33,7 @@ Flow Control Commands
 Repeat
 Place at end of script to repeat it
 Loop # [variable]
-Loop the given # of times until EndLoop; optionally set variable with index
+Loop the given # of times until EndLoop; optionally set variable with index.  As of SerialEM 3.7.0 beta, a loop count less than or equal to 0 is allowed and will cause the loop to be skipped.  If a script relying on this is liable to run on earlier versions, it should include the line 'Require zeroloop'.
 EndLoop
 Marks the end of the loop
 DoScript #
@@ -44,8 +44,8 @@ CallMacro #
 Calls other script by # and returns
 Call text
 Calls other script by name. Names are case-sensitive and must match exactly, including spaces
-Function name [#n] [s]
-Defines a function with the given name (without embedded spaces).  The optional #n indicates the number of numeric arguments and s is non-zero to indicate that a string argument occurs after the numeric ones.  Functions must be placed at the ends of scripts.
+Function name [#n] [s] [args]
+Defines a function with the given name (without embedded spaces).  The optional #n indicates the number of numeric arguments and s is non-zero to indicate that a string argument occurs after the numeric ones.  Optional variable names can be provided for the arguments.  Functions must be placed at the ends of scripts.
 EndFunction
 Required ending to a function definition.
 CallFunction name [args]
@@ -80,6 +80,8 @@ LongName text
 A longer name to appear in the Run submenu of the Script menu; if this name is not defined, the regular name defined by ScriptName or MacroName appears there.
 Delay # [units]
 Wait for given amount of time. The optional 'units' can be 'msec', 'sec', or 'min'. If no units are given, a # <= 60 is taken to be seconds, and a # > 60 is taken to be milliseconds
+WaitForMidnight #B #A [Hr Min]
+If the current time is between #B minutes before and #A minutes after midnight, or an alternative time specified by the optional entries Hr (the hour from 0 to 23) and Min (the minute from 0 to 59), the script will wait until #A minutes after midnight or the given time.
 Echo [text]
 Prints the text to the log window, or a blank line if there is no text.
 Pause [text]
@@ -104,8 +106,12 @@ ClearPersistentVars
 Removes all persistent variables defined with :=
 IsVariableDefined Var
 Reports whether a variable is defined, placing a 1 in reportedValue1 if it is and a 0 if it is not.  Follow with the variable name without a $.  Value can be assigned to a variable at end of commmand.
+LocalVar var [var] ...
+Create the listed variables as variables local to the current script or function.  They will not be accessible outside this script or function and will become undefined when returning from the script or function.
+LocalLoopIndexes
+Make loop indexes local; this means that a called function or script cannot access the index value in the caller and is free to reuse the variable name as a loop index or other variable.  If this feature is used, this command should be near the start of any script that may be started independently.  Once the feature is invoked, it cannot be turned off.
 Require feature [feature] ...
-This command tests whether the given script features are available in this version of SerialEM.  Earlier versions will not generate an error when some newer features are used, so including this command is the only way to test whether the script will run correctly.  The available features are: 1) 'variable1', which includes two capabilities: assigning reported values directly to variables listed after a command, and assigning function arguments directly to variables listed on the 'Function' line.  2) 'arrays', which is the ability to define a variable with an indexable array of values.  3) 'keepcase', which means that case will be preserved when assigning text to a variable.
+This command tests whether the given script features are available in this version of SerialEM.  Earlier versions will not generate an error when some newer features are used, so including this command is the only way to test whether the script will run correctly.  The available features are: 1) 'variable1', which includes two capabilities: assigning reported values directly to variables listed after a command, and assigning function arguments directly to variables listed on the 'Function' line.  2) 'arrays', which is the ability to define a variable with an indexable array of values.  3) 'keepcase', which means that case will be preserved when assigning text to a variable.  4) 'zeroloop', which means that a non-positive loop count is allowed.
 Test expression
 Evaluates a conditional expression (just as would be used for an IF statement) or a single number or variable value and stores whether the test passed (i.e., if the expression is true or if the number is non-zero) internally, as well as storing a 1 for success or 0 for failure in ReportedValue1 and a veariable TestResult
 PauseIfFailed [text]
@@ -126,10 +132,10 @@ L or Preview
 Acquire image with 'preview' parameters
 M or Montage
 Acquire montage
+Search
+In Low Dose mode, go to Search area conditions and acquire image with 'View' camera parameters.
 PreCookMontage #
 If montaging is enabled with stage movement, this command lowers the screen to expose the specimen, then moves the stage to each piece position and waits there for the number of seconds indicated by #, if the number is positive.  If the number is negative, it skips pieces, with an interval given by the negative of the number: -2 will stop at every second piece, -3 at every third, etc.  For  convenience, -1 is equivalent to a large negative number and will make it stop only at the bottom and top of each column.
-ContinuousMontage [#]
-Take a montage in continuous mode, or do a Prescan if the optional # is non-zero.  This cannot be used with image shift realignment or focusing on every frame.  Precede with a 'SetLiveSettleFraction' command to impose an adjustable amount of setting time.  This may be a temporary command, the option may be supported explicitly in the interface.
 Set Parameter Commands 
 The following 'Set...' commands change values in one of the camera parameter sets.  The set 'S' can be specified as either V, F, T, R, P or 0, 1, 2, 3, 4 for view, focus, trial, record, preview, respectively.  Parameters will be restored whenever the script ends or stops or when a different camera is selected.  However, if the script is suspended, any changed parameters will be set again when the script resumes.
     SetExposure S #E [#D]
@@ -198,7 +204,7 @@ Do not stack Falcon intermediate frames after the next exposure.  To stack frame
 OpenDECameraCover
 Opens the protection cover of the Direct Electron camera for the remainder of the script, if it is the current camera.  Without this command, the cover will be opened and closed for each exposure except during tasks.
 UpdateHWDarkRef #
-Updates the K2 hardware dark reference if the known interval since the last update is longer than # in hours.  If # is 0, the update is done unconditionally; if # is negative (-1), it simply records the current time as the time of the last update. 
+Updates the K2 hardware dark reference if the known interval since the last update is longer than # in hours.  If # is 0, the update is done unconditionally; if # is negative (-1), it simply records the current time as the time of the last update.  In order for the time interval to be kept track of between runs of the program, the property IgnoreShortTermCals must not be set.
 ReportK2FileParams
 Reports values selected in the Frame File Options dialog: 0 for MRC, 1 for TIFF LZW, or 2 for TIFF ZIP; sum of 1 to pack unnormalized data at all, plus 2 to pack counting mode to bytes; 1 to save MRC files in 4-bit mode 101; 1 to save normalized data times 100; 1 to skip rotation and flip of frames; 1 for one file per frame. 
 SetK2FileParams #T [#P]
@@ -245,6 +251,8 @@ Report means of strips along quadrant boundaries. Optional entries are 'n' for t
 File and Directory Commands
 S or Save [buf] [file #]
 Save image in A or in buf to current open file, or to the given file number
+ 
+ 
 SetDirectory dir
 Change the working directory to 'dir', which can contain spaces.
 ReportDirectory
@@ -258,11 +266,13 @@ Create a directory named by the date and time (e.g., Aug15_12.23.15) under the c
 SetNewFileType # [#]
 Set to 0 to open files as MRC, or 1 to open files as a TIFF series described in an image autodoc file. The optional second value sets whether to open montaged files as MRC or as a TIFF series, but only if the property MontageAutodocOptions is set.
 OpenNewFile file
-Open a file with the given name, which can contain spaces. The file properties dialog will be bypassed. Since the current working directory can be unpredictable, depending on whether the user has opened a file with the file chooser, it is advisable either to specify an absolute path for the filename, use a 'SetDirectory' with an absolute path, or use a filename in a variable set by 'ChooserForNewFile'.
+Open a file with the given name, which can contain spaces. The file properties dialog will be bypassed. Since the current working directory can be unpredictable, depending on whether the user has opened a file with the file chooser, it is advisable either to specify an absolute path for the filename, use a 'SetDirectory' with an absolute path, or use a filename in a variable set by 'ChooserForNewFile'.  The same advice applies for the following commands that open files as well.
 OpenNewMontage #x #y file
 Open a file with the given name for montaging, with the number of frames in X and Y given by '#x' and '#y'. If either #x or #y is 0, the number of frames will be taken from the last montage that was open. The file properties and montage setup dialogs will be bypassed, and some properties like overlap and whether to do a stage montage will be taken from the last montage that was open.
 SetupWaffleMontage #B file
 Open a montage file or adjust the current file's properties so that it will hold an image of the cross-line (waffle) replica grating with at least #B blocks in X and Y at the current magnification. Follow with the minimum # of blocks and the name of the file to be opened if necessary.  If montaging is not needed, no changes are made.  If there is an existing montage that is adequate, its properties will be adjusted to work at the current mag.  If a new montage is needed, it will close the current file if it is a montage and open a new one with the given name.  Variables will be substituted, so the name can contain the mag index, for example. It sets reportedValue1 to 1 or 0 depending on whether montaging is needed or not. 
+SaveToOtherFile buf typ cmp file
+Saves one image in the given buffer to the file with the given name and closes the file.  'typ' specifes the type of file and can be MRC, TIF, TIFF, CUR, or -1 (case insensitive), where CUR or -1 means use the current file type for the File menu entry Save Single/Save to Other.  If that type is a series of TIFF files, a single TIFF will be written with the given name instead. 'cmp' specifies the compression for a TIFF file and can be NONE,  LZW, ZIP, JPG, JPEG, CUR, or -1 (case insensitive), where CUR or -1 means use the current compression for Save Single/Save to Other.
 EnterNameOpenFile [prompt]
 Get a filename through a dialog with a simple text box and open it as a new file.  If the optional prompt string is not supplied, the prompt is "Enter name for new file:".
 ChooserForNewFile # var
@@ -318,7 +328,7 @@ Tilt to given angle
 TiltBy #
 Change tilt by the given amount
 BackgroundTilt #A [#S]
-Start tilting stage in the background; images can be taken and scripts can run during the tilt.  Follow with #A, the angle to tilt to, and optionally with #S, a speed factor for FEI scopes (< 1 for slower than normal tilting).
+Start tilting stage in the background; images can be taken and scripts can run during the tilt.  Follow with #A, the angle to tilt to, and optionally with #S, a speed factor for FEI scopes (< 1 for slower than normal tilting).  On FEI scopes, background stage movement requires the property 'BackgroundSocketToFEI' set to 1 so that the fourth socket for background stage operations is opened when the program starts.
 ReportTiltAngle
 Report current tilt angle
 MoveStage #X #Y #Z
@@ -359,18 +369,20 @@ Sets the defocus readout to 0, just as Reset Defocus in Focus menu does.
 Magnification-Related Commands
 SetMag #
 Set the mag to an actual film mag value
+SetMagIndex #
+Set the magnification index to the given value
 ChangeMag #
-Change mag by given number of mag steps
+Change mag by given number of mag steps, positive to increase mag index and negative to decrease it.  If the property 'UseInvertedMagRange' is set, positive and negative increase or decrease the mag rather than the mag index in the inverted range.
 ReportMag
 Report the current mag; also set ReportedValue2 to 1 if low mag mode, 0 if not
 ReportMagIndex
 Report the current mag index; also set ReportedValue2 to 1 if low mag mode, 0 if not
 SetCamLenIndex #
-Set the camera length index to the given number; on the Tecnai, values higher than 30 set the index to (# - 30) in LAD mode
+Set the camera length index to the given number; on an FEI scope, values higher than 30 set the index to (# - 30) in LAD mode
 SetMagAndIntensity #
 Set the mag to the actual film mag value and change the beam to maintain the same brightness. Two values are reported: the initial percent C2 value and the remaining factor of intensity change needed if it was not possible to change the intensity by the full amount needed. The C2 value should be used to restore intensity when the mag is restored. The remaining intensity change could be applied to the exposure time if necessary. The script will stop if there is an error in the intensity change.
 ChangeMagAndIntensity #
-Change mag by the given number of mag steps and change the beam to maintain the same brightness. Behaves same as SetMagAndIntensity.
+Change mag by the given number of mag steps and change the beam to maintain the same brightness. Behaves same as SetMagAndIntensity, and steps in the same way as ChangeMag.
 IncMagIfFoundPixel #
 Increase or decrease mag by one step if the pixel size has been found at the current mag with the Find Pixel Size routine, depending on whether # is positive or negative.  Sets reportedValue1 to 1 if the mag is changed, 0 otherwise.
 Beam-Related Commands
@@ -383,9 +395,11 @@ Set the C2/C3 lens strength to the given percentage, or illuminated area on Tita
 IncPercentC2 #
 Change the C2/C3 lens strength percentage or illuminated area in microns by the given amount
 ReportPercentC2
-Report the percent C2/C3 (on the Tecnai, this number matches the value in TUI) and the fractional lens strength.  On a Titan, if illuminated area is being used for intensity, this reports the illuminated area value.
+Report the percent C2/C3 (on an FEI scope, this number matches the value in MUI) and the fractional lens strength.  On a Titan, if illuminated area is being used for intensity, this reports the illuminated area value.
 ReportIlluminatedArea
-Report the illuminated area on a Titan
+Report the illuminated area on a Titan in the units from the scope, which are microns times 0.01.
+SetIlluminatedArea #
+Set the illuminated area on a Titan to the given value, expressed in microns times 0.01.
 SetIntensityForMean #
 Adjust beam intensity to yield the given number of counts, based on counts in the tilt-foreshortened area of the image in A. In Low Dose mode, this operates only on Record images and will change the intensity only of the Record area.
 SetExposureForMean #M [#K]
@@ -442,28 +456,40 @@ ScreenDown
 Lower the main screen
 ReportScreen
 Report if screen is up or down; reportedValue1 is set to 0 or 1, respectively.
+ReportLens name
+For a Hitachi or JEOL scope, reports the lens value by its abbreviated name.  For JEOL, allowed names are CL1, CL2, OM2, IL1, IL2, IL3, PL1, PL2, PL3, PL4, FLf, FLc, FLcomp1, FLcomp2.
+ReportDeflector
+For a Hitachi scope, reports the X and Y values of deflector specified by its abbreviated name.
 ManualFilmExposure #
 Film exposure time in seconds for manual exposures, or 0 for automatic exposure (the default)
 ExposeFilm
 Take a film exposure
 SpecialExposeFilm # [#] [#]
 Expose film with special handling: the first # specifies a delay in seconds after loading the plate; the second # specifies a pre-exposure of the specimen before exposing the plate, in seconds. The third # suppresses dimming of the screen if it is nonzero. This command command does not raise the screen if it is down. It requires the adaexp server to be installed.
+SetupMessageBox #B [#T] [text]
+Sets properties for a message box to be shown on an FEI microscope computer with the next command.  B specifies the type of buttons: 0 for OK, 1 for OK - Cancel, 2 for Yes - No, 3 for Yes - No - Cancel.  The optional T sets the time interval between message box displays, or 0 to display it unconditionally or -1 just to set the time of display to the current time.  The optional rest of the line specified the text inside the message.  If you just want to specify an interval, enter ' 0 interval'; if you just want to specify text for a box to be displayed unconditionally, enter '0 0 text'.
+ShowMessageOnScope title
+Opens a message box on an FEI microscope computer with the given title, which can include spaces.  The box is displayed with the "long operation" mechanism described below, so it is possible to have it displayed only after an interval has elapsed.  If SetupMessageBox was not used, the default is for a box with an OK button, opened unconditionally, with the text "SerialEM message".  When the command is finished, reportedValue1 is set with 1 if the box was displayed or 0 if it was not, and reportedValue2 is set with the reply from the box: 2 for Yes or OK, 1 for No, 0 for Cancel, or -1 for an error.
 Energy Filter Commands
 SetSlitWidth #
-Set energy filter slit width in eV
+Sets energy filter slit width in eV
 SetSlitIn [#]
-Insert the slit; or if # is entered, insert if 1 or retract if 0
+Inserts the slit; or if # is entered, inserts if 1 or retracts if 0
 SetEnergyLoss #
-Set the energy loss to the #
+Set sthe energy loss to the #
 ChangeEnergyLoss #
-Change the energy loss by the #
+Changes the energy loss by the #
 ReportEnergyFilter
-Report the slit width, energy loss, and whether the slit is in or out (the latter is placed in ReportedValue3 as a 1 or 0)
+Reports the slit width, energy loss, and whether the slit is in or out (the latter is placed in ReportedValue3 as a 1 or 0)
+SetJeolGIF #
+Calls JEOL function to set GIF mode on (if # is nonzero) or off.
+ReportJeolGIF
+Calls JEOL function to get whether GIF mode is on.
 Autoloader, Refrigerant, and Vacuum Commands
 LoadCartridge #
-Loads the cartridge from the given slot # (numbered from 1) if there is an autoloader.
+Loads the cartridge from the given slot # (numbered from 1) if there is an autoloader. This command starts a long operation.
 UnloadCartridge
-If there is an autoloader, unloads the cartridge.
+If there is an autoloader, unloads the cartridge. This command starts a long operation
 ReportSlotStatus #
 Report the status of the cartridge slot given by # (numbered from 1) if there is an autoloader.  Status is -1 for an error, 0 for empty, and 1 for occupied.
 AreDewarsFilling
@@ -475,7 +501,7 @@ Report the refrigerant level of the given dewar: 1 for autoloader, 2 for column,
 IsPVPRunning
 Report whether the PVP is running on an FEI scope.  Value can be assigned to a variable at end of commmand.
 LongOperation Op # [Op #...]
-Starts one or more time-consuming operations: Buffer cycle (Bu), Refill refrigerant (Re), Inventory cassettes (In), Loader buffer cycle (Lo), Dark reference update for K2 (Da).  Operations are identified by the first two letters of whatever full word you use (case insensitive).  Each operation except Inventory must be followed by an interval in hours (#).  If # is > 0, the operation is done only if the time since the last such operation is greater than #; if # is 0, the operation is done unconditionally; if # is < 0, it simply records the current time as the time of the last operation.   The scope operations will occur sequentially and be started in  the order that they are listed. The dark reference update will be done simultaneously with scope operations.  If an error occurs in a scope operation, other operations will be finished and the error reported at the end.  Errors other than in refilling refrigerant will cause the script to stop.  The user interface should not hang during long operations, and users will be asked to confirm that they want to kill the operation threads if they press STOP or try to exit the program.  The consequences of killing these threads are uncertain.
+Starts one or more time-consuming operations: Buffer cycle (Bu), Refill refrigerant (Re), Inventory cassettes (In), Loader buffer cycle (Lo), Unload cartridge (Un), or Dark reference update for K2 (Da).  Operations are identified by the first two letters of whatever full word you use (case insensitive).  Each operation except Inventory and Unload cartridge must be followed by an interval in hours (#).  If # is > 0, the operation is done only if the time since the last such operation is greater than #; if # is 0, the operation is done unconditionally; if # is < 0, it simply records the current time as the time of the last operation.   The scope operations will occur sequentially and be started in  the order that they are listed. The dark reference update will be done simultaneously with scope operations.  If an error occurs in a scope operation, other operations will be finished and the error reported at the end.  Errors other than in refilling refrigerant will cause the script to stop.  The user interface should not hang during long operations, and users will be asked to confirm that they want to kill the operation threads if they press STOP or try to exit the program.  The consequences of killing these threads are uncertain.  In order for time intervals to be kept track of between runs of the program, the property IgnoreShortTermCals must not be set.
 Piezo Drive Commands
 SelectPiezo # #
 Select a piezo drive for reports or movements, follow with the plugin number (numbered from 0, enter 0 if there is only one plugin controlling piezos) and the piezo number (numbered from 0).
@@ -493,8 +519,8 @@ A or Autoalign
 Align buffer A to autoalign buffer
 AlignTo buffer_letter [noIS]
 Align buffer A to given buffer (e.g. B). Optionally, enter 1 for 'noIS' to avoid changing microscope image shift
-ClearAlignment
-Clear the alignment shift of the image in buffer A
+ClearAlignment [noIS]
+Clear the alignment shift of the image in buffer A.  Optionally, enter 1 for 'noIS' to avoid changing microscope image shift.
 ConicalAlignTo buf # [show]
 Align buffer A to the given buffer 'buf' assuming a specimen rotation given by #. Optionally, enter 1 for 'show' to show the cross-correlation.
 ReportAlignTrimming
@@ -509,7 +535,7 @@ ResetAccumShift
 Reset the sum of shifts given by ReportAlignShift to 0 or ReportShiftDiffFrom
 Autofocus/Autotuning-Related Commands
 G or Autofocus [#] [#]
-Autofocus; set optional first # to -2 to measure shift and drift, -1 to just measure defocus without changing, or 1 for normal autofocus that changes focus to target; set optional second # to 1 to focus with View area in Low Dose mode.
+Autofocus; set optional first # to -2 to measure shift and drift, -1 to just measure defocus without changing, or 1 for normal autofocus that changes focus to target; set optional second # to 1 or 2 to focus with View area in Low Dose mode. With  '-1 1', the measured defocus is that of the View area, i.e., not adjusted for View defocus offset; with '-1 2' the measured defocus is adjusted for the offset to give an estimate of defocus in the Record area. 
 IncTargetDefocus #
 Change the defocus target by #
 SetTargetDefocus #
@@ -525,17 +551,19 @@ In low dose mode, autofocus in area on opposite side of Record from the defined 
 FocusChangeLimits # #
 Set limits on the focus change during autofocus runs for the remainder of the script; follow with a negative and a positive number for the limits in microns.  When an autofocus run exceeds a limit, it will abort and return to the starting defocus.  Enter with 0 0 to cancel these limits.
 AbsoluteFocusLimits # #
-Set limits on the absolute focus reached during autofocus runs.  Follow with a lower and a upper limit as given by ReportAbsoluteFocus, or 0 0 to cancel these limits.  Autofocus will abort when a limit is exceeded.
+Set limits on the absolute focus reached during autofocus runs.  Follow with a lower and a upper limit as given by ReportAbsoluteFocus, or 0 0 to cancel these limits.  Autofocus will abort when a limit is exceeded.  These values will override the absolute limits that can be specificed through the Focus menu, but a 0 0 will not prevent those limits from being applied.
 ReportFocusDrift
 Report the drift estimate from the last autofocus, if available
 ReportAutofocus
-Report measured defocus from last autofocus
+Report measured defocus from last autofocus, or whether it failed.  The defocus is placed into reportedValue1 and a failure code in reportedValue2 (1 for inconsistent focus, 2 for absolute limits exceeded, 3 for focus change limits exceeded, or -1 for other error).
 ReportTargetDefocus
 Report the defocus target
 CorrectAstigmatism [#]
 Measure astigmatism, report the stigmator values, and correct for those values (or do not correct, if the optional # is -1)
 CorrectComa [#]
-Measure beam-tilt misalignment, report the estimated beam tilt, and correct to bring beam tilt to zero (or do not correct, if the optional # is -1)
+Measure beam-tilt misalignment, report the estimated beam tilt, and correct to bring beam tilt to zero. If the optional # is -1, it will simply measure the misalignment once and report it without correcting it.  If the # is 1, it will do another iteration of estimating beam tilt and average the result with the previous iterations.
+ZemlinTableau #T [#S] [#C]
+Make an array of 8 FFTs of beam-tilted images around a central FFT without beam tilt.  The first value #T specifies the beam tilt to use, in milliradians on an FEI scope or percent of full scale on other scopes.  The optional entry #S sets the cropped size of each FFT in the array (default 340) and #C sets the number of pixels to crop (default 170).  See Beam-Tilted FFT Array for other details.
 Low Dose Commands
 GoToLowDoseArea area
 Switches to the low dose area given by 'area', which must be one of V, F, T, R, or S. This will not work if the screen is down. 
@@ -555,7 +583,7 @@ Reset image shift and realign image if image shift is greater than the given # i
 Eucentricity [#]
 Refine eucentricity, or if optional # is entered, do rough eucentricity only (1), refine only (2), both steps (3), or refine and realign (6)
 ReportLastAxisOffset
-Reports the lateral offset of the tilt axis estimated from the last Refine Eucentricity run; aborts the script if no offset is available.
+Reports the total lateral offset of the tilt axis estimated from the last Refine Eucentricity run; aborts the script if no offset is available.
 WalkUpTo #
 Tilt up to given angle in steps and track image position
 ReverseTilt [#]
@@ -595,12 +623,14 @@ ShiftItemsByAlignment
 Shift items at the current registration by the alignment shift of the image in buffer A. If rerun on the same image, it applied the change in shift between the current and previous run.
 ShiftItemsByCurrentDiff #
 Shift items at the current registration by the difference between the current stage position and the recorded position of the current Navigator item or the item that this script is being run on.  The shift is done only if the difference is less than the # in microns.
+ShiftItemsByMicrons #x #y [#r]
+Shift items at the current registration, or at the registration given by the optional #r, by the amount in microns in #x and #y.  Each component of the shift must be less than 100 microns.
 UpdateItemZ
 Assign current stage Z value to the current Navigator item, or item that this script is being run on.
 UpdateGroupZ
 Assign current stage Z value to the whole group that the current Navigator item, or item that this script is being run on, belongs to. The item must have a non-zero group ID. If the group would show up on more than one line with 'Collapse groups' on, items on all lines will be updated, unlike with the 'Update Z' button.
 ReportNavItem
-Report the index, stage X, Y, Z, label, and note string for the current Navigator item, or the item this script is being run on. The index and stage coordinates are placed in 'reportedValue' variables as usual, and the item type is placed in 'reportedValue5' (0 for point, 1 for polygon, 2 for map). In addition, variables 'navLabel', and 'navNote' are set with the label and note strings, and variables 'navIndex' and 'navIntLabel' are set with integer values of the item index (numbered from 1) and of the label (up to any non-numeric characters). If the Navigator is currently acquiring at points, a variable 'navAcqIndex' is set with the number of items already acquired plus 1.  Any of these variables can then be used to make filenames, and the latter two can be used in arithmetic and IF statements.
+Report the index, stage X, Y, Z, label, and note string for the current Navigator item, or the item this script is being run on. The index and stage coordinates are placed in 'reportedValue' variables as usual, and the item type is placed in 'reportedValue5' (0 for point, 1 for polygon, 2 for map). In addition, variables 'navLabel', and 'navNote' are set with the label and note strings, variables 'navIndex' and 'navIntLabel' are set with integer values of the item index (numbered from 1) and of the label (up to any non-numeric characters), and variable 'navRegis' is set with the item's registration value. If the Navigator is currently acquiring at points, a variable 'navAcqIndex' is set with the number of items already acquired plus 1.  Any of these variables can then be used to make filenames, and the latter two can be used in arithmetic and IF statements.
 ReportOtherItem #
 Report similarly on the Navigator item whose index in the table is #, numbered from 1.
 ReportGroupStatus
@@ -611,12 +641,20 @@ ItemIndexWithLabel str
 Report the index in the Navigator table of the item whose label is the given string, or 0 if there is none.  Sets reportedValue1 with the index.  The string can contain spaces and the comparison is not case-sensitive.
 ItemIndexWithNote str
 Report the Navigator index of the item whose note is the given string, otherwise just like ItemIndexWithLabel.
+SetNavRegistration #
+Set the current registration of the Navigator window to the given number.  No item registration values are changed.
+ChangeItemRegistration #i #r
+Change the registration number of the Navigator item with table index #i to #r.  This works just like the Navigator menu entry Change Registrationn: the registration number must be in the legal range,the item cannot be a registration point, and you cannot change an item between imported and regular registrations.
 ItemForSuperCoord #
 Set the item number that Navigator supplies supermontage coordinates from when a montage image is acquired. Set the number to 0 to restore Navigator to using coordinates from the item currently being acquired.
 SkipPiecesOutsideItem #
 Sets the current montage to skip pieces outside the Navigator item whose position in the table is # (numbered from 1). If # is 0, uses the current item. If # is < 0, disables the skipping of pieces.
 SuffixForExtraFile
 Sets a suffix so that the Acquire at Points routine will open an extra file whenever it opens a regular file for output.  The name of the extra file will be the root of the regular filename, plus the suffix, followed by the extension of the regular filename.  The extra file will be opened before the regular file.  It will be closed when the regular file is closed (at the end of acquisition or before opening a new file).
+SkipAcquiringNavItem
+Tells the Navigator to skip the current item and move on to the next.  This command has an effect only when included in a script being run as a preliminary action before the main action.
+SkipAcquiringGroup [ID]
+Tells the Navigator to skip points whose group ID match either the group ID of the current acquire item, or the optional ID entered with the command.  The Navigator must be acquiring at points.
 Miscellaneous Commands 
 CircleFromPoints x y x y x y
 Report the X and Y center coordinate and the radius in microns for the circle through three points whose coordinates are given on the line as x1 y1 x2 y2 x3 y3..  Values can be assigned to variables at end of command.
@@ -643,3 +681,10 @@ Send an email containing the given text, which can include variables to be subst
 ErrorBoxSendEmail text
 Send an email containing the given text if the script stops with a message box; the text can have variables to be substituted.  Requirements are the same as for 'SendEmail'.  If the message box occurs during Navigator Acquire at Points and the user has selected to send emails there, two emails will be sent, thus allowing more specific information from the one specified here.
 RunInShell command
+Run the given command with the system command processor.  It appears that any command that will run in a Command Prompt window can be run.  Thus commands can include: '|' to pipe from one program to another; '&' to run successive programs unconditionally; '&&' or '||' to run successive programs conditionally; '> outfile' to redirect standard output to a file, '2> errfile' to redirect standard error output to a file, or '> outfile 2>&1' to redirect both to one file.  Single arguments like filenames that contain spaces should be enclosed in double quotes.  The exit status of the command will be placed in ReportedValue1; if it is -1, this indicates an error in before running the command, and ReportedValue2 will be set with the following values: 1 if argument list too big, 2 or 3 if command interpreter cannot be found or is not executable, 4 for insufficient memory or other meory problem, 5 for unidentified error.  In any case, a non-zero exit status will not be considered a macro error, and you need to test for failure explicitly. These error codes are not very helpful - it seems that the exit status is 1 if the command cannot be found or cannot be started, so if you want to pass information back with the exit status, you cannot use a 1, and might want to use a value beside 1 for failure of the operation to distinguish it from failure to run the command.   If STOP is used while the command is running, the script will stop and the thread that is running the command will be killed, but the command will keep running.
+SetProperty name value
+Use this command to set the value of one program property.  The command can be used with nearly all of the general (non-camera-specific) properties that contain just a single numeric entry and can be set by name in SerialEMproperties.txt.  Follow with the full name of the property (case insensitive) and with its new value.  An error will result if the name does not match one of the properties that can be set.  The list of available properties in the development version of SerialEM is in http://bio3d.colorado.edu/ftp/SerialEM/Scripts/ScriptableProperties.txt
+ReportUserSetting name 
+Use this command to report the value of one user setting, using the name for it in SerialEMsettings.txt.  The command can be used with nearly all of the general (non-camera-specific) settings that contain just a single numeric entry.  Follow with the full name of the setting (case insensitive) and with an optional variable name for the value.  An error will result if the name does not match one of the settings that can be set.  The list of available settings in the development version of SerialEM is in http://bio3d.colorado.edu/ftp/SerialEM/Scripts/ScriptableSettings.txt
+SetUserSetting name val [#K]
+Use this command to set the value of one user setting.  This works just like 'ReportUserSetting'.  Follow with the name of the setting and its value.  The original value is automatically restored when the script stops unless the optional entry K is non-zero to keep the setting.  If the script is suspended, the new value will be set again when it is resumed.  Multiple changes in the same setting can be done; the original value or last kept new value will be restored when the script stops, and the latest new value will be set on resume.

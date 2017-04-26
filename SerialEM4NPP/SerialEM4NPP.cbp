@@ -25,7 +25,7 @@
 					<Add library="libwxmsw30ud_core.a" />
 					<Add library="libwxmsw30ud_aui.a" />
 					<Add library="libwxmsw30ud_html.a" />
-					<Add library="libwxbase30u_net.a" />
+					<Add library="libwxbase30ud_net.a" />
 					<Add library="libwxbase30ud.a" />
 					<Add library="libwxpngd.a" />
 					<Add library="libwxzlibd.a" />
