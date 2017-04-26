@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <!--
-  Copyright (c) 2016 Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, BioEM Lab <https://c-cina.unibas.ch/bioem>, C-CINA <https://c-cina.unibas.ch>
+  Copyright (c) 2016-2017 Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, BioEM Lab <https://c-cina.unibas.ch/bioem>, C-CINA <https://c-cina.unibas.ch>
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -14,8 +14,8 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
   
-  - API extraction made from SerialEM v3.6.8-beta from Dec. 7th 2016 documentation.
-  - File version: 6
+  - API extraction made from SerialEM v3.6.8-beta from Apr. 24th 2017 documentation.
+  - File version: 7
 -->
 <NotepadPlus>
     <AutoComplete language="SEM">
