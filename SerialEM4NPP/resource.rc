@@ -22,14 +22,14 @@ VS_VERSION_INFO    VERSIONINFO
   {
     BLOCK "040904E4" // Lang=US English, CharSet=Windows Multilingual
     {
-      VALUE "Build",            "December 2016\0"
+      VALUE "Build",            "March 2019\0"
       VALUE "Comments",         "Free.\0"
       VALUE "CompanyName",      "BioEM Lab\0"
       VALUE "Developer",        "Daniel Caujolle-Bert\0"
       VALUE "FileDescription",  "SerialEM for Notepad++ Tool\0"
       VALUE "FileVersion",      RC_FILEVERSION_STRING
       VALUE "InternalName",     "SerialEM4NPP\0"
-      VALUE "LegalCopyright",   "Copyright (C) 2016 BioEM Lab\0"
+      VALUE "LegalCopyright",   "Copyright (C) 2016-2019 BioEM Lab\0"
       VALUE "LegalTrademarks",  "All rights reserved.\0"
       VALUE "OriginalFilename", "SerialEM4NPP.exe\0"
       VALUE "PrivateBuild",     "\0"
