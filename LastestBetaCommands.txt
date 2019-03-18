@@ -101,7 +101,7 @@ Do not print any of these reports, just assign the values to report variables
 ErrorsToLog [#]
 Makes most script error messages be duplicated in the log window.  Follow with a 0 to turn off the feature again.
 NoMessageBoxOnError [#]
-Outputs an error message to the log instead of opening a message box.  The script stops, but if it is being run from Navigator Aqcuire at Points, the Navigator is able to go to the next item.  Follow with 0 to turn the feature off again.
+Outputs an error message to the log instead of opening a message box.  The script stops, but if it is being run from Navigator Acquire at Points, the Navigator is able to go to the next item.  Follow with 0 to turn the feature off again.
 ClearPersistentVars
 Removes all persistent variables defined with :=
 IsVariableDefined Var
@@ -175,10 +175,10 @@ Sets the time from which the next 'WaitForNextFrame' will require an exposure ti
 SetLiveSettleFraction #
 Set the fraction of the usual settling time to apply in continuous mode after image shift or stage movement.  By default, no settling is applied in continuous mode (i.e., the fraction is 0), but some settling may be needed when a script or other operation is using continuous frames.  The fraction is reset to zero when continuous mode ends.
 Other Camera Commands
-CameraProperties
-Reports unbinned size in X and Y of current camera, and RotationAndFlip property.   Values can be assigned to variables at end of command.
+CameraProperties [#]
+Reports unbinned size in X and Y, RotationAndFlip property, and size of detector pixel in microns of the current camera, or of the active camera whose number is given by the optional #, numbered from 1.   Values can be assigned to variables at end of command.
 SelectCamera #
-Make the given camera (numbered from 1) be the active camera.  Will switch in and out of EFTEM mode or STEM mode if appropriate.
+Make the given camera be the active camera, where the number is the position of the camera in the ActiveCameraList property or Camera setup dialog, numbered from 1.  Will switch in and out of EFTEM mode or STEM mode if appropriate.
 RetractCamera
 Retracts all retractable cameras
 OppositeFocus
@@ -203,6 +203,8 @@ DeferStackingNextShot
 Do not stack Falcon intermediate frames after the next exposure.  To stack frames from multiple exposures into one stack, use this command before each exposure except the last one.
 OpenDECameraCover
 Opens the protection cover of the Direct Electron camera for the remainder of the script, if it is the current camera.  Without this command, the cover will be opened and closed for each exposure except during tasks.
+SetDECamFrameRate #
+Sets the frame rate of the current camera if it is a DE camera; follow with the new rate in frames per second, which must be positive and less than the maximum frame rate.  The user's original frame rate is placed into ReportedValue1 and is restored when the script ends.
 UpdateHWDarkRef #
 Updates the K2 hardware dark reference if the known interval since the last update is longer than # in hours.  If # is 0, the update is done unconditionally; if # is negative (-1), it simply records the current time as the time of the last update.  In order for the time interval to be kept track of between runs of the program, the property IgnoreShortTermCals must not be set.
 ReportK2FileParams
@@ -302,7 +304,7 @@ Reads the contents of the given text file, breaks it up by spaces or tabs, and s
 SetMontageParams # [# # # # #]
 Sets up to 6 montage parameters; enter a value or -1 to leave the parameter unchanged. The entries are: 1 to use stage movement or 0 not to; overlap in X; overlap in Y; frame size in X; frame size in Y, 1 to skip correlations or 0 not to.
 AddToAutodoc key value
-Adds a key-value pair to the last section of the autodoc associated with the current open file, if any.  The next word after the command is the key, and the remainder of the text on the line is taken as the value.  Variables are substituted before using the text.  After one or more additions to a section of the autodoc, a WriteAutodoc command must be used to save the values before closing the file or saving another image to it.
+Adds a key-value pair to the last section of the autodoc associated with the current open file, if any.  The next word after the command is the key, and the remainder of the text on the line is taken as the value.  Variables are substituted before using the text.  After one or more additions to a section of the autodoc, a WriteAutodoc command must be used to save the values before closing the file or saving another image to it.  If no images have been written yet, the entry will be added to the global section.
 WriteAutodoc
 Writes the autodoc associated with the current open file.  Use this command once after adding one or more values to a section of the autodoc.
 AddToFrameMdoc key value
@@ -377,6 +379,8 @@ ReportMag
 Report the current mag; also set ReportedValue2 to 1 if low mag mode, 0 if not
 ReportMagIndex
 Report the current mag index; also set ReportedValue2 to 1 if low mag mode, 0 if not
+ReportCameraLength
+Report the camera length in meters, or 0 if not in diffraction mode.
 SetCamLenIndex #
 Set the camera length index to the given number; on an FEI scope, values higher than 30 set the index to (# - 30) in LAD mode
 SetMagAndIntensity #
@@ -397,9 +401,13 @@ Change the C2/C3 lens strength percentage or illuminated area in microns by the 
 ReportPercentC2
 Report the percent C2/C3 (on an FEI scope, this number matches the value in MUI) and the fractional lens strength.  On a Titan, if illuminated area is being used for intensity, this reports the illuminated area value.
 ReportIlluminatedArea
-Report the illuminated area on a Titan in the units from the scope, which are microns times 0.01.
+Report the illuminated area on a Titan in the units that are used internally, which are microns times 0.01.
 SetIlluminatedArea #
 Set the illuminated area on a Titan to the given value, expressed in microns times 0.01.
+ReportImageDistanceOffset
+Report the offset of the distance from the condenser plane to the image plane on a Titan in the units from the scope. Older versions of the scripting software do not have this function, and with them, this command and the next one will crash SerialEM or FEI-SEMserver.
+SetImageDistanceOffset #
+Set the offset of the distance from the condenser plane to the image plane on a Titan; the allowed range is +/- 0.02.
 SetIntensityForMean #
 Adjust beam intensity to yield the given number of counts, based on counts in the tilt-foreshortened area of the image in A. In Low Dose mode, this operates only on Record images and will change the intensity only of the Record area.
 SetExposureForMean #M [#K]

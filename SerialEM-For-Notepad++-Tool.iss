@@ -1,15 +1,25 @@
 ; -- SerialEM-For-Notpad++-Tool.iss --
 ; Install SerialEM language support Tool for Notepad++
 
-#define SERIALEM4NPPTOOL_VERSION "0.99.5.0"
+#define SERIALEM4NPPTOOL_VERSION "0.99.6.0"
 #define SERIALEM4NPPTOOL_UUID "{dc46f650-bdd3-4ea8-a0e1-4be3e2cd30ec}"
+
+;; g++ libs
+;; Used LIBS: libgcc_s_seh-1.dll libstdc++-6.dll libwinpthread-1.dll
+#define CLIBS_X64_DIR "C:\Program Files\mingw-w64\x86_64-6.2.0-posix-seh-rt_v5-rev1\mingw64\x86_64-w64-mingw32\lib"
+;; Used LIBS: libgcc_s_dw2-1.dll libstdc++-6.dll libwinpthread-1.dll
+#define CLIBS_X86_DIR "C:\Program Files (x86)\mingw-w64\i686-6.2.0-posix-dwarf-rt_v5-rev1\mingw32\bin"
+;; -- wxWidgets
+;; Used LIBS: wxbase30u_gcc_custom.dll wxmsw30u_adv_gcc_custom.dll wxmsw30u_aui_gcc_custom.dll wxmsw30u_core_gcc_custom.dll
+#define WXLIBS_X64_DIR "C:\wxWidgets-3.0.2-libs\lib\gcc_x64_dll"
+#define WXLIBS_X86_DIR "C:\wxWidgets-3.0.2-libs\lib\gcc_dll"
 
 [Setup]
 AppName=SerialEM for Notepad++ Tool
 UninstallDisplayName=SerialEM for Notepad++ Tool
 AppID={{#SERIALEM4NPPTOOL_UUID}
 AppVersion={#SERIALEM4NPPTOOL_VERSION}
-AppCopyright=Copyright (C) 2016 Daniel Caujolle-Bert, BioEM Lab.
+AppCopyright=Copyright (C) 2016-2019 Daniel Caujolle-Bert, BioEM Lab.
 AppPublisher=BioEM Lab.
 AppPublisherURL=https://c-cina.unibas.ch/bioem/
 AppComments=SerialEM for Notepad++ Tool {#SERIALEM4NPPTOOL_VERSION} {code:Architecture}
@@ -40,7 +50,19 @@ ArchitecturesInstallIn64BitMode=x64
 [Files]
 ; Place all x86 files here, first one should be marked 'solidbreak'
 Source: "SerialEM4NPP\bin\Release\SerialEM4NPP.exe"; DestDir: "{app}"; DestName: "SerialEM4NPP.exe"; Check: Is64BitInstallMode
-Source: "SerialEM4NPP\releaselibs_x64\*.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+;Source: "SerialEM4NPP\releaselibs_x64\*.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+;; g++ Runtime X64
+Source: "{#CLIBS_X64_DIR}\libgcc_s_seh-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#CLIBS_X64_DIR}\libstdc++-6.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#CLIBS_X64_DIR}\libwinpthread-1.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+;; wxWidgets X64
+Source: "{#WXLIBS_X64_DIR}\wxbase30u_gcc_custom.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#WXLIBS_X64_DIR}\wxbase30u_net_gcc_custom.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#WXLIBS_X64_DIR}\wxbase30u_xml_gcc_custom.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#WXLIBS_X64_DIR}\wxmsw30u_html_gcc_custom.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+Source: "{#WXLIBS_X64_DIR}\wxmsw30u_aui_gcc_custom.dll"; DestDir: "{app}"; Flags: sharedfile onlyifdoesntexist; Check: Is64BitInstallMode
+Source: "{#WXLIBS_X64_DIR}\wxmsw30u_core_gcc_custom.dll"; DestDir: "{app}"; Check: Is64BitInstallMode
+
 ; Place all common files here, first one should be marked 'solidbreak'
 Source: "LICENSE.txt"; DestDir: "{app}"; DestName: "Tool-LICENSE.txt"; Check: Is64BitInstallMode
 

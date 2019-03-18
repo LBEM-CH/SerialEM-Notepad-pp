@@ -1,7 +1,7 @@
 ; -- SerialEM-For-Notpad++.iss --
 ; Install SerialEM language support for Notepad++
 
-#define SERIALEM4NPP_VERSION "3.6.8.7"
+#define SERIALEM4NPP_VERSION "3.8.0.0"
 #define SERIALEM4NPP_UUID "{61aba454-af81-4469-8770-f1859da5026b}"
 
 [Setup]
@@ -9,7 +9,7 @@ AppName=SerialEM for Notepad++
 UninstallDisplayName=SerialEM for Notepad++
 AppID={{#SERIALEM4NPP_UUID}
 AppVersion={#SERIALEM4NPP_VERSION}
-AppCopyright=Copyright (C) 2016-2017 Daniel Caujolle-Bert, BioEM Lab.
+AppCopyright=Copyright (C) 2016-2019 Daniel Caujolle-Bert, BioEM Lab.
 AppPublisher=BioEM Lab.
 AppPublisherURL=https://c-cina.unibas.ch/bioem/
 AppComments=SerialEM for Notepad++ {#SERIALEM4NPP_VERSION} {code:Architecture}

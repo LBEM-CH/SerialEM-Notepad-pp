@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <!--
-  Copyright (c) 2016-2017 Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, BioEM Lab <https://c-cina.unibas.ch/bioem>, C-CINA <https://c-cina.unibas.ch>
+  Copyright (c) 2016-2019 Daniel Caujolle-Bert <daniel.caujolle-bert@unibas.ch>, BioEM Lab <https://c-cina.unibas.org/bioem>, C-CINA <https://c-cina.unibas.ch>
 
   This program is free software; you can redistribute it and/or
   modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@
             </Overload>
         </KeyWord>
         <KeyWord name="AddToAutodoc" func="yes">
-            <Overload retVal="" descr="Adds a &lt;key&gt; - &lt;value&gt; pair to the last section of the autodoc associated with the current&#xA;open file, if any. The next word after the command is the key, and the remainder of the text on the line is taken as&#xA;the value. Variables are substituted before using the text. After one or more additions to a section of the autodoc,&#xA;a WriteAutodoc command must be used to save the values before closing the file or saving another image to it.">
+            <Overload retVal="" descr="Adds a &lt;key&gt; - &lt;value&gt; pair to the last section of the autodoc associated with the current&#xA;open file, if any. The next word after the command is the key, and the remainder of the text on the line is taken as&#xA;the value. Variables are substituted before using the text. After one or more additions to a section of the autodoc,&#xA;a WriteAutodoc command must be used to save the values before closing the file or saving another image to it.&#xA;If no images have been written yet, the entry will be added to the global section.">
                 <Param name="int key"/>
                 <Param name="int value"/>
             </Overload>
@@ -153,7 +153,9 @@
             </Overload>
         </KeyWord>
         <KeyWord name="CameraProperties" func="yes">
-            <Overload retVal="" descr="Reports unbinned size in X and Y of current camera, and RotationAndFlip property.&#xA;Values can be assigned to variables at end of command."/>
+            <Overload retVal="" descr="Reports unbinned size in X and Y, RotationAndFlip property, and size of detector&#xA;pixel in microns of the current camera, or of the active camera whose number is &#xA;given by the optional &lt;camera&gt;, numbered from 1.&#xA;Values can be assigned to variables at end of command.">
+                <Param name="[int camera]"/>
+            </Overload>
         </KeyWord>
         <KeyWord name="CenterBeamFromImage" func="yes">
             <Overload retVal="" descr="Center beam using the existing image in the active buffer by detecting the edges of the&#xA;beam, or from the centroid of the image intensities if &lt;value&gt; is nonzero. In the latter&#xA;case the beam should be completely within the camera field.">
@@ -610,7 +612,7 @@
             <Overload retVal="" descr="Make the current image or montage a new Navigator map."/>
         </KeyWord>
         <KeyWord name="NoMessageBoxOnError" func="yes">
-            <Overload retVal="" descr="Outputs an error message to the log instead of opening a message box. The script stops, but &#xA;if it is being run from Navigator Aqcuire at Points, the Navigator is able to go to the &#xA;next item. Follow with 0 to turn the feature &lt;off&gt; again.">
+            <Overload retVal="" descr="Outputs an error message to the log instead of opening a message box. The script stops, but &#xA;if it is being run from Navigator Acquire at Points, the Navigator is able to go to the &#xA;next item. Follow with 0 to turn the feature &lt;off&gt; again.">
                 <Param name="[bool off]"/>
             </Overload>
         </KeyWord>
@@ -804,6 +806,9 @@
         <KeyWord name="ReportBeamTilt" func="yes">
             <Overload retVal="" descr="Reports the beam tilt in milliradians for FEI, % of full-scale value for JEOL"/>
         </KeyWord>
+        <KeyWord name="ReportCameraLength" func="yes">
+            <Overload retVal="" descr="Report the camera length in meters, or 0 if not in diffraction mode."/>
+        </KeyWord>
         <KeyWord name="ReportClock" func="yes">
             <Overload retVal="" descr="Report seconds elapsed since last 'ResetClock' command."/>
         </KeyWord>
@@ -857,7 +862,10 @@
             <Overload retVal="" descr="For the current Navigator item or the item this script is being run on, reports a code for&#xA;whether the item is first to be acquired in a group: -1 if Navigator not acquiring, 0 if&#xA;not in a group, 1 if first to be acquired in a group, 2 if later in the group. If the group&#xA;would show up on more than one line with 'Collapse groups' on, a value of 1 is returned for&#xA;the first item to be acquired in each subgroup.  It also reports the group ID of the&#xA;item  (ID is 0 for an item not in a group)."/>
         </KeyWord>
         <KeyWord name="ReportIlluminatedArea" func="yes">
-            <Overload retVal="" descr="Report the illuminated area on a Titan in the units from the scope, which are microns times 0.01."/>
+            <Overload retVal="" descr="Report the illuminated area on a Titan in the units that are used internally, which are&#xA;microns times 0.01."/>
+        </KeyWord>
+        <KeyWord name="ReportImageDistanceOffset" func="yes">
+            <Overload retVal="" descr="Report the offset of the distance from the condenser plane to the image plane on a Titan&#xA;in the units from the scope. Older versions of the scripting software do not have this function, &#xA;and with them, this command and the next one will crash SerialEM or FEI-SEMserver."/>
         </KeyWord>
         <KeyWord name="ReportImageShift" func="yes">
             <Overload retVal="" descr="Report the image shift in IS units, adjusted for tilt axis offset, image shift offset,&#xA;and low dose area shift; if image shift is calibrated, also report the equivalent shift&#xA;in unbinned pixels on the current camera at the current magnification, and the amount&#xA;the stage would need to be moved to compensate for resetting this image shift.  Positive &#xA;values of the camera shift will result from an image shift imposed by dragging an image&#xA;to the upper right."/>
@@ -1199,6 +1207,11 @@
                 <Param name="bool cont"/>
             </Overload>
         </KeyWord>
+        <KeyWord name="SetDECamFrameRate" func="yes">
+            <Overload retVal="" descr="Sets the frame rate of the current camera if it is a DE camera; follow with the new&#xA;&lt;rate&gt; in frames per second, which must be positive and less than the maximum frame rate.&#xA;The user's original frame rate is placed into ReportedValue1 and is restored when the&#xA;script ends.">
+                <Param name="int rate"/>
+            </Overload>
+        </KeyWord>
         <KeyWord name="SetDefocus" func="yes">
             <Overload retVal="" descr="Set the defocus to the given &lt;value&gt; in microns">
                 <Param name="float value"/>
@@ -1274,6 +1287,11 @@
         <KeyWord name="SetIlluminatedArea" func="yes">
             <Overload retVal="" descr="Set the illuminated area on a Titan to the given &lt;value&gt;, expressed in microns times 0.01.">
                 <Param name="int value"/>
+            </Overload>
+        </KeyWord>
+        <KeyWord name="SetImageDistanceOffset" func="yes">
+            <Overload retVal="" descr="Set the offset of the &lt;distance&gt; from the condenser plane to the image plane on a&#xA;Titan; the allowed range is +/- 0.02.">
+                <Param name="float distance"/>
             </Overload>
         </KeyWord>
         <KeyWord name="SetImageShift" func="yes">
