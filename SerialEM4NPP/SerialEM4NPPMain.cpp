@@ -618,7 +618,7 @@ SerialEM4NPPFrame::SerialEM4NPPFrame(wxWindow* parent,wxWindowID id) :
     BoxSizer39->Add(-1,-1,0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     StaticBoxSizer15 = new wxStaticBoxSizer(wxHORIZONTAL, m_panel7, wxEmptyString);
     m_wbtnHtmlSave = new wxBitmapButton(m_panel7, ID_BITMAPBUTTON9, wxArtProvider::GetBitmap(wxART_MAKE_ART_ID_FROM_STR(_T("wxART_FILE_SAVE_AS")),wxART_TOOLBAR), wxDefaultPosition, wxDefaultSize, wxBU_AUTODRAW, wxDefaultValidator, _T("ID_BITMAPBUTTON9"));
-    m_wbtnHtmlSave->SetToolTip(_("Save pqge context to text file"));
+    m_wbtnHtmlSave->SetToolTip(_("Save page context to text file"));
     StaticBoxSizer15->Add(m_wbtnHtmlSave, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer39->Add(StaticBoxSizer15, 0, wxALL|wxALIGN_CENTER_HORIZONTAL|wxALIGN_CENTER_VERTICAL, 5);
     BoxSizer38->Add(BoxSizer39, 0, wxALL|wxEXPAND, 5);
